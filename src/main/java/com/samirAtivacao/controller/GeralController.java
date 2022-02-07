@@ -127,7 +127,7 @@ public class GeralController {
 		}
 		BancoController banco = new BancoController();
 		List<InfomacoesDosPrev> aLista = banco.litaDosPrev();
-		System.out.println("Cpf: " + aLista.get(1).getCpf());
+		System.out.println("Cpf: ");
 		//repository.teste(info);
 		 return "deu certo";
 		
@@ -144,7 +144,7 @@ public class GeralController {
     	
     	BancoController banco = new BancoController();
 		List<InfomacoesDosPrev> lista = banco.litaDosPrev();
-		System.out.println("Cpf: " + lista.get(1).getCpf());
+		System.out.println("Cpf: ");
 		int x = 0;
 		while(x <lista.size()) {
 			repository.inserirDosPrev(lista.get(x));
