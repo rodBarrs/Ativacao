@@ -13,6 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver.Options;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -361,7 +362,13 @@ public class SeleniumRepositorio {
 						for (int j = 1; j < 100; j++) {
 
 							try {	
-									Thread.sleep(150);
+								if(z == 5) {
+								Thread.sleep(150);
+							}
+								else {
+									this.driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS).pageLoadTimeout(1, TimeUnit.SECONDS);
+								}
+									
 									System.out.println(nb);
 									verificarAtivo = driver
 											.findElement(
@@ -522,23 +529,21 @@ public class SeleniumRepositorio {
 	}
 
 	public void inserirDosPrev(InfomacoesDosPrev lista) {
-		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS).pageLoadTimeout(30, TimeUnit.SECONDS);
+		 this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS).pageLoadTimeout(30, TimeUnit.SECONDS);
 		
 		
-		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div[1]/div[1]/div/div/div[1]/div/input")).sendKeys(lista.getNumeroDoProcesso());
-		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div[1]/div[2]/div/div/div[1]/div/input")).sendKeys(lista.getNome());
-		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div[1]/div[3]/div/div/div[1]/div/input")).click();
-		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div[1]/div[3]/div/div/div[1]/div/input")).sendKeys(lista.getDataAjuizamento());
-		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div[2]/div[1]/div/div/div[1]/div/input")).sendKeys(lista.getCpf());
-		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div[2]/div[2]/div/div/div[1]/div/input")).click();
-		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div[2]/div[2]/div/div/div[1]/div/input")).sendKeys(lista.getDibInicial());
-		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div[2]/div[3]/div/div/div[1]/div/input")).click();
-		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div[2]/div[3]/div/div/div[1]/div/input")).sendKeys(lista.getDibFinal());
-		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div[2]/div[4]/div/div/div[1]/div/input")).sendKeys(lista.getRmi());
-		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div[3]/div[1]/div/div/div[1]/div/input")).sendKeys(lista.getBeneficio());
-		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div[3]/div[2]/div/div/div[1]/div/input")).sendKeys(lista.getNb());
-		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div[3]/div[3]/div/div/div[1]/div/input")).click();
-		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div[3]/div[3]/div/div/div[1]/div/input")).sendKeys(lista.getDip());
-		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div[4]/div/div/div/div[1]/div/input")).sendKeys(lista.getAps());
+		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[1]/div[1]/div/div/div[1]/div/input")).sendKeys(lista.getNumeroDoProcesso());
+		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[1]/div[2]/div/div/div[1]/div/input")).sendKeys(lista.getNome());
+		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[1]/div[3]/div/div/div[1]/div/input")).click();
+		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[1]/div[3]/div/div/div[1]/div/input")).sendKeys(lista.getDataAjuizamento());
+		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[2]/div[1]/div/div/div[1]/div/input")).sendKeys(lista.getCpf());
+		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[2]/div[2]/div/div/div[1]/div/input")).sendKeys(lista.getDibInicial());
+		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[2]/div[3]/div/div/div[1]/div/input")).sendKeys(lista.getDibFinal());
+		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[2]/div[4]/div/div/div[1]/div/input")).sendKeys(lista.getRmi());
+		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[3]/div[1]/div/div/div[1]/div/input")).sendKeys(lista.getBeneficio());
+		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[3]/div[2]/div/div/div[1]/div/input")).sendKeys(lista.getNb());
+		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[3]/div[3]/div/div/div[1]/div/input")).sendKeys(lista.getDip());
+		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[4]/div/div/div/div[1]/div/input")).sendKeys(lista.getAps());
+		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[4]/button")).click();
 	}
 }
