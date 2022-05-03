@@ -13,7 +13,6 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriver.Options;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -80,8 +79,8 @@ public class SeleniumRepositorio {
 		} else {
 			return "ACESSO NEGADO";
 		}
-
 	}
+	
 
 	public String colocarFiltro( String etiqueta) throws InterruptedException {
 		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS).pageLoadTimeout(30, TimeUnit.SECONDS);
@@ -122,10 +121,9 @@ public class SeleniumRepositorio {
 				.getText();
 
 		System.out.println(verificacao);
-		verificacao = verificacao.replace("Sem registros para exibir", "");
-		System.out.println(verificacao);
+		String falso = "Sem registros para exibir";
 
-		boolean confirmacaoDeExistencia = verificacao == "";
+		boolean confirmacaoDeExistencia = verificacao.equals(falso) ;
 		System.out.println(confirmacaoDeExistencia);
 		if (confirmacaoDeExistencia == true) {
 			return "Sem registros para exibir";
@@ -136,18 +134,12 @@ public class SeleniumRepositorio {
 					"/html/body/div[4]/div[1]/div[2]/div/div[2]/div/div[4]/div/table/tbody/tr[1]/td[3]/div/a[1]")));
 			wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
 					"/html/body/div[4]/div[1]/div[2]/div/div[2]/div/div[4]/div/table/tbody/tr[1]/td[3]/div/a[1]")));
-			boolean confirmacaoDeAtivacao = driver
-					.findElement(By.xpath(
-							"/html/body/div[4]/div[1]/div[2]/div/div[2]/div[1]/div[4]/div/table/tbody/tr[1]/td[9]/div"))
-					.getText().toUpperCase().contains(etiqueta);
-			if (confirmacaoDeAtivacao == false) {
-				return "Codigo das eiquetas estao errados";
-			} else {
+			
 				WebElement processo = driver.findElement(By.xpath(
 						"/html/body/div[4]/div[1]/div[2]/div/div[2]/div[1]/div[4]/div/table/tbody/tr[1]/td[3]/div/a[1]"));
 				processo.click();
 				return "pronto para procurar";
-			}
+			
 
 		}
 
@@ -264,8 +256,8 @@ public class SeleniumRepositorio {
 
 								int x = dataValidacao.getDayOfYear() - 333;
 								//dataATUALocalDateTime.getDayOfYear()<= x
-								if (dataATUALocalDateTime.getDayOfYear()!= x ) {
-									System.out.println("x é menor ou igual a 30" + x);
+								if (dataATUALocalDateTime.getDayOfYear()<= x) {
+									System.out.println("x é menor ou igual a 30 , x " + x);
 									return true;
 								} else {
 
@@ -532,18 +524,32 @@ public class SeleniumRepositorio {
 		 this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS).pageLoadTimeout(30, TimeUnit.SECONDS);
 		
 		
-		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[1]/div[1]/div/div/div[1]/div/input")).sendKeys(lista.getNumeroDoProcesso());
-		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[1]/div[2]/div/div/div[1]/div/input")).sendKeys(lista.getNome());
-		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[1]/div[3]/div/div/div[1]/div/input")).click();
-		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[1]/div[3]/div/div/div[1]/div/input")).sendKeys(lista.getDataAjuizamento());
-		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[2]/div[1]/div/div/div[1]/div/input")).sendKeys(lista.getCpf());
-		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[2]/div[2]/div/div/div[1]/div/input")).sendKeys(lista.getDibInicial());
-		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[2]/div[3]/div/div/div[1]/div/input")).sendKeys(lista.getDibFinal());
-		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[2]/div[4]/div/div/div[1]/div/input")).sendKeys(lista.getRmi());
-		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[3]/div[1]/div/div/div[1]/div/input")).sendKeys(lista.getBeneficio());
-		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[3]/div[2]/div/div/div[1]/div/input")).sendKeys(lista.getNb());
-		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[3]/div[3]/div/div/div[1]/div/input")).sendKeys(lista.getDip());
-		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[4]/div/div/div/div[1]/div/input")).sendKeys(lista.getAps());
-		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[4]/button")).click();
+		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[2]/div[1]/div/div/div[1]/div/input")).sendKeys(lista.getNumeroDoProcesso());
+		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[2]/div[2]/div/div/div[1]/div/input")).sendKeys(lista.getNome());
+		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[2]/div[3]/div/div/div[1]/div/input")).click();
+		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[2]/div[3]/div/div/div[1]/div/input")).sendKeys(lista.getDataAjuizamento());
+		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[3]/div[1]/div/div/div[1]/div/input")).sendKeys(lista.getCpf());
+		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[3]/div[2]/div/div/div[1]/div/input")).sendKeys(lista.getDibInicial());
+		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[3]/div[3]/div/div/div[1]/div/input")).sendKeys(lista.getDibFinal());
+		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[3]/div[4]/div/div/div[1]/div/input")).sendKeys(lista.getRmi());
+		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[4]/div[1]/div/div/div[1]/div/input")).sendKeys(lista.getBeneficio());
+		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[4]/div[2]/div/div/div[1]/div/input")).sendKeys(lista.getNb());
+		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[4]/div[3]/div/div/div[1]/div/input")).sendKeys(lista.getDip());
+		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[5]/div/div/div/div[1]/div/input")).sendKeys(lista.getAps());
+		WebElement butaoAdicionar = driver.findElement(By.id("adicionarButton"));
+		butaoAdicionar.click();
 	}
+	public String finalizar() {
+		try {
+			driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[6]/button")).click();
+			driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[6]/button")).click();
+			
+			return "deu certo";
+		} catch (Exception e) {
+			return "deu errado: " + e;
+			// TODO: handle exception
+		}
+	}
+	
+	
 }
