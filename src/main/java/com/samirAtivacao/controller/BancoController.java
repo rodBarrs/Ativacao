@@ -57,6 +57,7 @@ public class BancoController {
 	            	info.setBeneficio(rs.getString("beneficio"));
 	            	info.setNb(rs.getString("nb"));
 	            	info.setDip(rs.getString("dip"));
+	            	info.setCitacao(rs.getString("citacao"));
 	            	lista.add(info);
 	            	
 	            }

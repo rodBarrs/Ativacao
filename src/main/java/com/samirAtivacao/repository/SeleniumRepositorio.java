@@ -7,6 +7,7 @@ package com.samirAtivacao.repository;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
@@ -294,6 +295,28 @@ public class SeleniumRepositorio {
 		driver.switchTo().window(janela.get(1));
 		WebElement TabelaTref = driver.findElement(By.id("treeview-1015"));
 		List<WebElement> listaMovimentacao = new ArrayList<WebElement>(TabelaTref.findElements(By.cssSelector("tr")));
+		try {
+			for (int h = 2; h < listaMovimentacao.size(); h++) {
+				Boolean existeCitacao = driver.findElement(By.xpath("//tr[" + h + "]/td[2]/div/span[1]")).getText()
+						.toUpperCase().contains("CITAÇÃO");
+				if(existeCitacao) {
+					driver.findElement(By.xpath("//tr[" + h + "]/td[2]/div/span")).click();
+					String citacaoProcesso = driver
+							.findElement(By.xpath(
+									"//tr[" + h + "]/td[2]/div/span"))
+							.getText();
+					//System.out.println("texto: " + citacaoProcesso);
+					String[] dataCitacao = citacaoProcesso.split("-");
+					System.out.println("texto: " + Arrays.toString(dataCitacao));
+					String[] anoCitacao = dataCitacao[3].split(" ");
+					System.out.println("citacao: " + dataCitacao[1] + "/" + dataCitacao[2] + "/" + anoCitacao[0]);
+					informacao.setCitacao(dataCitacao[1] + "/" + dataCitacao[2] + "/" + anoCitacao[0]);
+					h = listaMovimentacao.size();
+				}
+			}
+		} catch (Exception e) {
+			System.out.println("Erro: true; " + e);
+		}
 		for (int i = listaMovimentacao.size(); i > 2; i--) {
 
 			// Providência Jurídica é o título da movimentação
@@ -302,6 +325,8 @@ public class SeleniumRepositorio {
 			if (existeDosPrev == true) {
 				WebElement dosClick = driver.findElement(By.xpath("//tr[" + i + "]/td[2]/div/span"));
 				dosClick.click();
+				
+				System.out.println("informaçoes: " + informacao);
 				driver.switchTo().frame(0);
 				try {
 					String cnj = driver.findElement(By.xpath("//html/body/div/div[1]/table/tbody/tr[1]/td")).getText();
@@ -400,11 +425,10 @@ public class SeleniumRepositorio {
 									informacao.setDibInicial(dibInicial);
 									informacao.setDibFinal(dibFinal);
 									informacao.setDip(dip);
-									System.out.println("informaçoes: " + informacao);
 									return informacao;
 								}
 							} catch (Exception e) {
-								System.out.println("Entrei no Catch forever");
+								System.out.println("Entrei no Catch forever " + e);
 								j = 1000;
 								
 

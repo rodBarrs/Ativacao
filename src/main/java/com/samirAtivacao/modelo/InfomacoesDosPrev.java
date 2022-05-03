@@ -21,6 +21,7 @@ public class InfomacoesDosPrev {
 	private String nb;
 	private String aps;
 	private String dip;
+	private String citacao;
 	
 	public String getBeneficio() {
 		return beneficio;
@@ -102,5 +103,11 @@ public class InfomacoesDosPrev {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public String getCitacao() {
+		return citacao;
+	}
+	public void setCitacao(String citacao) {
+		this.citacao = citacao;
 	}
 }
