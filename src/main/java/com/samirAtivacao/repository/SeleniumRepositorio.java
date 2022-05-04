@@ -344,6 +344,7 @@ public class SeleniumRepositorio {
 					informacao.setDataAjuizamento(dataAjuizamento);
 					informacao.setNome(nome);
 					informacao.setCpf(cpf);
+					this.driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS).pageLoadTimeout(1, TimeUnit.SECONDS);
 					String beneficio = null;
 					String nb = null;
 					String dip;
@@ -386,7 +387,6 @@ public class SeleniumRepositorio {
 									this.driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS).pageLoadTimeout(1, TimeUnit.SECONDS);
 								}
 									
-									System.out.println(nb);
 									verificarAtivo = driver
 											.findElement(
 													By.xpath("/html/body/div/div[" + z + "]/div[" + j + "]/table[1]/tbody/tr[2]/td[2]"))
@@ -538,7 +538,7 @@ public class SeleniumRepositorio {
 			System.setProperty("webdriver.gecko.driver", "GeckoDriver.exe");
 		}
 		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS).pageLoadTimeout(30, TimeUnit.SECONDS);
-		driver.get("https://relaxed-hopper-ba9dd1.netlify.app/");
+		driver.get("http://localhost:8080/");
 		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div/form/div[1]/div/div[1]/div/input")).sendKeys(usuario.getNome());
 		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div/form/div[2]/div/div[1]/div/input")).sendKeys(usuario.getCpf());
 		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div/form/button")).click();
@@ -548,18 +548,21 @@ public class SeleniumRepositorio {
 		 this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS).pageLoadTimeout(30, TimeUnit.SECONDS);
 		
 		
-		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[2]/div[1]/div/div/div[1]/div/input")).sendKeys(lista.getNumeroDoProcesso());
-		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[2]/div[2]/div/div/div[1]/div/input")).sendKeys(lista.getNome());
-		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[2]/div[3]/div/div/div[1]/div/input")).click();
-		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[2]/div[3]/div/div/div[1]/div/input")).sendKeys(lista.getDataAjuizamento());
-		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[3]/div[1]/div/div/div[1]/div/input")).sendKeys(lista.getCpf());
-		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[3]/div[2]/div/div/div[1]/div/input")).sendKeys(lista.getDibInicial());
-		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[3]/div[3]/div/div/div[1]/div/input")).sendKeys(lista.getDibFinal());
-		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[3]/div[4]/div/div/div[1]/div/input")).sendKeys(lista.getRmi());
-		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[4]/div[1]/div/div/div[1]/div/input")).sendKeys(lista.getBeneficio());
-		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[4]/div[2]/div/div/div[1]/div/input")).sendKeys(lista.getNb());
-		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[4]/div[3]/div/div/div[1]/div/input")).sendKeys(lista.getDip());
-		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[5]/div/div/div/div[1]/div/input")).sendKeys(lista.getAps());
+		driver.findElement(By.id("numeroProcesso")).sendKeys(lista.getNumeroDoProcesso());
+		driver.findElement(By.id("nome")).sendKeys(lista.getNome());
+		driver.findElement(By.id("dataAjuizamento")).click();
+		driver.findElement(By.id("dataAjuizamento")).sendKeys(lista.getDataAjuizamento());
+		driver.findElement(By.id("cpf")).sendKeys(lista.getCpf());
+		driver.findElement(By.id("dtDibInicial")).sendKeys(lista.getDibInicial());
+		driver.findElement(By.id("dtDibFinal")).sendKeys(lista.getDibFinal());
+		driver.findElement(By.id("rmi")).sendKeys(lista.getRmi());
+		driver.findElement(By.id("beneficio")).sendKeys(lista.getBeneficio());
+		driver.findElement(By.id("nb")).sendKeys(lista.getNb());
+		driver.findElement(By.id("dip")).sendKeys(lista.getDip());
+		if(lista.getCitacao() != null) {
+			driver.findElement(By.id("citacao")).sendKeys(lista.getCitacao());
+		}
+		driver.findElement(By.id("aps")).sendKeys(lista.getAps());
 		WebElement butaoAdicionar = driver.findElement(By.id("adicionarButton"));
 		butaoAdicionar.click();
 	}
