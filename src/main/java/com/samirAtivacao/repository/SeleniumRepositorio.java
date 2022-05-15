@@ -13,6 +13,7 @@ import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -565,6 +566,26 @@ public class SeleniumRepositorio {
 		driver.findElement(By.id("aps")).sendKeys(lista.getAps());
 		WebElement butaoAdicionar = driver.findElement(By.id("adicionarButton"));
 		butaoAdicionar.click();
+		/*try {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			
+			wait.until(ExpectedConditions
+					.elementToBeClickable(By.id("aps")));
+			WebElement ele = driver.findElement(By.id("aps"));
+//			action.moveToElement(driver.findElement(By.xpath("//td["+i+"]/div"))).doubleClick().build().perform();
+//			driver.findElement(By.xpath("//td["+i+"]/div")).click();
+			//Thread.sleep(500);
+			//driver.findElement(By.xpath("//td["+i+"]/div")).click();
+			js.executeScript(("var evt = document.createEvent('MouseEvents');"+
+					"evt.initMouseEvent('dblclick',true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0,null);"+
+					"arguments[0].dispatchEvent(evt);"), ele);
+			//action.doubleClick(driver.findElement(By.xpath("//td["+i+"]/div"))).build().perform();
+			wait.until(ExpectedConditions
+					.elementToBeClickable(By.id("aps")));
+
+		} catch (Exception e) {
+			System.out.println("erro true: " + e);
+		}*/
 	}
 	public String finalizar() {
 		try {
