@@ -12,6 +12,7 @@ import com.samirAtivacao.controller.BancoController;
 import com.samirAtivacao.controller.ControllerUsuario;
 import com.samirAtivacao.controller.GeralController;
 import com.samirAtivacao.modelo.Usuario;
+import java.awt.Color;
 
 /**
  *
@@ -26,6 +27,39 @@ public class Samir extends javax.swing.JFrame {
      */
     public Samir() {
         initComponents();
+        jButton2.setBackground(new Color(0,0,0,0));
+        BancoController banco = new BancoController();
+        Usuario usuario = new Usuario();
+        usuario = banco.loginInformacoes();
+
+
+
+
+
+
+        if (usuario.getNome() == null) {
+            jTextField2.setText("NOME");
+        } else {
+            jTextField2.setText(usuario.getNome());
+        }
+
+        if (usuario.getEtiqueta() == null) {
+            jTextField3.setText("ETIQUETA");
+        } else {
+            jTextField3.setText(usuario.getEtiqueta());
+        }
+
+        if (usuario.getCpf() == null) {
+            jTextField1.setText("CPF");
+        } else {
+            jTextField1.setText(usuario.getCpf());
+        }
+
+        if (usuario.getSenha() == null) {
+            jPasswordField1.setText("SENHA");
+        } else {
+            jPasswordField1.setText(usuario.getSenha());
+        }
     }
 
     /**
@@ -38,173 +72,161 @@ public class Samir extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jPasswordField1 = new javax.swing.JPasswordField();
         jToggleButton1 = new javax.swing.JToggleButton();
         jToggleButton2 = new javax.swing.JToggleButton();
-        jLabel3 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jTextField3 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
+        setMaximumSize(new java.awt.Dimension(1280, 720));
+        setMinimumSize(new java.awt.Dimension(1280, 720));
+        setPreferredSize(new java.awt.Dimension(1280, 740));
         setResizable(false);
         setType(java.awt.Window.Type.POPUP);
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setText("CPF");
-        jLabel1.setIconTextGap(10);
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jLabel2.setText("SENHA");
+        getContentPane().setLayout(null);
 
         jTextField1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextField1FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextField1FocusLost(evt);
+            }
+        });
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jTextField1);
+        jTextField1.setBounds(720, 126, 515, 72);
 
         jPasswordField1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        jPasswordField1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jPasswordField1FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jPasswordField1FocusLost(evt);
+            }
+        });
         jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPasswordField1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jPasswordField1);
+        jPasswordField1.setBounds(720, 241, 515, 72);
 
-        jToggleButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jToggleButton1.setText("SAMIR ENTER");
+        jToggleButton1.setBackground(new java.awt.Color(112, 247, 111));
+        jToggleButton1.setFont(new java.awt.Font("Tahoma", 0, 50)); // NOI18N
+        jToggleButton1.setText("INICIAR");
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jToggleButton1);
+        jToggleButton1.setBounds(393, 355, 493, 87);
 
-        jToggleButton2.setBackground(new java.awt.Color(139, 139, 139));
-        jToggleButton2.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
-        jToggleButton2.setForeground(new java.awt.Color(228, 9, 9));
+        jToggleButton2.setBackground(new java.awt.Color(247, 75, 74));
+        jToggleButton2.setFont(new java.awt.Font("Sylfaen", 0, 50)); // NOI18N
+        jToggleButton2.setForeground(new java.awt.Color(255, 255, 255));
         jToggleButton2.setSelected(true);
-        jToggleButton2.setText("PARAR TRIAGEM");
+        jToggleButton2.setText("  PARAR ");
         jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton2ActionPerformed(evt);
             }
         });
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel3.setText("NOME COMPLETO");
-        jLabel3.setIconTextGap(10);
+        getContentPane().add(jToggleButton2);
+        jToggleButton2.setBounds(393, 479, 493, 87);
 
         jTextField2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        jTextField2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextField2FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextField2FocusLost(evt);
+            }
+        });
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
             }
         });
+        getContentPane().add(jTextField2);
+        jTextField2.setBounds(31, 126, 515, 72);
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton2.setText("Salvar as Infomações de Login");
+        jButton2.setIcon(new javax.swing.ImageIcon("D:\\Beremiz\\Ativacao\\Assets\\Group 14.png")); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton2);
+        jButton2.setBounds(600, 167, 80, 98);
 
         jTextField3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        jTextField3.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextField3FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextField3FocusLost(evt);
+            }
+        });
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField3ActionPerformed(evt);
             }
         });
+        getContentPane().add(jTextField3);
+        jTextField3.setBounds(30, 240, 515, 72);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setText("Etiqueta");
         jLabel5.setIconTextGap(10);
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(590, 410, 107, 20);
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton1.setText("Renviar DosPrev");
+        jButton1.setBackground(new java.awt.Color(123, 152, 224));
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 50)); // NOI18N
+        jButton1.setText("CALCULADORA");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        BancoController banco = new BancoController();
-		Usuario usuario = banco.loginInformacoes();
-		jTextField2.setText(usuario.getNome());
-    	jTextField1.setText(usuario.getCpf());
-    	jPasswordField1.setText(usuario.getSenha());
-    	jTextField3.setText(usuario.getEtiqueta());
+        getContentPane().add(jButton1);
+        jButton1.setBounds(393, 603, 493, 87);
 
+        jLabel1.setIcon(new javax.swing.ImageIcon("D:\\Beremiz\\Ativacao\\Assets\\home.png")); // NOI18N
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(1193, 622, 70, 70);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(99, 99, 99)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(175, 175, 175))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(85, 85, 85)
-                                .addComponent(jButton1)
-                                .addGap(337, 337, 337))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(529, Short.MAX_VALUE))))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(143, 143, 143)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
-                .addContainerGap(562, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(49, 49, 49)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addGap(7, 7, 7)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jToggleButton1)
-                .addGap(26, 26, 26)
-                .addComponent(jButton2)
-                .addGap(18, 18, 18)
-                .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(93, Short.MAX_VALUE))
-        );
+        jLabel4.setIcon(new javax.swing.ImageIcon("D:\\Beremiz\\Ativacao\\Assets\\SamirFundo.png")); // NOI18N
+        jLabel4.setText("jLabel4");
+        jLabel4.setMaximumSize(new java.awt.Dimension(1280, 720));
+        jLabel4.setMinimumSize(new java.awt.Dimension(1280, 720));
+        jLabel4.setPreferredSize(new java.awt.Dimension(1280, 720));
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(0, -10, 1280, 740);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -262,6 +284,73 @@ public class Samir extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null,  shazam.InserirNoFront(usuario, true));
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jTextField2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField2FocusGained
+        // TODO add your handling code here:
+         if (jTextField2.getText().equals("NOME")){
+       jTextField2.setText("");
+       }
+
+    }//GEN-LAST:event_jTextField2FocusGained
+
+    private void jTextField2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField2FocusLost
+        // TODO add your handling code here:
+           if (jTextField2.getText().equals("")){
+       jTextField2.setText("NOME");
+       }
+
+    }//GEN-LAST:event_jTextField2FocusLost
+
+    private void jTextField3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField3FocusGained
+        // TODO add your handling code here:
+         if (jTextField3.getText().equals("ETIQUETA")){
+       jTextField3.setText("");
+       }
+
+    }//GEN-LAST:event_jTextField3FocusGained
+
+    private void jTextField3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField3FocusLost
+        // TODO add your handling code here:
+          if (jTextField3.getText().equals("")){
+       jTextField3.setText("ETIQUETA");
+       }
+
+    }//GEN-LAST:event_jTextField3FocusLost
+
+    private void jTextField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusGained
+        // TODO add your handling code here:
+
+         if (jTextField1.getText().equals("CPF")){
+       jTextField1.setText("");
+       }
+
+    }//GEN-LAST:event_jTextField1FocusGained
+
+    private void jTextField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusLost
+        // TODO add your handling code here:
+
+          if (jTextField1.getText().equals("")){
+       jTextField1.setText("CPF");
+       }
+
+    }//GEN-LAST:event_jTextField1FocusLost
+
+    private void jPasswordField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPasswordField1FocusGained
+        // TODO add your handling code here:
+
+         if (jPasswordField1.getText().equals("")){
+       jPasswordField1.setText("12345");
+       }
+    }//GEN-LAST:event_jPasswordField1FocusGained
+
+    private void jPasswordField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPasswordField1FocusLost
+        // TODO add your handling code here:
+
+          if (jPasswordField1.getText().equals("")){
+       jPasswordField1.setText("12345");
+       }
+
+    }//GEN-LAST:event_jPasswordField1FocusLost
+
     /**
      * @param args the command line arguments
      */
@@ -301,8 +390,7 @@ public class Samir extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextField1;

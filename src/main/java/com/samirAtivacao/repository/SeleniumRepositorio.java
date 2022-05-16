@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
+import com.samirAtivacao.DAO.DAOInformacoesCessado;
+import com.samirAtivacao.modelo.InformacoesCessado;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -345,6 +347,8 @@ public class SeleniumRepositorio {
 					informacao.setDataAjuizamento(dataAjuizamento);
 					informacao.setNome(nome);
 					informacao.setCpf(cpf);
+
+
 					this.driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS).pageLoadTimeout(1, TimeUnit.SECONDS);
 					String beneficio = null;
 					String nb = null;
@@ -353,6 +357,7 @@ public class SeleniumRepositorio {
 					String dibInicial;
 					String dibFinal;
 					String aps;
+					String nbUnido;
 					for (int j = 2; j < 100; j++) {
 						try {
 							verificarAtivo = driver
@@ -426,6 +431,10 @@ public class SeleniumRepositorio {
 									informacao.setDibInicial(dibInicial);
 									informacao.setDibFinal(dibFinal);
 									informacao.setDip(dip);
+
+									nbUnido = unirNbInformacoesCessado(procurarCessado());
+									informacao.setCessado(nbUnido);
+
 									return informacao;
 								}
 							} catch (Exception e) {
@@ -458,6 +467,135 @@ public class SeleniumRepositorio {
 		}
 
 		return null;
+
+	}
+
+	public List<InformacoesCessado> procurarCessado() {
+
+		List<InformacoesCessado> listInformacao = new ArrayList<InformacoesCessado>() ;
+		for (int x = 2; x < 100; x++) {
+			InformacoesCessado informacao = new InformacoesCessado();
+
+			boolean verificarCessado = false;
+			String beneficio;
+			String nb;
+			String dib;
+			String dcb;
+			String rmi;
+
+			try {
+				verificarCessado = driver
+						.findElement(By.xpath("/html/body/div/div[3]/table/tbody/tr[" + x + "]/td[6]"))
+						.getText().toUpperCase().contains("CESSADO");
+				if (verificarCessado) {
+					beneficio = driver
+							.findElement(By.xpath("/html/body/div/div[3]/table/tbody/tr[" + x + "]/td[2]"))
+							.getText();
+					System.out.println(beneficio);
+					nb = driver
+							.findElement(By.xpath("/html/body/div/div[3]/table/tbody/tr[" + x + "]/td[1]"))
+							.getText();
+
+
+					for(int z = 5; z < 9; z++) {
+						for (int j = 1; j < 100; j++) {
+
+							try {
+								if(z == 5) {
+									Thread.sleep(150);
+								}
+								else {
+									this.driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS).pageLoadTimeout(1, TimeUnit.SECONDS);
+								}
+
+
+								verificarCessado = driver
+										.findElement(
+												By.xpath("/html/body/div/div[" + z + "]/div[" + j + "]/table[1]/tbody/tr[2]/td[2]"))
+										.getText().toUpperCase().contains(nb);
+//												         /html/body/div/div[6]/div[17]/table[1]/tbody/tr[2]/td[2]
+//										                 /html/body/div/div[6]/div[18]/table[1]/tbody/tr[2]/td[2]
+
+								if (verificarCessado) {
+									dib = driver
+											.findElement(By.xpath(
+													"/html/body/div/div["+ z +"]/div[" + j + "]/table[1]/tbody/tr[2]/td[6]"))
+											.getText();
+									System.out.println(dib);
+
+									dcb = driver
+											.findElement(By.xpath(
+													"/html/body/div/div["+ z +"]/div[" + j + "]/table[1]/tbody/tr[2]/td[7]"))
+											.getText();
+									System.out.println("DIP FINAL: " + dcb);
+									rmi = driver
+											.findElement(By.xpath(
+													"/html/body/div/div["+ z +"]/div[" + j + "]/table[2]/tbody/tr[2]/td[1]"))
+											.getText();
+									System.out.println("RMI: " + rmi);
+									j = 100;
+									z =100;
+
+									informacao.setEspecie(beneficio);
+									informacao.setRmi(rmi);
+									informacao.setDataDeinicio(dib);
+									informacao.setDataFinalBeneficio(dcb);
+									informacao.setNb(nb);
+									listInformacao.add(informacao);
+
+								}
+							} catch (Exception e) {
+								System.out.println("Entrei no Catch forever " + e);
+								j = 1000;
+
+
+							}
+
+
+							/*
+							 * dataValiadcaoString = dataValiadcaoString
+							 * .replace("* Informações extraídas dos sistemas informatizados do INSS em: ",
+							 * ""); System.out.println(dataValiadcaoString);
+							 */
+
+						}
+					}
+
+				}
+			} catch (Exception e) {
+				System.out.println("Entrei no Catch");
+				break;
+
+			}
+			if (informacao.getNb() != null ) {
+				DAOInformacoesCessado daoInfo = new DAOInformacoesCessado();
+				daoInfo.salvarInformacoesCessados(informacao);
+			}
+
+
+		}
+
+		return listInformacao;
+	}
+
+	public String unirNbInformacoesCessado(List listaCessado){
+		String nbUnida = "";
+		InformacoesCessado informacao = new InformacoesCessado();
+		for (int i = 0; i < listaCessado.size(); i++) {
+			informacao = (InformacoesCessado) listaCessado.get(i);
+			if (i != listaCessado.size() - 1){
+				nbUnida = nbUnida + informacao.getNb()+",";
+			}else {
+				nbUnida = nbUnida + informacao.getNb();
+			}
+
+		}
+		return nbUnida;
+	}
+
+	public void obterNbCessado(InfomacoesDosPrev lista){
+
+
 
 	}
 
@@ -539,13 +677,13 @@ public class SeleniumRepositorio {
 			System.setProperty("webdriver.gecko.driver", "GeckoDriver.exe");
 		}
 		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS).pageLoadTimeout(30, TimeUnit.SECONDS);
-		driver.get("http://localhost:8080/");
+		driver.get("https://relaxed-hopper-ba9dd1.netlify.app/");
 		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div/form/div[1]/div/div[1]/div/input")).sendKeys(usuario.getNome());
 		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div/form/div[2]/div/div[1]/div/input")).sendKeys(usuario.getCpf());
 		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div/form/button")).click();
 	}
 
-	public void inserirDosPrev(InfomacoesDosPrev lista) {
+	public void inserirDosPrev(InfomacoesDosPrev lista, List<InformacoesCessado> listaCessado) {
 		 this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS).pageLoadTimeout(30, TimeUnit.SECONDS);
 		
 		
@@ -564,8 +702,37 @@ public class SeleniumRepositorio {
 			driver.findElement(By.id("citacao")).sendKeys(lista.getCitacao());
 		}
 		driver.findElement(By.id("aps")).sendKeys(lista.getAps());
+
+		String[] listaNb = lista.getCessado().split(",");
+
+		try {
+				for (int x = 0; x < listaNb.length; x++){
+					for (int i = 0; i < listaCessado.size(); i++){
+						boolean conferirCessado = false;
+						if (listaCessado.get(i).getNb() == null){
+							System.out.println("Deu null");
+						}else{
+							conferirCessado = listaCessado.get(i).getNb().contains(listaNb[x]);
+						}
+
+					if (conferirCessado){
+						driver.findElement(By.id("beneficioAcumulado_beneficio")).sendKeys(listaCessado.get(i).getEspecie());
+						driver.findElement(By.id("beneficioAcumulado_dib")).sendKeys(listaCessado.get(i).getDataDeinicio());
+						driver.findElement(By.id("beneficioAcumulado_dif")).sendKeys(listaCessado.get(i).getDataFinalBeneficio());
+						driver.findElement(By.id("beneficioAcumulado_rmi")).sendKeys(listaCessado.get(i).getRmi());
+						driver.findElement(By.id("beneficioBtn")).click();
+						break;
+					}
+				}
+			}
+		}catch (Exception e){
+			System.out.println("erro: true, mensagem: " + e);
+		}
+
+
 		WebElement butaoAdicionar = driver.findElement(By.id("adicionarButton"));
 		butaoAdicionar.click();
+<<<<<<< HEAD
 		/*try {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			
@@ -586,6 +753,9 @@ public class SeleniumRepositorio {
 		} catch (Exception e) {
 			System.out.println("erro true: " + e);
 		}*/
+=======
+
+>>>>>>> aca9001d989ddc26752844e5a288fde950067130
 	}
 	public String finalizar() {
 		try {
