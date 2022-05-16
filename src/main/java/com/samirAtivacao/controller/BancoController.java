@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.samirAtivacao.banco.ConexaoSQLite;
 import com.samirAtivacao.modelo.InfomacoesDosPrev;
+import com.samirAtivacao.modelo.InformacoesCessado;
 import com.samirAtivacao.modelo.Usuario;
 
 public class BancoController {
@@ -58,6 +59,7 @@ public class BancoController {
 	            	info.setNb(rs.getString("nb"));
 	            	info.setDip(rs.getString("dip"));
 	            	info.setCitacao(rs.getString("citacao"));
+					info.setCessado(rs.getString("nbUnido"));
 	            	lista.add(info);
 	            	
 	            }
@@ -68,6 +70,34 @@ public class BancoController {
 	        
 	        conexao.desconectar();
 	        return lista;
+	}
+
+	public List<InformacoesCessado> listaCessado() {
+		ConexaoSQLite conexao = new ConexaoSQLite();
+		conexao.conectar();
+		String sql = "SELECT * FROM informacoesCessado";
+		PreparedStatement stmt = conexao.criarPreparedStatement(sql, Statement.RETURN_GENERATED_KEYS);
+		@SuppressWarnings("unchecked")
+		List<InformacoesCessado> lista = new ArrayList<InformacoesCessado>();
+		try {
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				InformacoesCessado info = new InformacoesCessado();
+				info.setEspecie(rs.getString("especie"));
+				info.setDataDeinicio(rs.getString("dataDeInicio"));
+				info.setDataFinalBeneficio(rs.getString("dataFinalBeneficio"));
+				info.setRmi(rs.getString("rmi"));
+				info.setNb(rs.getString("nb"));
+				lista.add(info);
+
+			}
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+		conexao.desconectar();
+		return lista;
 	}
 
 	
