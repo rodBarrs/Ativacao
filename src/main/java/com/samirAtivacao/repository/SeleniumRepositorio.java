@@ -84,9 +84,8 @@ public class SeleniumRepositorio {
 			return "ACESSO NEGADO";
 		}
 	}
-	
 
-	public String colocarFiltro( String etiqueta) throws InterruptedException {
+	public String colocarFiltro(String etiqueta) throws InterruptedException {
 		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS).pageLoadTimeout(30, TimeUnit.SECONDS);
 		WebElement setaAparecer = driver.findElement(
 				By.xpath("/html/body/div[4]/div[1]/div[2]/div/div[2]/div[1]/div[3]/div/div/div[33]/div/span"));
@@ -127,7 +126,7 @@ public class SeleniumRepositorio {
 		System.out.println(verificacao);
 		String falso = "Sem registros para exibir";
 
-		boolean confirmacaoDeExistencia = verificacao.equals(falso) ;
+		boolean confirmacaoDeExistencia = verificacao.equals(falso);
 		System.out.println(confirmacaoDeExistencia);
 		if (confirmacaoDeExistencia == true) {
 			return "Sem registros para exibir";
@@ -138,48 +137,58 @@ public class SeleniumRepositorio {
 					"/html/body/div[4]/div[1]/div[2]/div/div[2]/div/div[4]/div/table/tbody/tr[1]/td[3]/div/a[1]")));
 			wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
 					"/html/body/div[4]/div[1]/div[2]/div/div[2]/div/div[4]/div/table/tbody/tr[1]/td[3]/div/a[1]")));
-			
-				WebElement processo = driver.findElement(By.xpath(
-						"/html/body/div[4]/div[1]/div[2]/div/div[2]/div[1]/div[4]/div/table/tbody/tr[1]/td[3]/div/a[1]"));
-				processo.click();
-				return "pronto para procurar";
-			
+
+			WebElement processo = driver.findElement(By.xpath(
+					"/html/body/div[4]/div[1]/div[2]/div/div[2]/div[1]/div[4]/div/table/tbody/tr[1]/td[3]/div/a[1]"));
+			processo.click();
+			return "pronto para procurar";
 
 		}
 
 	}
 
-	/*public String procurarProcesso(Usuario usuario) {
-		this.driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS).pageLoadTimeout(60, TimeUnit.SECONDS);
-		WebElement seta1 = driver
-				.findElement(By.xpath("/html/body/div[4]/div[1]/div[2]/div/div[2]/div/div[3]/div/div/div[3]/div"));
-		seta1.click();
-		WebElement seta = driver
-				.findElement(By.xpath("/html/body/div[4]/div[1]/div[2]/div/div[2]/div/div[3]/div/div/div[3]/div/div"));
-		seta.click();
-
-		WebElement filtro = driver.findElement(By.xpath("/html/body/div[11]/div/div[2]/div/div[6]/a"));
-		filtro.click();
-		WebElement filtroEs = driver
-				.findElement(By.xpath("/html/body/div[13]/div/div[2]/div/table/tbody/tr/td[2]/input"));
-		// /html/body/div[13]/div/div[2]/div/table/tbody/tr/td[2]/input
-		// /html/body/div[13]/div/div[2]/div/table/tbody/tr/td[2]/input
-		filtroEs.click();
-		filtroEs.sendKeys(usuario.getProcesso());
-
-		WebElement preocessoElement = driver.findElement(
-				By.xpath("/html/body/div[4]/div[1]/div[2]/div/div[2]/div/div[4]/div/table/tbody/tr/td[3]/div/a[1]"));
-		preocessoElement.click();
-
-		// WebElement dosPrev = this.driver.findElement(By.cssSelector(" span[id*=DOSSIÊ
-		// PREVIDENCIÁRIO]"));
-		// dosPrev.click();
-		// WebElement colunaNome =
-		// linhaDaTabela.findElement(By.cssSelector("td:nth-child(1)"));
-
-		return "pronto para fazer a leitura";
-
-	}*/
+	/*
+	 * public String procurarProcesso(Usuario usuario) {
+	 * this.driver.manage().timeouts().implicitlyWait(60,
+	 * TimeUnit.SECONDS).pageLoadTimeout(60, TimeUnit.SECONDS);
+	 * WebElement seta1 = driver
+	 * .findElement(By.xpath(
+	 * "/html/body/div[4]/div[1]/div[2]/div/div[2]/div/div[3]/div/div/div[3]/div"));
+	 * seta1.click();
+	 * WebElement seta = driver
+	 * .findElement(By.xpath(
+	 * "/html/body/div[4]/div[1]/div[2]/div/div[2]/div/div[3]/div/div/div[3]/div/div"
+	 * ));
+	 * seta.click();
+	 * 
+	 * WebElement filtro =
+	 * driver.findElement(By.xpath("/html/body/div[11]/div/div[2]/div/div[6]/a"));
+	 * filtro.click();
+	 * WebElement filtroEs = driver
+	 * .findElement(By.xpath(
+	 * "/html/body/div[13]/div/div[2]/div/table/tbody/tr/td[2]/input"));
+	 * // /html/body/div[13]/div/div[2]/div/table/tbody/tr/td[2]/input
+	 * // /html/body/div[13]/div/div[2]/div/table/tbody/tr/td[2]/input
+	 * filtroEs.click();
+	 * filtroEs.sendKeys(usuario.getProcesso());
+	 * 
+	 * WebElement preocessoElement = driver.findElement(
+	 * By.xpath(
+	 * "/html/body/div[4]/div[1]/div[2]/div/div[2]/div/div[4]/div/table/tbody/tr/td[3]/div/a[1]"
+	 * ));
+	 * preocessoElement.click();
+	 * 
+	 * // WebElement dosPrev = this.driver.findElement(By.cssSelector("
+	 * span[id*=DOSSIÊ
+	 * // PREVIDENCIÁRIO]"));
+	 * // dosPrev.click();
+	 * // WebElement colunaNome =
+	 * // linhaDaTabela.findElement(By.cssSelector("td:nth-child(1)"));
+	 * 
+	 * return "pronto para fazer a leitura";
+	 * 
+	 * }
+	 */
 
 	public boolean dataDeValidacaoDosPrev() throws InterruptedException {
 		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS).pageLoadTimeout(30, TimeUnit.SECONDS);
@@ -194,12 +203,15 @@ public class SeleniumRepositorio {
 			// Providência Jurídica é o título da movimentação
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//tr[" + i + "]/td[2]/div/span")));
 			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//tr[" + i + "]/td[2]/div/span")));
-			if(i > listaMovimentacao.size() - 3) {
+			if (i > listaMovimentacao.size() - 3) {
 				Thread.sleep(500);
 			}
-			/*if(i < listaMovimentacao.size() - 2) {
-				this.driver.manage().timeouts().implicitlyWait(1, TimeUnit.MILLISECONDS).pageLoadTimeout(1, TimeUnit.MILLISECONDS);
-			}*/
+			/*
+			 * if(i < listaMovimentacao.size() - 2) {
+			 * this.driver.manage().timeouts().implicitlyWait(1,
+			 * TimeUnit.MILLISECONDS).pageLoadTimeout(1, TimeUnit.MILLISECONDS);
+			 * }
+			 */
 
 			Boolean existeDosPrev = driver.findElement(By.xpath("//tr[" + i + "]/td[2]/div/span")).getText()
 					.toUpperCase().contains("DOSSIÊ PREVIDENCIÁRIO");
@@ -259,8 +271,8 @@ public class SeleniumRepositorio {
 							if (dataValidacao.getMonthValue() == 12) {
 
 								int x = dataValidacao.getDayOfYear() - 333;
-								//dataATUALocalDateTime.getDayOfYear()<= x
-								if (dataATUALocalDateTime.getDayOfYear()<= x) {
+								// dataATUALocalDateTime.getDayOfYear()<= x
+								if (dataATUALocalDateTime.getDayOfYear() <= x) {
 									System.out.println("x é menor ou igual a 30 , x " + x);
 									return true;
 								} else {
@@ -302,13 +314,13 @@ public class SeleniumRepositorio {
 			for (int h = 2; h < listaMovimentacao.size(); h++) {
 				Boolean existeCitacao = driver.findElement(By.xpath("//tr[" + h + "]/td[2]/div/span[1]")).getText()
 						.toUpperCase().contains("CITAÇÃO");
-				if(existeCitacao) {
+				if (existeCitacao) {
 					driver.findElement(By.xpath("//tr[" + h + "]/td[2]/div/span")).click();
 					String citacaoProcesso = driver
 							.findElement(By.xpath(
 									"//tr[" + h + "]/td[2]/div/span"))
 							.getText();
-					//System.out.println("texto: " + citacaoProcesso);
+					// System.out.println("texto: " + citacaoProcesso);
 					String[] dataCitacao = citacaoProcesso.split("-");
 					System.out.println("texto: " + Arrays.toString(dataCitacao));
 					String[] anoCitacao = dataCitacao[3].split(" ");
@@ -328,7 +340,7 @@ public class SeleniumRepositorio {
 			if (existeDosPrev == true) {
 				WebElement dosClick = driver.findElement(By.xpath("//tr[" + i + "]/td[2]/div/span"));
 				dosClick.click();
-				
+
 				System.out.println("informaçoes: " + informacao);
 				driver.switchTo().frame(0);
 				try {
@@ -348,8 +360,8 @@ public class SeleniumRepositorio {
 					informacao.setNome(nome);
 					informacao.setCpf(cpf);
 
-
-					this.driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS).pageLoadTimeout(1, TimeUnit.SECONDS);
+					this.driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS).pageLoadTimeout(1,
+							TimeUnit.SECONDS);
 					String beneficio = null;
 					String nb = null;
 					String dip;
@@ -382,49 +394,55 @@ public class SeleniumRepositorio {
 						}
 					}
 					System.out.println("Nb: " + nb);
-					for(int z = 5; z < 9; z++) {
+					for (int z = 5; z < 9; z++) {
 						for (int j = 1; j < 100; j++) {
 
-							try {	
-								if(z == 5) {
-								Thread.sleep(150);
-							}
-								else {
-									this.driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS).pageLoadTimeout(1, TimeUnit.SECONDS);
+							try {
+								if (z == 5) {
+									Thread.sleep(150);
+								} else {
+									this.driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS)
+											.pageLoadTimeout(1, TimeUnit.SECONDS);
 								}
-									
-									verificarAtivo = driver
-											.findElement(
-													By.xpath("/html/body/div/div[" + z + "]/div[" + j + "]/table[1]/tbody/tr[2]/td[2]"))
-											.getText().toUpperCase().contains(nb);
-								
+
+								verificarAtivo = driver
+										.findElement(
+												By.xpath("/html/body/div/div[" + z + "]/div[" + j
+														+ "]/table[1]/tbody/tr[2]/td[2]"))
+										.getText().toUpperCase().contains(nb);
+
 								if (verificarAtivo) {
 									dibInicial = driver
 											.findElement(By.xpath(
-													"/html/body/div/div["+ z +"]/div[" + j + "]/table[1]/tbody/tr[2]/td[6]"))
+													"/html/body/div/div[" + z + "]/div[" + j
+															+ "]/table[1]/tbody/tr[2]/td[6]"))
 											.getText();
 									System.out.println(dibInicial);
 									dip = driver
 											.findElement(By.xpath(
-													"/html/body/div/div["+ z +"]/div[" + j + "]/table[1]/tbody/tr[2]/td[8]"))
+													"/html/body/div/div[" + z + "]/div[" + j
+															+ "]/table[1]/tbody/tr[2]/td[8]"))
 											.getText();
 									System.out.println("DIP: " + dip);
 									dibFinal = driver
 											.findElement(By.xpath(
-													"/html/body/div/div["+ z +"]/div[" + j + "]/table[1]/tbody/tr[2]/td[7]"))
+													"/html/body/div/div[" + z + "]/div[" + j
+															+ "]/table[1]/tbody/tr[2]/td[7]"))
 											.getText();
 									System.out.println("DIP FINAL: " + dibFinal);
 									rmi = driver
 											.findElement(By.xpath(
-													"/html/body/div/div["+ z +"]/div[" + j + "]/table[2]/tbody/tr[2]/td[1]"))
+													"/html/body/div/div[" + z + "]/div[" + j
+															+ "]/table[2]/tbody/tr[2]/td[1]"))
 											.getText();
 									System.out.println("RMI: " + rmi);
 									aps = driver
 											.findElement(By.xpath(
-													"/html/body/div/div["+ z +"]/div[" + j + "]/table[3]/tbody/tr[2]/td[8]"))
+													"/html/body/div/div[" + z + "]/div[" + j
+															+ "]/table[3]/tbody/tr[2]/td[8]"))
 											.getText();
 									System.out.println("APS: " + aps);
-									z =100;
+									z = 100;
 									j = 100;
 									informacao.setAps(aps);
 									informacao.setRmi(rmi);
@@ -440,10 +458,8 @@ public class SeleniumRepositorio {
 							} catch (Exception e) {
 								System.out.println("Entrei no Catch forever " + e);
 								j = 1000;
-								
 
 							}
-							
 
 							/*
 							 * dataValiadcaoString = dataValiadcaoString
@@ -453,9 +469,7 @@ public class SeleniumRepositorio {
 
 						}
 					}
-					
-					
-					
+
 				} catch (Exception e) {
 					System.out.println("Vish entrei no tal do catch 2");
 					// dataAjuizamento =
@@ -472,7 +486,7 @@ public class SeleniumRepositorio {
 
 	public List<InformacoesCessado> procurarCessado() {
 
-		List<InformacoesCessado> listInformacao = new ArrayList<InformacoesCessado>() ;
+		List<InformacoesCessado> listInformacao = new ArrayList<InformacoesCessado>();
 		for (int x = 2; x < 100; x++) {
 			InformacoesCessado informacao = new InformacoesCessado();
 
@@ -496,45 +510,47 @@ public class SeleniumRepositorio {
 							.findElement(By.xpath("/html/body/div/div[3]/table/tbody/tr[" + x + "]/td[1]"))
 							.getText();
 
-
-					for(int z = 5; z < 9; z++) {
+					for (int z = 5; z < 9; z++) {
 						for (int j = 1; j < 100; j++) {
 
 							try {
-								if(z == 5) {
+								if (z == 5) {
 									Thread.sleep(150);
+								} else {
+									this.driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS)
+											.pageLoadTimeout(1, TimeUnit.SECONDS);
 								}
-								else {
-									this.driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS).pageLoadTimeout(1, TimeUnit.SECONDS);
-								}
-
 
 								verificarCessado = driver
 										.findElement(
-												By.xpath("/html/body/div/div[" + z + "]/div[" + j + "]/table[1]/tbody/tr[2]/td[2]"))
+												By.xpath("/html/body/div/div[" + z + "]/div[" + j
+														+ "]/table[1]/tbody/tr[2]/td[2]"))
 										.getText().toUpperCase().contains(nb);
-//												         /html/body/div/div[6]/div[17]/table[1]/tbody/tr[2]/td[2]
-//										                 /html/body/div/div[6]/div[18]/table[1]/tbody/tr[2]/td[2]
+								// /html/body/div/div[6]/div[17]/table[1]/tbody/tr[2]/td[2]
+								// /html/body/div/div[6]/div[18]/table[1]/tbody/tr[2]/td[2]
 
 								if (verificarCessado) {
 									dib = driver
 											.findElement(By.xpath(
-													"/html/body/div/div["+ z +"]/div[" + j + "]/table[1]/tbody/tr[2]/td[6]"))
+													"/html/body/div/div[" + z + "]/div[" + j
+															+ "]/table[1]/tbody/tr[2]/td[6]"))
 											.getText();
 									System.out.println(dib);
 
 									dcb = driver
 											.findElement(By.xpath(
-													"/html/body/div/div["+ z +"]/div[" + j + "]/table[1]/tbody/tr[2]/td[7]"))
+													"/html/body/div/div[" + z + "]/div[" + j
+															+ "]/table[1]/tbody/tr[2]/td[7]"))
 											.getText();
 									System.out.println("DIP FINAL: " + dcb);
 									rmi = driver
 											.findElement(By.xpath(
-													"/html/body/div/div["+ z +"]/div[" + j + "]/table[2]/tbody/tr[2]/td[1]"))
+													"/html/body/div/div[" + z + "]/div[" + j
+															+ "]/table[2]/tbody/tr[2]/td[1]"))
 											.getText();
 									System.out.println("RMI: " + rmi);
 									j = 100;
-									z =100;
+									z = 100;
 
 									informacao.setEspecie(beneficio);
 									informacao.setRmi(rmi);
@@ -548,9 +564,7 @@ public class SeleniumRepositorio {
 								System.out.println("Entrei no Catch forever " + e);
 								j = 1000;
 
-
 							}
-
 
 							/*
 							 * dataValiadcaoString = dataValiadcaoString
@@ -567,25 +581,24 @@ public class SeleniumRepositorio {
 				break;
 
 			}
-			if (informacao.getNb() != null ) {
+			if (informacao.getNb() != null) {
 				DAOInformacoesCessado daoInfo = new DAOInformacoesCessado();
 				daoInfo.salvarInformacoesCessados(informacao);
 			}
-
 
 		}
 
 		return listInformacao;
 	}
 
-	public String unirNbInformacoesCessado(List listaCessado){
+	public String unirNbInformacoesCessado(List listaCessado) {
 		String nbUnida = "";
 		InformacoesCessado informacao = new InformacoesCessado();
 		for (int i = 0; i < listaCessado.size(); i++) {
 			informacao = (InformacoesCessado) listaCessado.get(i);
-			if (i != listaCessado.size() - 1){
-				nbUnida = nbUnida + informacao.getNb()+",";
-			}else {
+			if (i != listaCessado.size() - 1) {
+				nbUnida = nbUnida + informacao.getNb() + ",";
+			} else {
 				nbUnida = nbUnida + informacao.getNb();
 			}
 
@@ -593,9 +606,7 @@ public class SeleniumRepositorio {
 		return nbUnida;
 	}
 
-	public void obterNbCessado(InfomacoesDosPrev lista){
-
-
+	public void obterNbCessado(InfomacoesDosPrev lista) {
 
 	}
 
@@ -633,7 +644,8 @@ public class SeleniumRepositorio {
 	}
 
 	public Ativo verificacaoDeAtivo() {
-		this.driver.manage().timeouts().implicitlyWait(100, TimeUnit.MILLISECONDS).pageLoadTimeout(100, TimeUnit.MILLISECONDS);
+		this.driver.manage().timeouts().implicitlyWait(100, TimeUnit.MILLISECONDS).pageLoadTimeout(100,
+				TimeUnit.MILLISECONDS);
 		List<String> janela = new ArrayList<String>(driver.getWindowHandles());
 		driver.switchTo().window(janela.get(1));
 		Ativo ativo = new Ativo();
@@ -664,29 +676,38 @@ public class SeleniumRepositorio {
 	public void quit() {
 		driver.quit();
 	}
+
 	public void openSamirFront(Usuario usuario) {
 		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS).pageLoadTimeout(30, TimeUnit.SECONDS);
 		driver.get("https://relaxed-hopper-ba9dd1.netlify.app/");
-		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div/form/div[1]/div/div[1]/div/input")).sendKeys(usuario.getNome());
-		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div/form/div[2]/div/div[1]/div/input")).sendKeys(usuario.getCpf());
+		driver.findElement(
+				By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div/form/div[1]/div/div[1]/div/input"))
+				.sendKeys(usuario.getNome());
+		driver.findElement(
+				By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div/form/div[2]/div/div[1]/div/input"))
+				.sendKeys(usuario.getCpf());
 		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div/form/button")).click();
 	}
+
 	public void openFront(Usuario usuario) {
-		if(driver == null) {
+		if (driver == null) {
 			driver = new FirefoxDriver();
 			System.setProperty("webdriver.gecko.driver", "GeckoDriver.exe");
 		}
 		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS).pageLoadTimeout(30, TimeUnit.SECONDS);
-		driver.get("https://relaxed-hopper-ba9dd1.netlify.app/");
-		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div/form/div[1]/div/div[1]/div/input")).sendKeys(usuario.getNome());
-		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div/form/div[2]/div/div[1]/div/input")).sendKeys(usuario.getCpf());
+		driver.get("http://localhost:8080/");
+		driver.findElement(
+				By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div/form/div[1]/div/div[1]/div/input"))
+				.sendKeys(usuario.getNome());
+		driver.findElement(
+				By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div/form/div[2]/div/div[1]/div/input"))
+				.sendKeys(usuario.getCpf());
 		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div/form/button")).click();
 	}
 
 	public void inserirDosPrev(InfomacoesDosPrev lista, List<InformacoesCessado> listaCessado) {
-		 this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS).pageLoadTimeout(30, TimeUnit.SECONDS);
-		
-		
+		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS).pageLoadTimeout(30, TimeUnit.SECONDS);
+
 		driver.findElement(By.id("numeroProcesso")).sendKeys(lista.getNumeroDoProcesso());
 		driver.findElement(By.id("nome")).sendKeys(lista.getNome());
 		driver.findElement(By.id("dataAjuizamento")).click();
@@ -698,7 +719,7 @@ public class SeleniumRepositorio {
 		driver.findElement(By.id("beneficio")).sendKeys(lista.getBeneficio());
 		driver.findElement(By.id("nb")).sendKeys(lista.getNb());
 		driver.findElement(By.id("dip")).sendKeys(lista.getDip());
-		if(lista.getCitacao() != null) {
+		if (lista.getCitacao() != null) {
 			driver.findElement(By.id("citacao")).sendKeys(lista.getCitacao());
 		}
 		driver.findElement(By.id("aps")).sendKeys(lista.getAps());
@@ -706,68 +727,74 @@ public class SeleniumRepositorio {
 		String[] listaNb = lista.getCessado().split(",");
 
 		try {
-				for (int x = 0; x < listaNb.length; x++){
-					for (int i = 0; i < listaCessado.size(); i++){
-						boolean conferirCessado = false;
-						if (listaCessado.get(i).getNb() == null){
-							System.out.println("Deu null");
-						}else{
-							conferirCessado = listaCessado.get(i).getNb().contains(listaNb[x]);
-						}
+			for (int x = 0; x < listaNb.length; x++) {
+				for (int i = 0; i < listaCessado.size(); i++) {
+					boolean conferirCessado = false;
+					if (listaCessado.get(i).getNb() == null) {
+						System.out.println("Deu null");
+					} else {
+						conferirCessado = listaCessado.get(i).getNb().contains(listaNb[x]);
+					}
 
-					if (conferirCessado){
-						driver.findElement(By.id("beneficioAcumulado_beneficio")).sendKeys(listaCessado.get(i).getEspecie());
-						driver.findElement(By.id("beneficioAcumulado_dib")).sendKeys(listaCessado.get(i).getDataDeinicio());
-						driver.findElement(By.id("beneficioAcumulado_dif")).sendKeys(listaCessado.get(i).getDataFinalBeneficio());
+					if (conferirCessado) {
+						driver.findElement(By.id("beneficioAcumulado_beneficio"))
+								.sendKeys(listaCessado.get(i).getEspecie());
+						driver.findElement(By.id("beneficioAcumulado_dib"))
+								.sendKeys(listaCessado.get(i).getDataDeinicio());
+						driver.findElement(By.id("beneficioAcumulado_dif"))
+								.sendKeys(listaCessado.get(i).getDataFinalBeneficio());
 						driver.findElement(By.id("beneficioAcumulado_rmi")).sendKeys(listaCessado.get(i).getRmi());
 						driver.findElement(By.id("beneficioBtn")).click();
 						break;
 					}
 				}
 			}
-		}catch (Exception e){
+		} catch (Exception e) {
 			System.out.println("erro: true, mensagem: " + e);
 		}
 
-
-		WebElement butaoAdicionar = driver.findElement(By.id("adicionarButton"));
-		butaoAdicionar.click();
-<<<<<<< HEAD
-		/*try {
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-			
-			wait.until(ExpectedConditions
-					.elementToBeClickable(By.id("aps")));
-			WebElement ele = driver.findElement(By.id("aps"));
-//			action.moveToElement(driver.findElement(By.xpath("//td["+i+"]/div"))).doubleClick().build().perform();
-//			driver.findElement(By.xpath("//td["+i+"]/div")).click();
-			//Thread.sleep(500);
-			//driver.findElement(By.xpath("//td["+i+"]/div")).click();
-			js.executeScript(("var evt = document.createEvent('MouseEvents');"+
-					"evt.initMouseEvent('dblclick',true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0,null);"+
-					"arguments[0].dispatchEvent(evt);"), ele);
-			//action.doubleClick(driver.findElement(By.xpath("//td["+i+"]/div"))).build().perform();
-			wait.until(ExpectedConditions
-					.elementToBeClickable(By.id("aps")));
-
-		} catch (Exception e) {
-			System.out.println("erro true: " + e);
-		}*/
-=======
-
->>>>>>> aca9001d989ddc26752844e5a288fde950067130
+		driver.findElement(By.id("adicionarButton")).click();
+		/*
+		 * try {
+		 * JavascriptExecutor js = (JavascriptExecutor) driver;
+		 * 
+		 * wait.until(ExpectedConditions
+		 * .elementToBeClickable(By.id("aps")));
+		 * WebElement ele = driver.findElement(By.id("aps"));
+		 * // action.moveToElement(driver.findElement(By.xpath("//td["+i+"]/div"))).
+		 * doubleClick().build().perform();
+		 * // driver.findElement(By.xpath("//td["+i+"]/div")).click();
+		 * //Thread.sleep(500);
+		 * //driver.findElement(By.xpath("//td["+i+"]/div")).click();
+		 * js.executeScript(("var evt = document.createEvent('MouseEvents');"+
+		 * "evt.initMouseEvent('dblclick',true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0,null);"
+		 * +
+		 * "arguments[0].dispatchEvent(evt);"), ele);
+		 * //action.doubleClick(driver.findElement(By.xpath("//td["+i+"]/div"))).build()
+		 * .perform();
+		 * wait.until(ExpectedConditions
+		 * .elementToBeClickable(By.id("aps")));
+		 * 
+		 * } catch (Exception e) {
+		 * System.out.println("erro true: " + e);
+		 * }
+		 */
 	}
+
 	public String finalizar() {
 		try {
-			driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[6]/button")).click();
-			driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[6]/button")).click();
-			
+			driver.findElement(
+					By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[6]/button"))
+					.click();
+			driver.findElement(
+					By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div/div/div[6]/button"))
+					.click();
+
 			return "deu certo";
 		} catch (Exception e) {
 			return "deu errado: " + e;
 			// TODO: handle exception
 		}
 	}
-	
-	
+
 }

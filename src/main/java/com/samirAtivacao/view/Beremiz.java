@@ -51,13 +51,11 @@ public class Beremiz extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1280, 720));
         setMinimumSize(new java.awt.Dimension(1280, 720));
-        setPreferredSize(new java.awt.Dimension(1280, 720));
         getContentPane().setLayout(null);
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon("D:\\Beremiz\\Ativacao\\Assets\\Group 14.png")); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Group 14.png"))); // NOI18N
         jButton2.setActionCommand("Salvar as infomações");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -150,7 +148,7 @@ public class Beremiz extends javax.swing.JFrame {
         getContentPane().add(jButton1);
         jButton1.setBounds(408, 405, 493, 87);
 
-        jButton3.setIcon(new javax.swing.ImageIcon("D:\\Beremiz\\Ativacao\\Assets\\home.png")); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/home.png"))); // NOI18N
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -186,7 +184,7 @@ public class Beremiz extends javax.swing.JFrame {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(400, -10, 545, 155);
 
-        jLabel3.setIcon(new javax.swing.ImageIcon("D:\\Beremiz\\Ativacao\\Assets\\BeremizFundo.png")); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/BeremizFundo.png"))); // NOI18N
         jLabel3.setText("jLabel3");
         getContentPane().add(jLabel3);
         jLabel3.setBounds(0, 0, 1280, 720);

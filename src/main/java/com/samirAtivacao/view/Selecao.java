@@ -36,9 +36,7 @@ public class Selecao extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1280, 720));
         setMinimumSize(new java.awt.Dimension(1280, 720));
-        setPreferredSize(new java.awt.Dimension(1280, 720));
         getContentPane().setLayout(null);
 
         jButton1.setBackground(new java.awt.Color(219, 172, 70));
@@ -66,7 +64,7 @@ public class Selecao extends javax.swing.JFrame {
         getContentPane().add(jButton2);
         jButton2.setBounds(590, 390, 694, 114);
 
-        jButton3.setIcon(new javax.swing.ImageIcon("D:\\Beremiz\\Ativacao\\Assets\\info.png")); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/info.png"))); // NOI18N
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -75,7 +73,7 @@ public class Selecao extends javax.swing.JFrame {
         getContentPane().add(jButton3);
         jButton3.setBounds(1207, 94, 50, 50);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("D:\\Beremiz\\Ativacao\\Assets\\SelecaoFundo.png")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SelecaoFundo.png"))); // NOI18N
         jLabel2.setText("jLabel2");
         jLabel2.setMaximumSize(new java.awt.Dimension(1280, 720));
         jLabel2.setMinimumSize(new java.awt.Dimension(1280, 720));

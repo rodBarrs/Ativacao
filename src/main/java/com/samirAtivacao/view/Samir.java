@@ -86,15 +86,13 @@ public class Samir extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
-        setMaximumSize(new java.awt.Dimension(1280, 720));
         setMinimumSize(new java.awt.Dimension(1280, 720));
-        setPreferredSize(new java.awt.Dimension(1280, 740));
         setResizable(false);
         setType(java.awt.Window.Type.POPUP);
         getContentPane().setLayout(null);
 
         jTextField1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-
+        jTextField1.setText("CPF");
         jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jTextField1FocusGained(evt);
@@ -112,7 +110,7 @@ public class Samir extends javax.swing.JFrame {
         jTextField1.setBounds(720, 126, 515, 72);
 
         jPasswordField1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-
+        jPasswordField1.setText("ETIQUETA");
         jPasswordField1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jPasswordField1FocusGained(evt);
@@ -154,7 +152,8 @@ public class Samir extends javax.swing.JFrame {
         jToggleButton2.setBounds(393, 479, 493, 87);
 
         jTextField2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-
+        jTextField2.setText("NOME");
+        jTextField2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jTextField2.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jTextField2FocusGained(evt);
@@ -172,7 +171,7 @@ public class Samir extends javax.swing.JFrame {
         jTextField2.setBounds(31, 126, 515, 72);
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon("D:\\Beremiz\\Ativacao\\Assets\\Group 14.png")); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Group 14.png"))); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -182,7 +181,7 @@ public class Samir extends javax.swing.JFrame {
         jButton2.setBounds(600, 167, 80, 98);
 
         jTextField3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-
+        jTextField3.setText("ETIQUETA");
         jTextField3.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jTextField3FocusGained(evt);
@@ -215,18 +214,16 @@ public class Samir extends javax.swing.JFrame {
         });
         getContentPane().add(jButton1);
         jButton1.setBounds(393, 603, 493, 87);
-
-        jLabel1.setIcon(new javax.swing.ImageIcon("D:\\Beremiz\\Ativacao\\Assets\\home.png")); // NOI18N
         getContentPane().add(jLabel1);
         jLabel1.setBounds(1193, 622, 70, 70);
 
-        jLabel4.setIcon(new javax.swing.ImageIcon("D:\\Beremiz\\Ativacao\\Assets\\SamirFundo.png")); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SamirFundo.png"))); // NOI18N
         jLabel4.setText("jLabel4");
         jLabel4.setMaximumSize(new java.awt.Dimension(1280, 720));
         jLabel4.setMinimumSize(new java.awt.Dimension(1280, 720));
         jLabel4.setPreferredSize(new java.awt.Dimension(1280, 720));
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(0, -10, 1280, 740);
+        jLabel4.setBounds(0, -10, 1280, 760);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

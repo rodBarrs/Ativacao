@@ -36,10 +36,8 @@ public class Informacao extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1280, 720));
-        setPreferredSize(new java.awt.Dimension(1280, 750));
         getContentPane().setLayout(null);
 
-        jButton1.setIcon(new javax.swing.ImageIcon("D:\\Beremiz\\Ativacao\\Assets\\manualIcon.png")); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -47,12 +45,10 @@ public class Informacao extends javax.swing.JFrame {
         });
         getContentPane().add(jButton1);
         jButton1.setBounds(352, 569, 60, 60);
-
-        jButton2.setIcon(new javax.swing.ImageIcon("D:\\Beremiz\\Ativacao\\Assets\\homeBlack.png")); // NOI18N
         getContentPane().add(jButton2);
         jButton2.setBounds(600, 630, 90, 91);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("D:\\Beremiz\\Ativacao\\Assets\\informacoes.png")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/informacoes.png"))); // NOI18N
         jLabel2.setText("jLabel2");
         jLabel2.setMaximumSize(new java.awt.Dimension(1280, 720));
         jLabel2.setMinimumSize(new java.awt.Dimension(1280, 720));
