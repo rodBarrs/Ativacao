@@ -7,6 +7,8 @@ import java.sql.Statement;
 import com.samirAtivacao.banco.ConexaoSQLite;
 import com.samirAtivacao.modelo.InfomacoesDosPrev;
 
+//teste git
+
 public class DAOInformacoesDosPrev extends ConexaoSQLite {
 	public boolean salvarInformacoesDosPrev  (InfomacoesDosPrev informacoes) {
 		conectar();
