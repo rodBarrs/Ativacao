@@ -6,9 +6,11 @@ package com.samirAtivacao.controller;
 
 import java.util.List;
 
+import com.samirAtivacao.DAO.DAOInformacoesCessado;
 import com.samirAtivacao.DAO.DAOInformacoesDosPrev;
 import com.samirAtivacao.modelo.Ativo;
 import com.samirAtivacao.modelo.InfomacoesDosPrev;
+import com.samirAtivacao.modelo.InformacoesCessado;
 import com.samirAtivacao.modelo.Usuario;
 import com.samirAtivacao.repository.SeleniumRepositorio;
 
@@ -83,6 +85,7 @@ public class GeralController {
     	InfomacoesDosPrev info = new InfomacoesDosPrev();
     	repository.open(usuario);
     	DAOInformacoesDosPrev daoInfo = new DAOInformacoesDosPrev();
+		DAOInformacoesCessado daoInfoCessado = new DAOInformacoesCessado();
     	try {
     		repository.colocarFiltro(usuario.getEtiqueta());
 			
@@ -95,6 +98,7 @@ public class GeralController {
 		boolean validacao;
 		String letra = "";
 		daoInfo.excluirUInfomacoesDosPrev();
+		daoInfoCessado.excluirUInfomacoesDosPrev();
 		try {
 			while("Sem registros para exibir" != repository.entrarNoProcessoAutomatico(usuario.getEtiqueta())) {
 				validacao = repository.dataDeValidacaoDosPrev();
@@ -143,10 +147,12 @@ public class GeralController {
     	
     	BancoController banco = new BancoController();
 		List<InfomacoesDosPrev> lista = banco.litaDosPrev();
+		List<InformacoesCessado> listaCessado = banco.listaCessado();
 		System.out.println("Cpf: ");
 		int x = 0;
 		while(x <lista.size()) {
-			repository.inserirDosPrev(lista.get(x));
+
+			repository.inserirDosPrev(lista.get(x),listaCessado);
 			x++;
 		}
 		repository.finalizar();

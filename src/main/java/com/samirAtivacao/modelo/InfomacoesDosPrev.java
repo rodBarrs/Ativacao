@@ -4,6 +4,8 @@
  */
 package com.samirAtivacao.modelo;
 
+import java.util.List;
+
 /**
  *
  * @author AGU
@@ -22,6 +24,9 @@ public class InfomacoesDosPrev {
 	private String aps;
 	private String dip;
 	private String citacao;
+
+	private  String cessado;
+
 	
 	public String getBeneficio() {
 		return beneficio;
@@ -97,6 +102,7 @@ public class InfomacoesDosPrev {
 		nome =inf.getNome();
 		numeroDoProcesso = inf.getNumeroDoProcesso();
 		dataAjuizamento = inf.getDataAjuizamento();
+
 	}
 	public int getId() {
 		return id;
@@ -109,5 +115,13 @@ public class InfomacoesDosPrev {
 	}
 	public void setCitacao(String citacao) {
 		this.citacao = citacao;
+	}
+
+	public String getCessado() {
+		return cessado;
+	}
+
+	public void setCessado(String cessado) {
+		this.cessado = cessado;
 	}
 }
