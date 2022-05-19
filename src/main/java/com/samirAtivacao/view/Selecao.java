@@ -109,6 +109,7 @@ public class Selecao extends javax.swing.JFrame {
 		loginbremiz.setLocationRelativeTo(null);
 		loginbremiz.setVisible(true);
             loginbremiz.setResizable(false);
+            //
 		}
 		 else{
 		loginbremiz.setLocationRelativeTo(null);
