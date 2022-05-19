@@ -88,6 +88,7 @@ public class Selecao extends javax.swing.JFrame {
     Samir loginSamir;
     Beremiz loginbremiz;
     Informacao informacao;
+    Selecao selecao;
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
        
@@ -96,6 +97,8 @@ public class Selecao extends javax.swing.JFrame {
 			loginSamir.setLocationRelativeTo(null);
 			loginSamir.setVisible(true);
 			loginSamir.setResizable(false);
+			selecao.setVisible(false);
+			selecao.setResizable(true);
 			}
 			 else{
 			     loginSamir.setLocationRelativeTo(null);

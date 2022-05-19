@@ -4,6 +4,7 @@
  */
 package com.samirAtivacao.repository;
 
+import java.awt.event.ActionEvent;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import com.samirAtivacao.DAO.DAOInformacoesCessado;
+import com.samirAtivacao.controller.GeralController;
 import com.samirAtivacao.modelo.InformacoesCessado;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -33,10 +35,14 @@ public class SeleniumRepositorio {
 	WebDriver driver;
 	WebDriverWait wait;
 
+
+
+
 	public String open(Usuario usuario) {
 		String url = "https://sapiens.agu.gov.br/login";
 		System.setProperty("webdriver.gecko.driver", "GeckoDriver.exe");
 		driver = new FirefoxDriver();
+
 		driver.get(url);
 
 		String campoUserPath = "/html/body/div[1]/div[1]/div/div/div[2]/div/div/div/table[1]/tbody/tr/td[2]/input";
@@ -82,8 +88,9 @@ public class SeleniumRepositorio {
 		} else {
 			return "ACESSO NEGADO";
 		}
+
 	}
-	
+
 
 	public String colocarFiltro( String etiqueta) throws InterruptedException {
 		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS).pageLoadTimeout(30, TimeUnit.SECONDS);
@@ -744,6 +751,21 @@ public class SeleniumRepositorio {
 			// TODO: handle exception
 		}
 	}
-	
-	
+
+	public void parar() {
+		try {
+			System.out.println(this.driver);
+			driver.quit();
+
+
+		} catch (Exception e) {
+
+		}
+
+	}
+
+
+
+
+
 }
