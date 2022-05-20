@@ -12,8 +12,14 @@ import com.samirAtivacao.controller.BancoController;
 import com.samirAtivacao.controller.ControllerUsuario;
 import com.samirAtivacao.controller.GeralController;
 import com.samirAtivacao.modelo.Usuario;
+import com.samirAtivacao.repository.SeleniumRepositorio;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
 @SuppressWarnings("serial")
 public class Beremiz extends javax.swing.JFrame {
+    GeralController shazam = new GeralController();
+    private Thread backgroundThread;
 
     /**
      * Creates new form beremiz
@@ -21,10 +27,39 @@ public class Beremiz extends javax.swing.JFrame {
      */
     public Beremiz() {
         initComponents();
-        jButton2.setBackground(new Color(0,0,0,0));
-        jButton3.setBackground(new Color(0,0,0,0));
-        jToggleButton2.setForeground(Color.white);
+        botaoSalvar.setBackground(new Color(0,0,0,0));
+        botaoHome.setBackground(new Color(0,0,0,0));
+        botaoParar.setForeground(Color.white);
         jLabel1.setForeground(Color.white);
+        BancoController banco = new BancoController();
+        Usuario usuario = new Usuario();
+        usuario = banco.loginInformacoes();
+
+
+        if (usuario.getNome() == null) {
+            campoNome.setText("NOME");
+        } else {
+            campoNome.setText(usuario.getNome());
+        }
+
+        if (usuario.getEtiqueta() == null) {
+            campoEtiqueta.setText("ETIQUETA");
+        } else {
+            campoEtiqueta.setText(usuario.getEtiqueta());
+        }
+
+        if (usuario.getCpf() == null) {
+            campoCPF.setText("CPF");
+        } else {
+            campoCPF.setText(usuario.getCpf());
+        }
+
+        if (usuario.getSenha() == null) {
+            campoSenha.setText("SENHA");
+        } else {
+            campoSenha.setText(usuario.getSenha());
+        }
+
     }
 
     /**
@@ -37,15 +72,15 @@ public class Beremiz extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton2 = new javax.swing.JButton();
+        botaoSalvar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField1 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jToggleButton2 = new javax.swing.JToggleButton();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jTextField4 = new javax.swing.JTextField();
+        campoEtiqueta = new javax.swing.JTextField();
+        campoCPF = new javax.swing.JTextField();
+        campoSenha = new javax.swing.JPasswordField();
+        botaoParar = new javax.swing.JToggleButton();
+        botaoIniciar = new javax.swing.JButton();
+        botaoHome = new javax.swing.JButton();
+        campoNome = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
@@ -54,129 +89,130 @@ public class Beremiz extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(1280, 720));
         getContentPane().setLayout(null);
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Group 14.png"))); // NOI18N
-        jButton2.setActionCommand("Salvar as infomações");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        botaoSalvar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        botaoSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Group 14.png"))); // NOI18N
+        botaoSalvar.setActionCommand("Salvar as infomações");
+        botaoSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                botaoSalvarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2);
-        jButton2.setBounds(602, 152, 80, 98);
+        getContentPane().add(botaoSalvar);
+        botaoSalvar.setBounds(602, 152, 80, 98);
         getContentPane().add(jLabel4);
         jLabel4.setBounds(1090, 180, 147, 104);
 
-        jTextField3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jTextField3.setText("ETIQUETA");
-        jTextField3.addFocusListener(new java.awt.event.FocusAdapter() {
+        campoEtiqueta.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        campoEtiqueta.setText("ETIQUETA");
+        campoEtiqueta.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jTextField3FocusGained(evt);
+                campoEtiquetaFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jTextField3FocusLost(evt);
+                campoEtiquetaFocusLost(evt);
             }
         });
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        campoEtiqueta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                campoEtiquetaActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField3);
-        jTextField3.setBounds(37, 221, 515, 72);
+        getContentPane().add(campoEtiqueta);
+        campoEtiqueta.setBounds(37, 221, 515, 72);
 
-        jTextField1.setFont(new java.awt.Font("Perpetua", 0, 25)); // NOI18N
-        jTextField1.setText("CPF");
-        jTextField1.setMaximumSize(new java.awt.Dimension(515, 72));
-        jTextField1.setMinimumSize(new java.awt.Dimension(515, 72));
-        jTextField1.setPreferredSize(new java.awt.Dimension(515, 72));
-        jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
+        campoCPF.setFont(new java.awt.Font("Perpetua", 0, 25)); // NOI18N
+        campoCPF.setText("CPF");
+        campoCPF.setMaximumSize(new java.awt.Dimension(515, 72));
+        campoCPF.setMinimumSize(new java.awt.Dimension(515, 72));
+        campoCPF.setPreferredSize(new java.awt.Dimension(515, 72));
+        campoCPF.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jTextField1FocusGained(evt);
+                campoCPFFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jTextField1FocusLost(evt);
+                campoCPFFocusLost(evt);
             }
         });
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        campoCPF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                campoCPFActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField1);
-        jTextField1.setBounds(732, 129, 515, 72);
+        getContentPane().add(campoCPF);
+        campoCPF.setBounds(732, 129, 515, 72);
 
-        jPasswordField1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPasswordField1.setText("SENHA");
-        jPasswordField1.addFocusListener(new java.awt.event.FocusAdapter() {
+        campoSenha.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        campoSenha.setText("SENHA");
+        campoSenha.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jPasswordField1FocusGained(evt);
+                campoSenhaFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jPasswordField1FocusLost(evt);
+                campoSenhaFocusLost(evt);
             }
         });
-        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
+        campoSenha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField1ActionPerformed(evt);
+                campoSenhaActionPerformed(evt);
             }
         });
-        getContentPane().add(jPasswordField1);
-        jPasswordField1.setBounds(732, 227, 515, 72);
+        getContentPane().add(campoSenha);
+        campoSenha.setBounds(732, 227, 515, 72);
 
-        jToggleButton2.setBackground(new java.awt.Color(247, 75, 74));
-        jToggleButton2.setFont(new java.awt.Font("Tahoma", 0, 50)); // NOI18N
-        jToggleButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jToggleButton2.setSelected(true);
-        jToggleButton2.setText("PARAR TRIAGEM");
-        jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
+        botaoParar.setBackground(new java.awt.Color(247, 75, 74));
+        botaoParar.setFont(new java.awt.Font("Tahoma", 0, 50)); // NOI18N
+        botaoParar.setForeground(new java.awt.Color(255, 255, 255));
+        botaoParar.setSelected(true);
+        botaoParar.setText("PARAR TRIAGEM");
+        botaoParar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton2ActionPerformed(evt);
+                botaoPararActionPerformed(evt);
             }
         });
-        getContentPane().add(jToggleButton2);
-        jToggleButton2.setBounds(408, 529, 493, 87);
+        getContentPane().add(botaoParar);
+        botaoParar.setBounds(408, 529, 493, 87);
 
-        jButton1.setBackground(new java.awt.Color(112, 247, 111));
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 50)); // NOI18N
-        jButton1.setText("INICIAR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        botaoIniciar.setBackground(new java.awt.Color(112, 247, 111));
+        botaoIniciar.setFont(new java.awt.Font("Tahoma", 0, 50)); // NOI18N
+        botaoIniciar.setText("INICIAR");
+        botaoIniciar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botaoIniciarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(408, 405, 493, 87);
+        getContentPane().add(botaoIniciar);
+        botaoIniciar.setBounds(408, 405, 493, 87);
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/home.png"))); // NOI18N
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+
+        botaoHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/home.png"))); // NOI18N
+        botaoHome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                botaoHomeActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3);
-        jButton3.setBounds(1170, 600, 90, 70);
+        getContentPane().add(botaoHome);
+        botaoHome.setBounds(1170, 600, 90, 70);
 
-        jTextField4.setFont(new java.awt.Font("Perpetua", 0, 25)); // NOI18N
-        jTextField4.setText("NOME");
-        jTextField4.setMaximumSize(new java.awt.Dimension(515, 72));
-        jTextField4.setMinimumSize(new java.awt.Dimension(515, 72));
-        jTextField4.setPreferredSize(new java.awt.Dimension(515, 72));
-        jTextField4.addFocusListener(new java.awt.event.FocusAdapter() {
+        campoNome.setFont(new java.awt.Font("Perpetua", 0, 25)); // NOI18N
+        campoNome.setText("NOME");
+        campoNome.setMaximumSize(new java.awt.Dimension(515, 72));
+        campoNome.setMinimumSize(new java.awt.Dimension(515, 72));
+        campoNome.setPreferredSize(new java.awt.Dimension(515, 72));
+        campoNome.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jTextField4FocusGained(evt);
+                campoNomeFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jTextField4FocusLost(evt);
+                campoNomeFocusLost(evt);
             }
         });
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        campoNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                campoNomeActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField4);
-        jTextField4.setBounds(37, 125, 515, 72);
+        getContentPane().add(campoNome);
+        campoNome.setBounds(37, 125, 515, 72);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 80)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -207,110 +243,125 @@ public class Beremiz extends javax.swing.JFrame {
     Selecao selecao;
     Beremiz beremiz;
     @SuppressWarnings("deprecation")
-	private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+	private void botaoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarActionPerformed
         ControllerUsuario shazam = new ControllerUsuario();
         Usuario usuario = new Usuario();
-        usuario.setCpf(jTextField1.getText());
-        usuario.setSenha(jPasswordField1.getText());
-        usuario.setEtiqueta(jTextField3.getText().toUpperCase());
+        usuario.setCpf(campoCPF.getText());
+        usuario.setSenha(campoSenha.getText());
+        usuario.setEtiqueta(campoEtiqueta.getText().toUpperCase());
         usuario.setNome(null);
         shazam.excluirUsuarioController();
         JOptionPane.showMessageDialog(null, shazam.salvarUsuarioController(usuario) );
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_botaoSalvarActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void campoEtiquetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoEtiquetaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_campoEtiquetaActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void campoCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoCPFActionPerformed
 
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_campoCPFActionPerformed
 
-    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
+    private void campoSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoSenhaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField1ActionPerformed
+    }//GEN-LAST:event_campoSenhaActionPerformed
 
-    private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton2ActionPerformed
+    private void botaoPararActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoPararActionPerformed
+
+        backgroundThread.stop();
+        shazam.pararTriagem();
+        JOptionPane.showMessageDialog(null,"Triagem Parada!");
+    }//GEN-LAST:event_botaoPararActionPerformed
 
     @SuppressWarnings("deprecation")
-	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+	private void botaoIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoIniciarActionPerformed
         // Beremiz enter
         Usuario usuario = new Usuario();
-        usuario.setCpf(jTextField1.getText());
-        usuario.setSenha(jPasswordField1.getText());
-        usuario.setEtiqueta(jTextField3.getText().toUpperCase());
+        usuario.setCpf(campoCPF.getText());
+        usuario.setSenha(campoSenha.getText());
+        usuario.setEtiqueta(campoEtiqueta.getText().toUpperCase());
         System.out.println("etiqueta usuario: " + usuario.getEtiqueta());
-        GeralController shazam = new GeralController();
-        JOptionPane.showMessageDialog(null,  shazam.beremiz(usuario));
-    }//GEN-LAST:event_jButton1ActionPerformed
+       // SeleniumRepositorio shazam = new SeleniumRepositorio();
+        //JOptionPane.showMessageDialog(null,  shazam.triar(usuario));
+        Runnable task = new Runnable() {
+            GeralController shazam = new GeralController();
+            @Override
+            public void run() {
+               shazam.beremiz(usuario);
+            }
+
+        };
+        // Run the task in a background thread
+        backgroundThread = new Thread(task);
+        backgroundThread.start();
+        //shazam.beremiz(usuario);
+    }//GEN-LAST:event_botaoIniciarActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void campoNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNomeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_campoNomeActionPerformed
 
-    private void jTextField4FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField4FocusGained
+    private void campoNomeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoNomeFocusGained
        // TODO add your handling code here:
-       if (jTextField4.getText().equals("NOME")){
-       jTextField4.setText("");
+       if (campoNome.getText().equals("NOME")){
+       campoNome.setText("");
        }
-    }//GEN-LAST:event_jTextField4FocusGained
+    }//GEN-LAST:event_campoNomeFocusGained
 
-    private void jTextField4FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField4FocusLost
+    private void campoNomeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoNomeFocusLost
         // TODO add your handling code here:
         
-        if (jTextField4.getText().equals("")){
-            jTextField4.setText("NOME");
+        if (campoNome.getText().equals("")){
+            campoNome.setText("NOME");
         }
-    }//GEN-LAST:event_jTextField4FocusLost
+    }//GEN-LAST:event_campoNomeFocusLost
 
-    private void jTextField3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField3FocusGained
+    private void campoEtiquetaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoEtiquetaFocusGained
         // TODO add your handling code here:
-         if (jTextField3.getText().equals("ETIQUETA")){
-       jTextField3.setText("");
+         if (campoEtiqueta.getText().equals("ETIQUETA")){
+       campoEtiqueta.setText("");
        }
-    }//GEN-LAST:event_jTextField3FocusGained
+    }//GEN-LAST:event_campoEtiquetaFocusGained
 
-    private void jTextField3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField3FocusLost
+    private void campoEtiquetaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoEtiquetaFocusLost
         // TODO add your handling code here:
-         if (jTextField3.getText().equals("")){
-            jTextField3.setText("ETIQUETA");
+         if (campoEtiqueta.getText().equals("")){
+            campoEtiqueta.setText("ETIQUETA");
         }
-    }//GEN-LAST:event_jTextField3FocusLost
+    }//GEN-LAST:event_campoEtiquetaFocusLost
 
-    private void jTextField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusGained
+    private void campoCPFFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoCPFFocusGained
         // TODO add your handling code here:
-         if (jTextField1.getText().equals("CPF")){
-       jTextField1.setText("");
+         if (campoCPF.getText().equals("CPF")){
+       campoCPF.setText("");
        }
-    }//GEN-LAST:event_jTextField1FocusGained
+    }//GEN-LAST:event_campoCPFFocusGained
 
-    private void jTextField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusLost
+    private void campoCPFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoCPFFocusLost
         // TODO add your handling code here:
-         if (jTextField1.getText().equals("")){
-            jTextField1.setText("CPF");
+         if (campoCPF.getText().equals("")){
+            campoCPF.setText("CPF");
         }
-    }//GEN-LAST:event_jTextField1FocusLost
+    }//GEN-LAST:event_campoCPFFocusLost
 
-    private void jPasswordField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPasswordField1FocusGained
+    private void campoSenhaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoSenhaFocusGained
         // TODO add your handling code here:
-         if (jPasswordField1.getText().equals("")){
-       jPasswordField1.setText("12345");
-    }//GEN-LAST:event_jPasswordField1FocusGained
+         if (campoSenha.getText().equals("")){
+       campoSenha.setText("12345");
+    }//GEN-LAST:event_campoSenhaFocusGained
     }
-    private void jPasswordField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPasswordField1FocusLost
+    private void campoSenhaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoSenhaFocusLost
         // TODO add your handling code here:
-          if (jTextField1.getText().equals("")){
-       jTextField1.setText("12345");
+          if (campoCPF.getText().equals("")){
+       campoCPF.setText("12345");
           }
-    }//GEN-LAST:event_jPasswordField1FocusLost
+    }//GEN-LAST:event_campoSenhaFocusLost
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void botaoHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoHomeActionPerformed
         // TODO add your handling code here:
         
         if(selecao == null){
@@ -318,13 +369,14 @@ public class Beremiz extends javax.swing.JFrame {
 		selecao.setLocationRelativeTo(null);
 		selecao.setVisible(true);
                 selecao.setResizable(false);
+            dispose();
 		}
 		 else{
 		selecao.setLocationRelativeTo(null);
 		selecao.setVisible(true);
 		selecao.setResizable(false);
 		 }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_botaoHomeActionPerformed
 
     
     
@@ -369,17 +421,17 @@ public class Beremiz extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton botaoHome;
+    private javax.swing.JButton botaoIniciar;
+    private javax.swing.JToggleButton botaoParar;
+    private javax.swing.JButton botaoSalvar;
+    private javax.swing.JTextField campoCPF;
+    private javax.swing.JTextField campoEtiqueta;
+    private javax.swing.JTextField campoNome;
+    private javax.swing.JPasswordField campoSenha;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JToggleButton jToggleButton2;
     // End of variables declaration//GEN-END:variables
 }
