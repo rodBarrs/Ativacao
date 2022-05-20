@@ -28,7 +28,7 @@ public class Beremiz extends javax.swing.JFrame {
     public Beremiz() {
         initComponents();
         botaoSalvar.setBackground(new Color(0,0,0,0));
-        jButton3.setBackground(new Color(0,0,0,0));
+        botaoHome.setBackground(new Color(0,0,0,0));
         botaoParar.setForeground(Color.white);
         jLabel1.setForeground(Color.white);
         BancoController banco = new BancoController();
@@ -79,7 +79,7 @@ public class Beremiz extends javax.swing.JFrame {
         campoSenha = new javax.swing.JPasswordField();
         botaoParar = new javax.swing.JToggleButton();
         botaoIniciar = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        botaoHome = new javax.swing.JButton();
         campoNome = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -92,7 +92,7 @@ public class Beremiz extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         botaoSalvar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        botaoSalvar.setIcon(new javax.swing.ImageIcon("D:\\Beremiz\\Ativacao\\Assets\\Group 14.png")); // NOI18N
+        botaoSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Group 14.png"))); // NOI18N
         botaoSalvar.setActionCommand("Salvar as infomações");
         botaoSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -185,14 +185,14 @@ public class Beremiz extends javax.swing.JFrame {
         getContentPane().add(botaoIniciar);
         botaoIniciar.setBounds(408, 405, 493, 87);
 
-        jButton3.setIcon(new javax.swing.ImageIcon("D:\\Beremiz\\Ativacao\\Assets\\home.png")); // NOI18N
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        botaoHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/home.png"))); // NOI18N
+        botaoHome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                botaoHomeActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3);
-        jButton3.setBounds(1170, 600, 90, 70);
+        getContentPane().add(botaoHome);
+        botaoHome.setBounds(1170, 600, 90, 70);
 
         campoNome.setFont(new java.awt.Font("Perpetua", 0, 25)); // NOI18N
         campoNome.setText("NOME");
@@ -221,7 +221,7 @@ public class Beremiz extends javax.swing.JFrame {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(400, -10, 545, 155);
 
-        jLabel3.setIcon(new javax.swing.ImageIcon("D:\\Beremiz\\Ativacao\\Assets\\BeremizFundo.png")); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/BeremizFundo.png"))); // NOI18N
         jLabel3.setText("jLabel3");
         getContentPane().add(jLabel3);
         jLabel3.setBounds(0, 0, 1280, 720);
@@ -271,6 +271,7 @@ public class Beremiz extends javax.swing.JFrame {
 
         backgroundThread.stop();
         shazam.pararTriagem();
+        JOptionPane.showMessageDialog(null,"Triagem Parada!");
     }//GEN-LAST:event_botaoPararActionPerformed
 
     @SuppressWarnings("deprecation")
@@ -361,7 +362,7 @@ public class Beremiz extends javax.swing.JFrame {
           }
     }//GEN-LAST:event_campoSenhaFocusLost
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void botaoHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoHomeActionPerformed
         // TODO add your handling code here:
         
         if(selecao == null){
@@ -369,13 +370,14 @@ public class Beremiz extends javax.swing.JFrame {
 		selecao.setLocationRelativeTo(null);
 		selecao.setVisible(true);
                 selecao.setResizable(false);
+            dispose();
 		}
 		 else{
 		selecao.setLocationRelativeTo(null);
 		selecao.setVisible(true);
 		selecao.setResizable(false);
 		 }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_botaoHomeActionPerformed
 
     
     
@@ -420,6 +422,7 @@ public class Beremiz extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botaoHome;
     private javax.swing.JButton botaoIniciar;
     private javax.swing.JToggleButton botaoParar;
     private javax.swing.JButton botaoSalvar;
@@ -427,7 +430,6 @@ public class Beremiz extends javax.swing.JFrame {
     private javax.swing.JTextField campoEtiqueta;
     private javax.swing.JTextField campoNome;
     private javax.swing.JPasswordField campoSenha;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

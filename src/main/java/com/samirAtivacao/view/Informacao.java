@@ -11,14 +11,14 @@ import java.awt.Color;
  * @author Oseias
  */
 public class Informacao extends javax.swing.JFrame {
-
+        Selecao selecao;
     /**
      * Creates new form informacao
      */
     public Informacao() {
         initComponents();
-        jButton1.setBackground(new Color(0,0,0,0));
-         jButton2.setBackground(new Color(0,0,0,0));
+        botaoManual.setBackground(new Color(0,0,0,0));
+         botaoHome.setBackground(new Color(0,0,0,0));
     }
 
     /**
@@ -30,8 +30,8 @@ public class Informacao extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        botaoManual = new javax.swing.JButton();
+        botaoHome = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -39,20 +39,25 @@ public class Informacao extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(1280, 750));
         getContentPane().setLayout(null);
 
-        jButton1.setIcon(new javax.swing.ImageIcon("D:\\Beremiz\\Ativacao\\Assets\\manualIcon.png")); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        botaoManual.setIcon(new javax.swing.ImageIcon(getClass().getResource("/manualIcon.png"))); // NOI18N
+        botaoManual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botaoManualActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(352, 569, 60, 60);
+        getContentPane().add(botaoManual);
+        botaoManual.setBounds(352, 569, 60, 60);
 
-        jButton2.setIcon(new javax.swing.ImageIcon("D:\\Beremiz\\Ativacao\\Assets\\homeBlack.png")); // NOI18N
-        getContentPane().add(jButton2);
-        jButton2.setBounds(600, 630, 90, 91);
+        botaoHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/homeBlack.png"))); // NOI18N
+        botaoHome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoHomeActionPerformed(evt);
+            }
+        });
+        getContentPane().add(botaoHome);
+        botaoHome.setBounds(600, 630, 90, 91);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("D:\\Beremiz\\Ativacao\\Assets\\informacoes.png")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/informacoes.png"))); // NOI18N
         jLabel2.setText("jLabel2");
         jLabel2.setMaximumSize(new java.awt.Dimension(1280, 720));
         jLabel2.setMinimumSize(new java.awt.Dimension(1280, 720));
@@ -63,9 +68,24 @@ public class Informacao extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void botaoManualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoManualActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_botaoManualActionPerformed
+
+    private void botaoHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoHomeActionPerformed
+        if(selecao == null){
+            selecao = new Selecao();
+            selecao.setLocationRelativeTo(null);
+            selecao.setVisible(true);
+            selecao.setResizable(false);
+            dispose();
+        }
+        else{
+            selecao.setLocationRelativeTo(null);
+            selecao.setVisible(true);
+            selecao.setResizable(false);
+        }
+    }//GEN-LAST:event_botaoHomeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -104,8 +124,8 @@ public class Informacao extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton botaoHome;
+    private javax.swing.JButton botaoManual;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }

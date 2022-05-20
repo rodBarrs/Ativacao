@@ -23,6 +23,7 @@ public class Samir extends javax.swing.JFrame {
 
     GeralController shazam = new GeralController();
     private Thread backgroundThread;
+    Selecao selecao;
 
     /**
      * Creates new form loginTeste
@@ -31,6 +32,7 @@ public class Samir extends javax.swing.JFrame {
     public Samir() {
         initComponents();
         botaoSalvar.setBackground(new Color(0,0,0,0));
+        botaoHome.setBackground(new Color(0,0,0,0));
         BancoController banco = new BancoController();
         Usuario usuario = new Usuario();
         usuario = banco.loginInformacoes();
@@ -84,7 +86,7 @@ public class Samir extends javax.swing.JFrame {
         campoEtiqueta = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         botaoCalculadora = new javax.swing.JButton();
-        botaoHome = new javax.swing.JLabel();
+        botaoHome = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -176,7 +178,7 @@ public class Samir extends javax.swing.JFrame {
         campoNome.setBounds(31, 126, 515, 72);
 
         botaoSalvar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        botaoSalvar.setIcon(new javax.swing.ImageIcon("D:\\Beremiz\\Ativacao\\Assets\\Group 14.png")); // NOI18N
+        botaoSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Group 14.png"))); // NOI18N
         botaoSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoSalvarActionPerformed(evt);
@@ -221,10 +223,15 @@ public class Samir extends javax.swing.JFrame {
         botaoCalculadora.setBounds(393, 603, 493, 87);
 
         botaoHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/home.png"))); // NOI18N
+        botaoHome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoHomeActionPerformed(evt);
+            }
+        });
         getContentPane().add(botaoHome);
-        botaoHome.setBounds(1193, 622, 70, 70);
+        botaoHome.setBounds(1170, 600, 90, 70);
 
-        jLabel4.setIcon(new javax.swing.ImageIcon("D:\\Beremiz\\Ativacao\\Assets\\SamirFundo.png")); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SamirFundo.png"))); // NOI18N
         jLabel4.setText("jLabel4");
         jLabel4.setMaximumSize(new java.awt.Dimension(1280, 720));
         jLabel4.setMinimumSize(new java.awt.Dimension(1280, 720));
@@ -267,6 +274,7 @@ public class Samir extends javax.swing.JFrame {
     private void botaoPararActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoPararActionPerformed
         backgroundThread.stop();
         shazam.pararTriagem();
+        JOptionPane.showMessageDialog(null,"Triagem Parada!");
     }//GEN-LAST:event_botaoPararActionPerformed
 
     private void campoNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNomeActionPerformed
@@ -366,6 +374,23 @@ public class Samir extends javax.swing.JFrame {
 
     }//GEN-LAST:event_campoSenhaFocusLost
 
+    private void botaoHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoHomeActionPerformed
+        // TODO add your handling code here:
+
+        if(selecao == null){
+            selecao = new Selecao();
+            selecao.setLocationRelativeTo(null);
+            selecao.setVisible(true);
+            selecao.setResizable(false);
+            dispose();
+        }
+        else{
+            selecao.setLocationRelativeTo(null);
+            selecao.setVisible(true);
+            selecao.setResizable(false);
+        }
+    }//GEN-LAST:event_botaoHomeActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -403,7 +428,7 @@ public class Samir extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoCalculadora;
-    private javax.swing.JLabel botaoHome;
+    private javax.swing.JButton botaoHome;
     private javax.swing.JToggleButton botaoIniciar;
     private javax.swing.JToggleButton botaoParar;
     private javax.swing.JButton botaoSalvar;
