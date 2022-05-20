@@ -18,7 +18,7 @@ public class Selecao extends javax.swing.JFrame {
      */
     public Selecao() {
         initComponents();
-        jButton3.setBackground(new Color(0,0,0,0));
+        botaoInfo.setBackground(new Color(0,0,0,0));
     }
 
     /**
@@ -30,9 +30,9 @@ public class Selecao extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        botaoSamir = new javax.swing.JButton();
+        botaoBeremiz = new javax.swing.JButton();
+        botaoInfo = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -41,41 +41,41 @@ public class Selecao extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(1280, 720));
         getContentPane().setLayout(null);
 
-        jButton1.setBackground(new java.awt.Color(219, 172, 70));
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 130)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("SAMIR");
-        jButton1.setToolTipText("");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        botaoSamir.setBackground(new java.awt.Color(219, 172, 70));
+        botaoSamir.setFont(new java.awt.Font("Tahoma", 0, 130)); // NOI18N
+        botaoSamir.setForeground(new java.awt.Color(255, 255, 255));
+        botaoSamir.setText("SAMIR");
+        botaoSamir.setToolTipText("");
+        botaoSamir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botaoSamirActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(710, 550, 572, 114);
+        getContentPane().add(botaoSamir);
+        botaoSamir.setBounds(710, 550, 572, 114);
 
-        jButton2.setBackground(new java.awt.Color(219, 172, 70));
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 130)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("BEREMIZ");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        botaoBeremiz.setBackground(new java.awt.Color(219, 172, 70));
+        botaoBeremiz.setFont(new java.awt.Font("Tahoma", 0, 130)); // NOI18N
+        botaoBeremiz.setForeground(new java.awt.Color(255, 255, 255));
+        botaoBeremiz.setText("BEREMIZ");
+        botaoBeremiz.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                botaoBeremizActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2);
-        jButton2.setBounds(590, 390, 694, 114);
+        getContentPane().add(botaoBeremiz);
+        botaoBeremiz.setBounds(590, 390, 694, 114);
 
-        jButton3.setIcon(new javax.swing.ImageIcon("D:\\Beremiz\\Ativacao\\Assets\\info.png")); // NOI18N
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        botaoInfo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/info.png"))); // NOI18N
+        botaoInfo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                botaoInfoActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3);
-        jButton3.setBounds(1207, 94, 50, 50);
+        getContentPane().add(botaoInfo);
+        botaoInfo.setBounds(1207, 94, 50, 50);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("D:\\Beremiz\\Ativacao\\Assets\\SelecaoFundo.png")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SelecaoFundo.png"))); // NOI18N
         jLabel2.setText("jLabel2");
         jLabel2.setMaximumSize(new java.awt.Dimension(1280, 720));
         jLabel2.setMinimumSize(new java.awt.Dimension(1280, 720));
@@ -88,7 +88,8 @@ public class Selecao extends javax.swing.JFrame {
     Samir loginSamir;
     Beremiz loginbremiz;
     Informacao informacao;
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    Selecao selecao;
+    private void botaoSamirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSamirActionPerformed
         // TODO add your handling code here:
        
             if(loginSamir == null){
@@ -96,6 +97,8 @@ public class Selecao extends javax.swing.JFrame {
 			loginSamir.setLocationRelativeTo(null);
 			loginSamir.setVisible(true);
 			loginSamir.setResizable(false);
+
+                dispose();
 			}
 			 else{
 			     loginSamir.setLocationRelativeTo(null);
@@ -104,36 +107,38 @@ public class Selecao extends javax.swing.JFrame {
 			 }
             
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_botaoSamirActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void botaoBeremizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoBeremizActionPerformed
         if(loginbremiz == null){
 		loginbremiz = new Beremiz();
 		loginbremiz.setLocationRelativeTo(null);
 		loginbremiz.setVisible(true);
             loginbremiz.setResizable(false);
+            dispose();
 		}
 		 else{
 		loginbremiz.setLocationRelativeTo(null);
 		loginbremiz.setVisible(true);
 		loginbremiz.setResizable(false);
 		 }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_botaoBeremizActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void botaoInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoInfoActionPerformed
         // TODO add your handling code here:
         if(informacao == null){
 		informacao = new Informacao();
 		informacao.setLocationRelativeTo(null);
 		informacao.setVisible(true);
             informacao.setResizable(false);
+            dispose();
 		}
 		 else{
 		informacao.setLocationRelativeTo(null);
 		informacao.setVisible(true);
 		informacao.setResizable(false);
 		 }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_botaoInfoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -172,9 +177,9 @@ public class Selecao extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton botaoBeremiz;
+    private javax.swing.JButton botaoInfo;
+    private javax.swing.JButton botaoSamir;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }

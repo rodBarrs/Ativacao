@@ -2,6 +2,7 @@ package com.samirAtivacao.samirAtivacao;
 
 import javax.swing.JOptionPane;
 
+import com.samirAtivacao.repository.SeleniumRepositorio;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -21,6 +22,7 @@ public class SamirAtivacaoApplication extends javax.swing.JFrame {
 	/**
      * Creates new form loginTeste
      */
+    SeleniumRepositorio shazam = new SeleniumRepositorio();
     public SamirAtivacaoApplication() {
         initComponents();
     }
@@ -120,7 +122,7 @@ public class SamirAtivacaoApplication extends javax.swing.JFrame {
         login.setCpf(jTextField1.getText());
         
         GeralController shazam = new GeralController();
-        JOptionPane.showMessageDialog(null,  shazam.beremiz(login));
+        //JOptionPane.showMessageDialog(null,  shazam.beremiz(login,));
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     /**

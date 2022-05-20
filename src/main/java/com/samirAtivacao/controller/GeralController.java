@@ -4,6 +4,7 @@
  */
 package com.samirAtivacao.controller;
 
+import java.awt.event.ActionEvent;
 import java.util.List;
 
 import com.samirAtivacao.DAO.DAOInformacoesCessado;
@@ -14,14 +15,18 @@ import com.samirAtivacao.modelo.InformacoesCessado;
 import com.samirAtivacao.modelo.Usuario;
 import com.samirAtivacao.repository.SeleniumRepositorio;
 
+
 /**
  *
  * @author AGU
  */
 public class GeralController {
     private SeleniumRepositorio repository = new SeleniumRepositorio();
-    
+
+
+
     public String beremiz( Usuario usuario) {
+
 			/*try {
 	            //URL do som que no caso esta no pendrive, mais ainda é uma fase de teste.
 	            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("espartanos.wav").getAbsoluteFile());
@@ -158,4 +163,8 @@ public class GeralController {
 		repository.finalizar();
 		return lista.get(0).getCpf();
     }
+
+    public void pararTriagem(){
+    	repository.parar();
+	}
 }
