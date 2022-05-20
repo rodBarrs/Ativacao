@@ -91,9 +91,7 @@ public class Samir extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
-        setMaximumSize(new java.awt.Dimension(1280, 720));
         setMinimumSize(new java.awt.Dimension(1280, 720));
-        setPreferredSize(new java.awt.Dimension(1280, 740));
         setResizable(false);
         setType(java.awt.Window.Type.POPUP);
         getContentPane().setLayout(null);
@@ -157,7 +155,6 @@ public class Samir extends javax.swing.JFrame {
         });
         getContentPane().add(botaoParar);
         botaoParar.setBounds(393, 479, 493, 87);
-
         campoNome.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         campoNome.setText("NOME");
         campoNome.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -230,14 +227,13 @@ public class Samir extends javax.swing.JFrame {
         });
         getContentPane().add(botaoHome);
         botaoHome.setBounds(1170, 600, 90, 70);
-
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SamirFundo.png"))); // NOI18N
         jLabel4.setText("jLabel4");
         jLabel4.setMaximumSize(new java.awt.Dimension(1280, 720));
         jLabel4.setMinimumSize(new java.awt.Dimension(1280, 720));
         jLabel4.setPreferredSize(new java.awt.Dimension(1280, 720));
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(0, -10, 1280, 740);
+        jLabel4.setBounds(0, -10, 1280, 760);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

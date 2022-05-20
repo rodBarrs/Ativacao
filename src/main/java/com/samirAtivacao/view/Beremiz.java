@@ -86,9 +86,7 @@ public class Beremiz extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1280, 720));
         setMinimumSize(new java.awt.Dimension(1280, 720));
-        setPreferredSize(new java.awt.Dimension(1280, 720));
         getContentPane().setLayout(null);
 
         botaoSalvar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -184,6 +182,7 @@ public class Beremiz extends javax.swing.JFrame {
         });
         getContentPane().add(botaoIniciar);
         botaoIniciar.setBounds(408, 405, 493, 87);
+
 
         botaoHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/home.png"))); // NOI18N
         botaoHome.addActionListener(new java.awt.event.ActionListener() {
