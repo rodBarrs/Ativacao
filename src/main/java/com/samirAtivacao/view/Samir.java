@@ -87,6 +87,7 @@ public class Samir extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         botaoCalculadora = new javax.swing.JButton();
         botaoHome = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -227,13 +228,20 @@ public class Samir extends javax.swing.JFrame {
         });
         getContentPane().add(botaoHome);
         botaoHome.setBounds(1170, 600, 90, 70);
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 80)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("SAMIR");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(520, -30, 545, 155);
+
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SamirFundo.png"))); // NOI18N
         jLabel4.setText("jLabel4");
         jLabel4.setMaximumSize(new java.awt.Dimension(1280, 720));
         jLabel4.setMinimumSize(new java.awt.Dimension(1280, 720));
         jLabel4.setPreferredSize(new java.awt.Dimension(1280, 720));
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(0, -10, 1280, 760);
+        jLabel4.setBounds(0, -10, 1280, 730);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -432,6 +440,7 @@ public class Samir extends javax.swing.JFrame {
     private javax.swing.JTextField campoEtiqueta;
     private javax.swing.JTextField campoNome;
     private javax.swing.JPasswordField campoSenha;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     // End of variables declaration//GEN-END:variables
