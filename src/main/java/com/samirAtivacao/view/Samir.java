@@ -156,7 +156,6 @@ public class Samir extends javax.swing.JFrame {
         });
         getContentPane().add(botaoParar);
         botaoParar.setBounds(393, 479, 493, 87);
-
         campoNome.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         campoNome.setText("NOME");
         campoNome.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
