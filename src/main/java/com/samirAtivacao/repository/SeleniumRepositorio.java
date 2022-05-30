@@ -686,7 +686,7 @@ public class SeleniumRepositorio {
 
 	public void openSamirFront(Usuario usuario) {
 		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS).pageLoadTimeout(30, TimeUnit.SECONDS);
-		driver.get("https://relaxed-hopper-ba9dd1.netlify.app/");
+		driver.get("https://relaxed-hopper-ba9dd1.netlify.app");
 		driver.findElement(
 				By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div/form/div[1]/div/div[1]/div/input"))
 				.sendKeys(usuario.getNome());
@@ -702,7 +702,7 @@ public class SeleniumRepositorio {
 			System.setProperty("webdriver.gecko.driver", "GeckoDriver.exe");
 		}
 		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS).pageLoadTimeout(30, TimeUnit.SECONDS);
-		driver.get("http://localhost:8080/");
+		driver.get("https://relaxed-hopper-ba9dd1.netlify.app");
 		driver.findElement(
 				By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div/form/div[1]/div/div[1]/div/input"))
 				.sendKeys(usuario.getNome());
