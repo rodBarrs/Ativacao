@@ -134,8 +134,7 @@ public class GeralController {
 		} catch (Exception e) {
 			System.out.println("entrei no cath");
 		}
-		GeralController controller = new GeralController();
-		controller.InserirNoFront(usuario, true);
+
 		 return "deu certo";
 		
 		
