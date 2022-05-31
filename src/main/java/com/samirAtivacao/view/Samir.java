@@ -84,7 +84,6 @@ public class Samir extends javax.swing.JFrame {
         campoNome = new javax.swing.JTextField();
         botaoSalvar = new javax.swing.JButton();
         campoEtiqueta = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
         botaoCalculadora = new javax.swing.JButton();
         botaoHome = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -142,7 +141,7 @@ public class Samir extends javax.swing.JFrame {
             }
         });
         getContentPane().add(botaoIniciar);
-        botaoIniciar.setBounds(393, 355, 493, 87);
+        botaoIniciar.setBounds(400, 330, 493, 87);
 
         botaoParar.setBackground(new java.awt.Color(247, 75, 74));
         botaoParar.setFont(new java.awt.Font("Sylfaen", 0, 50)); // NOI18N
@@ -155,7 +154,8 @@ public class Samir extends javax.swing.JFrame {
             }
         });
         getContentPane().add(botaoParar);
-        botaoParar.setBounds(393, 479, 493, 87);
+        botaoParar.setBounds(400, 460, 493, 87);
+
         campoNome.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         campoNome.setText("NOME");
         campoNome.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -203,12 +203,6 @@ public class Samir extends javax.swing.JFrame {
         getContentPane().add(campoEtiqueta);
         campoEtiqueta.setBounds(30, 240, 515, 72);
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel5.setText("Etiqueta");
-        jLabel5.setIconTextGap(10);
-        getContentPane().add(jLabel5);
-        jLabel5.setBounds(590, 410, 107, 20);
-
         botaoCalculadora.setBackground(new java.awt.Color(123, 152, 224));
         botaoCalculadora.setFont(new java.awt.Font("Tahoma", 0, 50)); // NOI18N
         botaoCalculadora.setText("CALCULADORA");
@@ -218,7 +212,7 @@ public class Samir extends javax.swing.JFrame {
             }
         });
         getContentPane().add(botaoCalculadora);
-        botaoCalculadora.setBounds(393, 603, 493, 87);
+        botaoCalculadora.setBounds(400, 580, 493, 87);
 
         botaoHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/home.png"))); // NOI18N
         botaoHome.addActionListener(new java.awt.event.ActionListener() {
@@ -259,6 +253,7 @@ public class Samir extends javax.swing.JFrame {
         usuario.setCpf(campoCPF.getText());
         usuario.setSenha(campoSenha.getText());
         usuario.setEtiqueta(campoEtiqueta.getText().toUpperCase());
+        usuario.setNome(campoNome.getText());
         System.out.println("etiqueta usuario: " + usuario.getEtiqueta());
         // SeleniumRepositorio shazam = new SeleniumRepositorio();
         //JOptionPane.showMessageDialog(null,  shazam.triar(usuario));
@@ -267,12 +262,14 @@ public class Samir extends javax.swing.JFrame {
             @Override
             public void run() {
                 shazam.samir(usuario);
+                shazam.InserirNoFront(usuario, false);
             }
 
         };
         // Run the task in a background thread
         backgroundThread = new Thread(task);
         backgroundThread.start();
+
     }//GEN-LAST:event_botaoIniciarActionPerformed
 
     private void botaoPararActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoPararActionPerformed
@@ -442,6 +439,5 @@ public class Samir extends javax.swing.JFrame {
     private javax.swing.JPasswordField campoSenha;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     // End of variables declaration//GEN-END:variables
 }
