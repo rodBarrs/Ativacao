@@ -134,9 +134,7 @@ public class GeralController {
 		} catch (Exception e) {
 			System.out.println("entrei no cath");
 		}
-		BancoController banco = new BancoController();
-		List<InfomacoesDosPrev> aLista = banco.litaDosPrev();
-		//repository.teste(info);
+
 		 return "deu certo";
 		
 		

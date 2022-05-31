@@ -35,7 +35,7 @@ public class Informacao extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(1280, 720));
+        setMinimumSize(new java.awt.Dimension(1280, 760));
         getContentPane().setLayout(null);
 
         botaoManual.setIcon(new javax.swing.ImageIcon(getClass().getResource("/manualIcon.png"))); // NOI18N
