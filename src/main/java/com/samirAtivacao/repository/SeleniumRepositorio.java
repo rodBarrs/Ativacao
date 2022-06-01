@@ -456,7 +456,8 @@ public class SeleniumRepositorio {
 									informacao.setDibInicial(dibInicial);
 									informacao.setDibFinal(dibFinal);
 									informacao.setDip(dip);
-
+									informacao.setUrlProcesso(driver.getCurrentUrl());
+									System.out.println("Url da pagina " + driver.getCurrentUrl());
 									nbUnido = unirNbInformacoesCessado(procurarCessado());
 									informacao.setCessado(nbUnido);
 
@@ -702,7 +703,7 @@ public class SeleniumRepositorio {
 			System.setProperty("webdriver.gecko.driver", "GeckoDriver.exe");
 		}
 		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS).pageLoadTimeout(30, TimeUnit.SECONDS);
-		driver.get("https://relaxed-hopper-ba9dd1.netlify.app");
+		driver.get("http://localhost:8080/");
 		driver.findElement(
 				By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div/form/div[1]/div/div[1]/div/input"))
 				.sendKeys(usuario.getNome());
@@ -713,8 +714,7 @@ public class SeleniumRepositorio {
 	}
 
 	public void inserirDosPrev(InfomacoesDosPrev lista, List<InformacoesCessado> listaCessado) {
-		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS).pageLoadTimeout(30, TimeUnit.SECONDS);
-
+		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS).pageLoadTimeout(30, TimeUnit.SECONDS); 
 		driver.findElement(By.id("numeroProcesso")).sendKeys(lista.getNumeroDoProcesso());
 		driver.findElement(By.id("nome")).sendKeys(lista.getNome());
 		driver.findElement(By.id("dataAjuizamento")).click();
@@ -729,6 +729,7 @@ public class SeleniumRepositorio {
 		if (lista.getCitacao() != null) {
 			driver.findElement(By.id("citacao")).sendKeys(lista.getCitacao());
 		}
+		driver.findElement(By.id("urlProcesso")).sendKeys(lista.getUrlProcesso());
 		driver.findElement(By.id("aps")).sendKeys(lista.getAps());
 
 		String[] listaNb = lista.getCessado().split(",");

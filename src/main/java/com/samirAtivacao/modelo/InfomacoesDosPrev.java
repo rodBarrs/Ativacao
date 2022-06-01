@@ -26,7 +26,8 @@ public class InfomacoesDosPrev {
 	private String citacao;
 
 	private  String cessado;
-
+	
+	private String urlProcesso;
 	
 	public String getBeneficio() {
 		return beneficio;
@@ -123,5 +124,11 @@ public class InfomacoesDosPrev {
 
 	public void setCessado(String cessado) {
 		this.cessado = cessado;
+	}
+	public String getUrlProcesso() {
+		return urlProcesso;
+	}
+	public void setUrlProcesso(String urlProcesso) {
+		this.urlProcesso = urlProcesso;
 	}
 }
