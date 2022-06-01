@@ -25,8 +25,9 @@ public class DAOInformacoesDosPrev extends ConexaoSQLite {
 				+"aps,"
 				+ "dip,"
 				+ "citacao,"
-				+ "nbUnido)"
-				+"VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				+ "nbUnido,"
+				+"urlProcesso)"
+				+"VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		PreparedStatement preparedStatement = criarPreparedStatement(sql, Statement.RETURN_GENERATED_KEYS);
 		try {
 			preparedStatement.setString(1, informacoes.getNumeroDoProcesso());
@@ -42,6 +43,7 @@ public class DAOInformacoesDosPrev extends ConexaoSQLite {
 			preparedStatement.setString(11, informacoes.getDip());
 			preparedStatement.setString(12, informacoes.getCitacao());
 			preparedStatement.setString(13, informacoes.getCessado());
+			preparedStatement.setString(14, informacoes.getUrlProcesso());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
