@@ -735,12 +735,16 @@ public class SeleniumRepositorio {
 		String[] listaNb = lista.getCessado().split(",");
 
 		try {
+
 			for (int x = 0; x < listaNb.length; x++) {
 				for (int i = 0; i < listaCessado.size(); i++) {
 					boolean conferirCessado = false;
 					if (listaCessado.get(i).getNb() == null) {
 						System.out.println("Deu null");
-					} else {
+					}else if (listaNb[x].equals("")){
+						System.out.println("Não tem Benefício");
+						break;
+					} else{
 						conferirCessado = listaCessado.get(i).getNb().contains(listaNb[x]);
 					}
 
