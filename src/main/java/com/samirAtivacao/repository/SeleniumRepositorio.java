@@ -4,7 +4,9 @@
  */
 package com.samirAtivacao.repository;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -16,11 +18,9 @@ import java.util.concurrent.TimeUnit;
 import com.samirAtivacao.DAO.DAOInformacoesCessado;
 import com.samirAtivacao.controller.GeralController;
 import com.samirAtivacao.modelo.InformacoesCessado;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -696,14 +696,37 @@ public class SeleniumRepositorio {
 				.sendKeys(usuario.getCpf());
 		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div/form/button")).click();
 	}
+	public void diminuirTela () throws AWTException {
+		Actions action = new Actions(driver);
+		Robot robot = new Robot();
+		for (int i = 0; i<=3; i++){
 
+			robot.keyPress(KeyEvent.VK_CONTROL);
+			robot.keyPress(KeyEvent.VK_SUBTRACT);
+			robot.keyRelease(KeyEvent.VK_SUBTRACT);
+			robot.keyRelease(KeyEvent.VK_CONTROL);
+		}
+
+	}
+	public void aumentarTela() throws AWTException {
+		Actions action = new Actions(driver);
+		Robot robot = new Robot();
+		for (int i = 0; i<=3; i++){
+
+			robot.keyPress(KeyEvent.VK_CONTROL);
+			robot.keyPress(KeyEvent.VK_ADD);
+			robot.keyRelease(KeyEvent.VK_ADD);
+			robot.keyRelease(KeyEvent.VK_CONTROL);
+		}
+
+	}
 	public void openFront(Usuario usuario) {
 		if (driver == null) {
 			driver = new FirefoxDriver();
 			System.setProperty("webdriver.gecko.driver", "GeckoDriver.exe");
 		}
 		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS).pageLoadTimeout(30, TimeUnit.SECONDS);
-		driver.get("http://localhost:8080/");
+		driver.get("https://relaxed-hopper-ba9dd1.netlify.app");
 		driver.findElement(
 				By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div/form/div[1]/div/div[1]/div/input"))
 				.sendKeys(usuario.getNome());
@@ -714,6 +737,7 @@ public class SeleniumRepositorio {
 	}
 
 	public void inserirDosPrev(InfomacoesDosPrev lista, List<InformacoesCessado> listaCessado) {
+
 		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS).pageLoadTimeout(30, TimeUnit.SECONDS); 
 		driver.findElement(By.id("numeroProcesso")).sendKeys(lista.getNumeroDoProcesso());
 		driver.findElement(By.id("nome")).sendKeys(lista.getNome());
