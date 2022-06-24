@@ -4,6 +4,7 @@
  */
 package com.samirAtivacao.controller;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.List;
 
@@ -139,7 +140,7 @@ public class GeralController {
 		
 		
 	}
-    public String InserirNoFront(Usuario usuario, Boolean driever) {
+    public String InserirNoFront(Usuario usuario, Boolean driever) throws AWTException {
     	//repository.open(usuario);
     	if(driever == true){
     		repository.openFront(usuario);
@@ -147,7 +148,7 @@ public class GeralController {
     	else {
     		repository.openSamirFront(usuario);
     	}
-    	
+    	repository.diminuirTela();
     	BancoController banco = new BancoController();
 		List<InfomacoesDosPrev> lista = banco.litaDosPrev();
 		List<InformacoesCessado> listaCessado = banco.listaCessado();
@@ -158,6 +159,7 @@ public class GeralController {
 			repository.inserirDosPrev(lista.get(x),listaCessado);
 			x++;
 		}
+		repository.aumentarTela();
 		repository.finalizar();
 		return lista.get(0).getCpf();
     }

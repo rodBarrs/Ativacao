@@ -4,6 +4,7 @@
  */
 package com.samirAtivacao.view;
 
+import java.awt.*;
 import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
@@ -12,7 +13,6 @@ import com.samirAtivacao.controller.BancoController;
 import com.samirAtivacao.controller.ControllerUsuario;
 import com.samirAtivacao.controller.GeralController;
 import com.samirAtivacao.modelo.Usuario;
-import java.awt.Color;
 
 /**
  *
@@ -208,7 +208,11 @@ public class Samir extends javax.swing.JFrame {
         botaoCalculadora.setText("CALCULADORA");
         botaoCalculadora.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoCalculadoraActionPerformed(evt);
+                try {
+                    botaoCalculadoraActionPerformed(evt);
+                } catch (AWTException e) {
+                    e.printStackTrace();
+                }
             }
         });
         getContentPane().add(botaoCalculadora);
@@ -262,7 +266,11 @@ public class Samir extends javax.swing.JFrame {
             @Override
             public void run() {
                 shazam.samir(usuario);
-                shazam.InserirNoFront(usuario, false);
+                try {
+                    shazam.InserirNoFront(usuario, false);
+                } catch (AWTException e) {
+                    e.printStackTrace();
+                }
             }
 
         };
@@ -298,7 +306,7 @@ public class Samir extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_campoEtiquetaActionPerformed
 
-    private void botaoCalculadoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCalculadoraActionPerformed
+    private void botaoCalculadoraActionPerformed(java.awt.event.ActionEvent evt) throws AWTException {//GEN-FIRST:event_botaoCalculadoraActionPerformed
         Usuario usuario = new Usuario();
         usuario.setCpf(campoCPF.getText());
         usuario.setNome(campoNome.getText());
