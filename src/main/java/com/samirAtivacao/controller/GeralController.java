@@ -7,6 +7,7 @@ package com.samirAtivacao.controller;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import com.samirAtivacao.DAO.DAOInformacoesCessado;
 import com.samirAtivacao.DAO.DAOInformacoesDosPrev;
@@ -105,8 +106,14 @@ public class GeralController {
 		String letra = "";
 		daoInfo.excluirUInfomacoesDosPrev();
 		daoInfoCessado.excluirUInfomacoesDosPrev();
+
 		try {
 			while("Sem registros para exibir" != repository.entrarNoProcessoAutomatico(usuario.getEtiqueta())) {
+				try {
+					repository.clicarNaPrincipal();
+				}catch  (Exception e) {
+					System.out.println("entrei no cath");
+				}
 				validacao = repository.dataDeValidacaoDosPrev();
 				if ( validacao == true) {
 					ativo = repository.verificacaoDeAtivo();

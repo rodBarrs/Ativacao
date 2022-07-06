@@ -92,6 +92,35 @@ public class SeleniumRepositorio {
 
 	}
 
+	public String clicarNaPrincipal(){
+		this.driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS).pageLoadTimeout(100, TimeUnit.SECONDS);
+		List<String> janela = new ArrayList<String>(driver.getWindowHandles());
+		driver.switchTo().window(janela.get(1));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//tr[1]/td[2]/div/span")));
+
+
+		driver.switchTo().frame(0);
+		do {
+			try {
+				wait.until(ExpectedConditions.elementToBeClickable(By.tagName("html")));
+				wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("body")));
+				driver.findElement(By.tagName("html")).click();
+				break;
+			} catch (Exception e) {
+				//
+			}
+		} while (true);
+		this.driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS).pageLoadTimeout(100, TimeUnit.SECONDS);
+//		WebElement capa = driver.findElement(By.id("iframe-myiframe"));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div/div[4]/table/tbody/tr[13]/td[2]/a[1]/b")));
+		WebElement clique = driver.findElement(By.xpath("/html/body/div/div[4]/table/tbody/tr[13]/td[2]/a[1]/b"));
+		clique.click();
+//		wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(capa));
+
+
+		return "clicado";
+	}
+
 	public String colocarFiltro(String etiqueta) throws InterruptedException {
 		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS).pageLoadTimeout(30, TimeUnit.SECONDS);
 		WebElement setaAparecer = driver.findElement(
@@ -148,6 +177,7 @@ public class SeleniumRepositorio {
 			WebElement processo = driver.findElement(By.xpath(
 					"/html/body/div[4]/div[1]/div[2]/div/div[2]/div[1]/div[4]/div/table/tbody/tr[1]/td[3]/div/a[1]"));
 			processo.click();
+			this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS).pageLoadTimeout(30, TimeUnit.SECONDS);
 			return "pronto para procurar";
 
 		}
@@ -201,7 +231,7 @@ public class SeleniumRepositorio {
 		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS).pageLoadTimeout(30, TimeUnit.SECONDS);
 		Thread.sleep(1000);
 		List<String> janela = new ArrayList<String>(driver.getWindowHandles());
-		driver.switchTo().window(janela.get(1));
+		driver.switchTo().window(janela.get(2));
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("treeview-1015")));
 		WebElement TabelaTref = driver.findElement(By.id("treeview-1015"));
 		List<WebElement> listaMovimentacao = new ArrayList<WebElement>(TabelaTref.findElements(By.cssSelector("tr")));
