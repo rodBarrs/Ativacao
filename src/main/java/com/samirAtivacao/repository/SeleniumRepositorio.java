@@ -344,31 +344,10 @@ public class SeleniumRepositorio {
 		InfomacoesDosPrev informacao = new InfomacoesDosPrev();
 		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS).pageLoadTimeout(30, TimeUnit.SECONDS);
 		List<String> janela = new ArrayList<String>(driver.getWindowHandles());
-		driver.switchTo().window(janela.get(1));
+		driver.switchTo().window(janela.get(2));
 		WebElement TabelaTref = driver.findElement(By.id("treeview-1015"));
 		List<WebElement> listaMovimentacao = new ArrayList<WebElement>(TabelaTref.findElements(By.cssSelector("tr")));
-		try {
-			for (int h = 2; h < listaMovimentacao.size(); h++) {
-				Boolean existeCitacao = driver.findElement(By.xpath("//tr[" + h + "]/td[2]/div/span[1]")).getText()
-						.toUpperCase().contains("CITAÇÃO");
-				if (existeCitacao) {
-					driver.findElement(By.xpath("//tr[" + h + "]/td[2]/div/span")).click();
-					String citacaoProcesso = driver
-							.findElement(By.xpath(
-									"//tr[" + h + "]/td[2]/div/span"))
-							.getText();
-					// System.out.println("texto: " + citacaoProcesso);
-					String[] dataCitacao = citacaoProcesso.split("-");
-					System.out.println("texto: " + Arrays.toString(dataCitacao));
-					String[] anoCitacao = dataCitacao[3].split(" ");
-					System.out.println("citacao: " + dataCitacao[1] + "/" + dataCitacao[2] + "/" + anoCitacao[0]);
-					informacao.setCitacao(dataCitacao[1] + "/" + dataCitacao[2] + "/" + anoCitacao[0]);
-					h = listaMovimentacao.size();
-				}
-			}
-		} catch (Exception e) {
-			System.out.println("Erro: true; " + e);
-		}
+
 		for (int i = listaMovimentacao.size(); i > 2; i--) {
 
 			// Providência Jurídica é o título da movimentação
@@ -501,7 +480,7 @@ public class SeleniumRepositorio {
 									System.out.println("Url da pagina " + driver.getCurrentUrl());
 									nbUnido = unirNbInformacoesCessado(procurarCessado());
 									informacao.setCessado(nbUnido);
-
+									procurarCitacao(informacao, listaMovimentacao);
 									return informacao;
 								}
 							} catch (Exception e) {
@@ -524,13 +503,42 @@ public class SeleniumRepositorio {
 					// dataAjuizamento =
 					// driver.findElement(By.xpath("/html/body/div/div[5]/table/tbody/tr[3]/td[2]")).getText();
 				}
-
+				procurarCitacao(informacao, listaMovimentacao);
 				return informacao;
 			}
 		}
 
+
+
 		return null;
 
+	}
+
+	private void procurarCitacao(InfomacoesDosPrev informacao, List<WebElement> listaMovimentacao) {
+		try {
+
+			for (int h = 2; h < listaMovimentacao.size(); h++) {
+				driver.switchTo().defaultContent();
+				Boolean existeCitacao = driver.findElement(By.xpath("//tr[" + h + "]/td[2]/div/span[1]")).getText()
+						.toUpperCase().contains("CITAÇÃO");
+				if (existeCitacao) {
+					driver.findElement(By.xpath("//tr[" + h + "]/td[2]/div/span")).click();
+					String citacaoProcesso = driver
+							.findElement(By.xpath(
+									"//tr[" + h + "]/td[2]/div/span"))
+							.getText();
+					// System.out.println("texto: " + citacaoProcesso);
+					String[] dataCitacao = citacaoProcesso.split("-");
+					System.out.println("texto: " + Arrays.toString(dataCitacao));
+					String[] anoCitacao = dataCitacao[3].split(" ");
+					System.out.println("citacao: " + dataCitacao[1] + "/" + dataCitacao[2] + "/" + anoCitacao[0]);
+					informacao.setCitacao(dataCitacao[1] + "/" + dataCitacao[2] + "/" + anoCitacao[0]);
+					h = listaMovimentacao.size();
+				}
+			}
+		} catch (Exception e) {
+			System.out.println("Erro: true; " + e);
+		}
 	}
 
 	public List<InformacoesCessado> procurarCessado() {
@@ -686,6 +694,7 @@ public class SeleniumRepositorio {
 		salvarEtiqueta.click();
 
 		driver.switchTo().window(janela.get(1)).close();
+		driver.switchTo().window(janela.get(2)).close();
 		driver.switchTo().window(janela.get(0));
 		WebElement filtroSpace = driver.findElement(
 				By.xpath("/html/body/div[4]/div[1]/div[2]/div/div[2]/div/div[2]/div/div/a[5]/span/span/span[2]"));
@@ -696,7 +705,7 @@ public class SeleniumRepositorio {
 		this.driver.manage().timeouts().implicitlyWait(100, TimeUnit.MILLISECONDS).pageLoadTimeout(100,
 				TimeUnit.MILLISECONDS);
 		List<String> janela = new ArrayList<String>(driver.getWindowHandles());
-		driver.switchTo().window(janela.get(1));
+		driver.switchTo().window(janela.get(2));
 		Ativo ativo = new Ativo();
 		String beneficio = null;
 		boolean verificarAtivo = false;

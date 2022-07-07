@@ -115,10 +115,10 @@ public class GeralController {
 					System.out.println("entrei no cath");
 				}
 				validacao = repository.dataDeValidacaoDosPrev();
-				if ( validacao == true) {
+				if (validacao) {
 					ativo = repository.verificacaoDeAtivo();
 					if(ativo.getAtivo() == true) {
-						if(x <= 10) {
+						if(x <= 100) {
 							info = repository.procurarDosPrev();
 							daoInfo.salvarInformacoesDosPrev(info);
 							repository.etiquetar(validacao, letra, 0);
