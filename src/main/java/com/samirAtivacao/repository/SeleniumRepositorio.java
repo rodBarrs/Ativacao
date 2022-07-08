@@ -94,27 +94,34 @@ public class SeleniumRepositorio {
 
 	public String clicarNaPrincipal(){
 		this.driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS).pageLoadTimeout(100, TimeUnit.SECONDS);
-		List<String> janela = new ArrayList<String>(driver.getWindowHandles());
-		driver.switchTo().window(janela.get(1));
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//tr[1]/td[2]/div/span")));
+
+		try {
+			List<String> janela = new ArrayList<String>(driver.getWindowHandles());
+			driver.switchTo().window(janela.get(1));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//tr[1]/td[2]/div/span")));
 
 
-		driver.switchTo().frame(0);
-		do {
-			try {
-				wait.until(ExpectedConditions.elementToBeClickable(By.tagName("html")));
-				wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("body")));
-				driver.findElement(By.tagName("html")).click();
-				break;
-			} catch (Exception e) {
-				//
-			}
-		} while (true);
-		this.driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS).pageLoadTimeout(100, TimeUnit.SECONDS);
+			driver.switchTo().frame(0);
+			do {
+				try {
+					wait.until(ExpectedConditions.elementToBeClickable(By.tagName("html")));
+					wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("body")));
+					driver.findElement(By.tagName("html")).click();
+					break;
+				} catch (Exception e) {
+					//
+				}
+			} while (true);
+			this.driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS).pageLoadTimeout(100, TimeUnit.SECONDS);
 //		WebElement capa = driver.findElement(By.id("iframe-myiframe"));
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div/div[4]/table/tbody/tr[13]/td[2]/a[1]/b")));
-		WebElement clique = driver.findElement(By.xpath("/html/body/div/div[4]/table/tbody/tr[13]/td[2]/a[1]/b"));
-		clique.click();
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div/div[4]/table/tbody/tr[13]/td[2]/a[1]/b")));
+			WebElement clique = driver.findElement(By.xpath("/html/body/div/div[4]/table/tbody/tr[13]/td[2]/a[1]/b"));
+			clique.click();
+		}catch (Exception e){
+			System.out.println("entrei no cat clicarNaPrincipal");
+			System.out.println(e);
+		}
+
 //		wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(capa));
 
 
@@ -152,36 +159,41 @@ public class SeleniumRepositorio {
 
 	}
 
-	public String entrarNoProcessoAutomatico(String etiqueta) throws InterruptedException {
-		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS).pageLoadTimeout(30, TimeUnit.SECONDS);
-		Thread.sleep(1000);
-		String verificacao = driver
-				.findElement(By.xpath("/html/body/div[4]/div[1]/div[2]/div/div[2]/div/div[2]/div/div/div[7]"))
-				.getText();
-
-		System.out.println(verificacao);
-		String falso = "Sem registros para exibir";
-
-		boolean confirmacaoDeExistencia = verificacao.equals(falso);
-		System.out.println(confirmacaoDeExistencia);
-		if (confirmacaoDeExistencia == true) {
-			return "Sem registros para exibir";
-		} else {
-			long time = 15000;
-			wait = new WebDriverWait(driver, time);
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-					"/html/body/div[4]/div[1]/div[2]/div/div[2]/div/div[4]/div/table/tbody/tr[1]/td[3]/div/a[1]")));
-			wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-					"/html/body/div[4]/div[1]/div[2]/div/div[2]/div/div[4]/div/table/tbody/tr[1]/td[3]/div/a[1]")));
-
-			WebElement processo = driver.findElement(By.xpath(
-					"/html/body/div[4]/div[1]/div[2]/div/div[2]/div[1]/div[4]/div/table/tbody/tr[1]/td[3]/div/a[1]"));
-			processo.click();
+	public boolean entrarNoProcessoAutomatico(String etiqueta) throws InterruptedException {
+		try {
 			this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS).pageLoadTimeout(30, TimeUnit.SECONDS);
-			return "pronto para procurar";
+			Thread.sleep(1000);
+			String verificacao = driver
+					.findElement(By.xpath("/html/body/div[4]/div[1]/div[2]/div/div[2]/div/div[2]/div/div/div[7]"))
+					.getText();
+
+			System.out.println(verificacao);
+			String falso = "Sem registros para exibir";
+
+			boolean confirmacaoDeExistencia = verificacao.equals(falso);
+			System.out.println(confirmacaoDeExistencia);
+			if (confirmacaoDeExistencia == true) {
+				return false;
+			} else {
+				long time = 15000;
+				wait = new WebDriverWait(driver, time);
+				wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+						"/html/body/div[4]/div[1]/div[2]/div/div[2]/div/div[4]/div/table/tbody/tr[1]/td[3]/div/a[1]")));
+				wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
+						"/html/body/div[4]/div[1]/div[2]/div/div[2]/div/div[4]/div/table/tbody/tr[1]/td[3]/div/a[1]")));
+
+				WebElement processo = driver.findElement(By.xpath(
+						"/html/body/div[4]/div[1]/div[2]/div/div[2]/div[1]/div[4]/div/table/tbody/tr[1]/td[3]/div/a[1]"));
+				processo.click();
+				return true;
+
+			}
+		}catch (Exception e){
+			System.out.println("entrei no cat entrarNoProcessoAutomatico");
+			System.out.println(e);
+			return entrarNoProcessoAutomatico(etiqueta);
 
 		}
-
 	}
 
 	/*
@@ -299,26 +311,21 @@ public class SeleniumRepositorio {
 							return true;
 						} else {
 
-							System.out.println("x maior que 30 dias");
+							System.out.println("x maior que 30 dias x= " + x);
 							return false;
 
 						}
 					} else {
-						if (dataATUALocalDateTime.getYear() == dataValidacao.getYear() + 1) {
-							if (dataValidacao.getMonthValue() == 12) {
-
+						if (dataATUALocalDateTime.getYear() == dataValidacao.getYear() + 1 && dataValidacao.getMonthValue() == 12 && dataATUALocalDateTime.getMonthValue() == 1) {
 								int x = dataValidacao.getDayOfYear() - 333;
 								// dataATUALocalDateTime.getDayOfYear()<= x
-								if (dataATUALocalDateTime.getDayOfYear() <= x) {
+								if ( x > dataATUALocalDateTime.getDayOfYear()) {
 									System.out.println("x é menor ou igual a 30 , x " + x);
 									return true;
 								} else {
-
-									System.out.println("x maior que 30 dias");
+									System.out.println("x maior que 30 dias. x: " + x );
 									return false;
-
 								}
-							}
 						} else {
 							System.out.println("ano diferente");
 							return false;
@@ -405,7 +412,8 @@ public class SeleniumRepositorio {
 								j = 100;
 							}
 						} catch (Exception e) {
-							System.out.println("Entrei no Catch");
+							System.out.println("Entrei no Catch procurarDosPrev");
+							System.out.println(e);
 							break;
 
 						}
