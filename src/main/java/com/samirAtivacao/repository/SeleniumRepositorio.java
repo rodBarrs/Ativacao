@@ -409,11 +409,14 @@ public class SeleniumRepositorio {
 							break;
 
 						}
-						if(verificarAtivo){
+						if (verificarAtivo) {
 							nb = driver
 									.findElement(By.xpath("/html/body/div/div[3]/table/tbody/tr[" + j + "]/td[1]"))
 									.getText();
 							nbsAtivos.add(nb);
+
+						}
+					}
 							for (int z = 5; z < 9; z++) {
 								for (int t = 1; t < 100; t++) {
 
@@ -425,107 +428,100 @@ public class SeleniumRepositorio {
 													.pageLoadTimeout(1, TimeUnit.SECONDS);
 										}
 
+										for (int j = 2; j < 100; j++) {
+											verificarAtivo = driver
+													.findElement(
+															By.xpath("/html/body/div/div[" + z + "]/div[" + t
+																	+ "]/table[1]/tbody/tr[2]/td[2]"))
+													.getText().toUpperCase().contains(nbsAtivos.get(1));
 
-										verificarAtivo = driver
-												.findElement(
-														By.xpath("/html/body/div/div[" + z + "]/div[" + t
-																+ "]/table[1]/tbody/tr[2]/td[2]"))
-												.getText().toUpperCase().contains(nb);
+											if (verificarAtivo) {
 
-										if (verificarAtivo) {
+													beneficio = driver
+															.findElement(By.xpath(
+																	"/html/body/div/div[" + z + "]/div[" + t
+																			+ "]/table[1]/tbody/tr[2]/td[3]"))
+															.getText();
+													dibInicial = driver
+															.findElement(By.xpath(
+																	"/html/body/div/div[" + z + "]/div[" + t
+																			+ "]/table[1]/tbody/tr[2]/td[6]"))
+															.getText();
+													System.out.println(dibInicial);
+													dip = driver
+															.findElement(By.xpath(
+																	"/html/body/div/div[" + z + "]/div[" + t
+																			+ "]/table[1]/tbody/tr[2]/td[8]"))
+															.getText();
+													System.out.println("DIP: " + dip);
+													dibFinal = driver
+															.findElement(By.xpath(
+																	"/html/body/div/div[" + z + "]/div[" + t
+																			+ "]/table[1]/tbody/tr[2]/td[7]"))
+															.getText();
+													System.out.println("DIP FINAL: " + dibFinal);
+													rmi = driver
+															.findElement(By.xpath(
+																	"/html/body/div/div[" + z + "]/div[" + t
+																			+ "]/table[2]/tbody/tr[2]/td[1]"))
+															.getText();
+													System.out.println("RMI: " + rmi);
 
-											String dibInicialInicial = driver
-													.findElement(By.xpath(
-															"/html/body/div/div[" + z + "]/div[" + t
-																	+ "]/table[1]/tbody/tr[2]/td[6]"))
-													.getText();
-											String dipInicial = driver
-													.findElement(By.xpath(
-															"/html/body/div/div[" + z + "]/div[" + t
-																	+ "]/table[1]/tbody/tr[2]/td[8]"))
-													.getText();
-											boolean ativoComDatasIguais = dibInicialInicial.equals(dipInicial);
-											if(!ativoComDatasIguais || !ativoComDatasIguais) {
-												beneficio = driver
-														.findElement(By.xpath(
-																"/html/body/div/div[" + z + "]/div[" + t
-																		+ "]/table[1]/tbody/tr[2]/td[3]"))
-														.getText();
-												dibInicial = driver
-														.findElement(By.xpath(
-																"/html/body/div/div[" + z + "]/div[" + t
-																		+ "]/table[1]/tbody/tr[2]/td[6]"))
-														.getText();
-												System.out.println(dibInicial);
-												dip = driver
-														.findElement(By.xpath(
-																"/html/body/div/div[" + z + "]/div[" + t
-																		+ "]/table[1]/tbody/tr[2]/td[8]"))
-														.getText();
-												System.out.println("DIP: " + dip);
-												dibFinal = driver
-														.findElement(By.xpath(
-																"/html/body/div/div[" + z + "]/div[" + t
-																		+ "]/table[1]/tbody/tr[2]/td[7]"))
-														.getText();
-												System.out.println("DIP FINAL: " + dibFinal);
-												rmi = driver
-														.findElement(By.xpath(
-																"/html/body/div/div[" + z + "]/div[" + t
-																		+ "]/table[2]/tbody/tr[2]/td[1]"))
-														.getText();
-												System.out.println("RMI: " + rmi);
+													dibAnterior = driver.findElement(By.xpath("/html/body/div/div[" + z + "]/div[" + t
+															+ "]/table[2]/tbody/tr[2]/td[6]")).getText();
+													if (dibAnterior.contains("-")) {
+														dibAnterior = "";
+													}
 
-												dibAnterior = driver.findElement(By.xpath("/html/body/div/div[" + z + "]/div[" + t
-														+ "]/table[2]/tbody/tr[2]/td[6]")).getText();
-												if (dibAnterior.contains("-")) {
-													dibAnterior = "";
+													aps = driver
+															.findElement(By.xpath(
+																	"/html/body/div/div[" + z + "]/div[" + t
+																			+ "]/table[3]/tbody/tr[2]/td[8]"))
+															.getText();
+
+
+													System.out.println("APS: " + aps);
+													z = 100;
+													t = 100;
+												boolean ativoComDatasIguais = dibInicial.equals(dip);
+												if(!ativoComDatasIguais || nbsAtivos.size() == 1){
+													informacao.setNb(nb);
+													informacao.setBeneficio(beneficio);
+													informacao.setAps(aps);
+													informacao.setRmi(rmi);
+													informacao.setDibInicial(dibInicial);
+													informacao.setDibFinal(dibFinal);
+													informacao.setDip(dip);
+													informacao.setDibAnterior(dibAnterior);
+													informacao.setUrlProcesso(driver.getCurrentUrl());
+													System.out.println("Url da pagina " + driver.getCurrentUrl());
+													nbUnido = unirNbInformacoesCessado(procurarCessado());
+													informacao.setCessado(nbUnido);
+													procurarCitacao(informacao, listaMovimentacao);
+
+
+													return informacao;
 												}
 
-												aps = driver
-														.findElement(By.xpath(
-																"/html/body/div/div[" + z + "]/div[" + t
-																		+ "]/table[3]/tbody/tr[2]/td[8]"))
-														.getText();
+												}
 
-
-												System.out.println("APS: " + aps);
-												z = 100;
-												t = 100;
-												informacao.setNb(nb);
-												informacao.setBeneficio(beneficio);
-												informacao.setAps(aps);
-												informacao.setRmi(rmi);
-												informacao.setDibInicial(dibInicial);
-												informacao.setDibFinal(dibFinal);
-												informacao.setDip(dip);
-												informacao.setDibAnterior(dibAnterior);
-												informacao.setUrlProcesso(driver.getCurrentUrl());
-												System.out.println("Url da pagina " + driver.getCurrentUrl());
-												nbUnido = unirNbInformacoesCessado(procurarCessado());
-												informacao.setCessado(nbUnido);
-												procurarCitacao(informacao, listaMovimentacao);
-
-
-												return informacao;
 											}
+										} catch(Exception e){
+											System.out.println("Entrei no Catch forever " + e);
+											t = 1000;
+
 										}
-									} catch (Exception e) {
-										System.out.println("Entrei no Catch forever " + e);
-										t = 1000;
+
+										/*
+										 * dataValiadcaoString = dataValiadcaoString
+										 * .replace("* Informações extraídas dos sistemas informatizados do INSS em: ",
+										 * ""); System.out.println(dataValiadcaoString);
+										 */
 
 									}
-
-									/*
-									 * dataValiadcaoString = dataValiadcaoString
-									 * .replace("* Informações extraídas dos sistemas informatizados do INSS em: ",
-									 * ""); System.out.println(dataValiadcaoString);
-									 */
-
 								}
-							}
-						}
-					}
+
+
 					System.out.println("Nb: " + nb);
 
 
