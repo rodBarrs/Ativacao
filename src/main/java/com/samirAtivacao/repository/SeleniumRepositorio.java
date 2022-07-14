@@ -417,11 +417,11 @@ public class SeleniumRepositorio {
 
 						}
 					}
-							for (int z = 5; z < 9; z++) {
-								for (int t = 1; t < 100; t++) {
+							for (int z = 6; z >= 5; z--) {
+								for (int t = 1; t < 20; t++) {
 
 									try {
-										if (z == 5) {
+										if (z == 6) {
 											Thread.sleep(150);
 										} else {
 											this.driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS)
@@ -483,7 +483,7 @@ public class SeleniumRepositorio {
 
 													System.out.println("APS: " + aps);
 													//z = 100;
-													t = 100;
+													//t = 100;
 												boolean ativoComDatasIguais = dibInicial.equals(dip);
 												if(!ativoComDatasIguais || nbsAtivos.size() == 1){
 													informacao.setNb(nb);
@@ -504,14 +504,12 @@ public class SeleniumRepositorio {
 													return informacao;
 												}
 
-												} else{
-												break;
-											}
+												}
 
 											}
 										} catch(Exception e){
 											System.out.println("Entrei no Catch forever " + e);
-											t = 1000;
+										//	t = 1000;
 
 										}
 
