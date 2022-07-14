@@ -428,12 +428,13 @@ public class SeleniumRepositorio {
 													.pageLoadTimeout(1, TimeUnit.SECONDS);
 										}
 
-										for (int j = 2; j < 100; j++) {
+										for (int j = 0; j < 10; j++) {
+											String ativo = nbsAtivos.get(j);
 											verificarAtivo = driver
 													.findElement(
 															By.xpath("/html/body/div/div[" + z + "]/div[" + t
 																	+ "]/table[1]/tbody/tr[2]/td[2]"))
-													.getText().toUpperCase().contains(nbsAtivos.get(1));
+													.getText().toUpperCase().contains(ativo);
 
 											if (verificarAtivo) {
 
@@ -481,7 +482,7 @@ public class SeleniumRepositorio {
 
 
 													System.out.println("APS: " + aps);
-													z = 100;
+													//z = 100;
 													t = 100;
 												boolean ativoComDatasIguais = dibInicial.equals(dip);
 												if(!ativoComDatasIguais || nbsAtivos.size() == 1){
@@ -503,7 +504,9 @@ public class SeleniumRepositorio {
 													return informacao;
 												}
 
-												}
+												} else{
+												break;
+											}
 
 											}
 										} catch(Exception e){
