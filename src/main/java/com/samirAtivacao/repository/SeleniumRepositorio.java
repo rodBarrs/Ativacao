@@ -418,7 +418,8 @@ public class SeleniumRepositorio {
 						}
 					}
 							for (int z = 6; z >= 5; z--) {
-								for (int t = 1; t < 20; t++) {
+
+								for (int t = 1; t <= 35; t++) {
 
 									try {
 										if (z == 6) {
@@ -428,7 +429,7 @@ public class SeleniumRepositorio {
 													.pageLoadTimeout(1, TimeUnit.SECONDS);
 										}
 
-										for (int j = 0; j < 10; j++) {
+										for (int j = 0; j < nbsAtivos.size(); j++) {
 											String ativo = nbsAtivos.get(j);
 											verificarAtivo = driver
 													.findElement(
@@ -509,6 +510,10 @@ public class SeleniumRepositorio {
 											}
 										} catch(Exception e){
 											System.out.println("Entrei no Catch forever " + e);
+											if(z ==6 && nbsAtivos.size() == 1){
+												z -=1;
+											}
+
 										//	t = 1000;
 
 										}
