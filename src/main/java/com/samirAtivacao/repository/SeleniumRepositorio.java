@@ -422,7 +422,7 @@ public class SeleniumRepositorio {
 								for (int t = 1; t <= 35; t++) {
 
 									try {
-										if (z == 6) {
+										if (z == 6 && t == 1) {
 											Thread.sleep(150);
 										} else {
 											this.driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS)
@@ -510,8 +510,9 @@ public class SeleniumRepositorio {
 											}
 										} catch(Exception e){
 											System.out.println("Entrei no Catch forever " + e);
-											if(z ==6 && nbsAtivos.size() == 1){
+											if(z ==6){
 												z -=1;
+												t = 0;
 											}
 
 										//	t = 1000;
@@ -729,6 +730,8 @@ public class SeleniumRepositorio {
 		driver.switchTo().window(janela.get(1)).close();
 		driver.switchTo().window(janela.get(2)).close();
 		driver.switchTo().window(janela.get(0));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By
+				.xpath("/html/body/div[4]/div[1]/div[2]/div/div[2]/div/div[2]/div/div/a[5]/span/span/span[2]")));
 		WebElement filtroSpace = driver.findElement(
 				By.xpath("/html/body/div[4]/div[1]/div[2]/div/div[2]/div/div[2]/div/div/a[5]/span/span/span[2]"));
 		filtroSpace.click();
