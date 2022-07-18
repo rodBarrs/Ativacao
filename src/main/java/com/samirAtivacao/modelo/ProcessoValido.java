@@ -8,7 +8,7 @@ package com.samirAtivacao.modelo;
  *
  * @author AGU
  */
-public class Ativo {
+public class ProcessoValido {
     private boolean ativo;
 	private String beneficio;
 	public boolean isAtivo() {

@@ -5,7 +5,6 @@
 package com.samirAtivacao.repository;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -16,7 +15,6 @@ import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import com.samirAtivacao.DAO.DAOInformacoesCessado;
-import com.samirAtivacao.controller.GeralController;
 import com.samirAtivacao.modelo.InformacoesCessado;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -24,7 +22,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.samirAtivacao.modelo.Ativo;
+import com.samirAtivacao.modelo.ProcessoValido;
 import com.samirAtivacao.modelo.InfomacoesDosPrev;
 import com.samirAtivacao.modelo.Usuario;
 
@@ -346,7 +344,7 @@ public class SeleniumRepositorio {
 		return false;
 	}
 
-	public InfomacoesDosPrev procurarDosPrev() {
+	public InfomacoesDosPrev procurarDosPrevAtivo() {
 		boolean verificarAtivo = false;
 		InfomacoesDosPrev informacao = new InfomacoesDosPrev();
 		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS).pageLoadTimeout(30, TimeUnit.SECONDS);
@@ -510,7 +508,7 @@ public class SeleniumRepositorio {
 											}
 										} catch(Exception e){
 											System.out.println("Entrei no Catch forever " + e);
-											if(z ==6){
+											if(z == 6){
 												z -=1;
 												t = 0;
 											}
@@ -547,6 +545,209 @@ public class SeleniumRepositorio {
 		return null;
 
 	}
+
+	public InfomacoesDosPrev procurarDosPrevCessado() {
+		boolean verificarAtivo = false;
+		InfomacoesDosPrev informacao = new InfomacoesDosPrev();
+		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS).pageLoadTimeout(30, TimeUnit.SECONDS);
+		List<String> janela = new ArrayList<String>(driver.getWindowHandles());
+		driver.switchTo().window(janela.get(2));
+		WebElement TabelaTref = driver.findElement(By.id("treeview-1015"));
+		List<WebElement> listaMovimentacao = new ArrayList<WebElement>(TabelaTref.findElements(By.cssSelector("tr")));
+
+		for (int i = listaMovimentacao.size(); i > 2; i--) {
+
+			// Providência Jurídica é o título da movimentação
+			Boolean existeDosPrev = driver.findElement(By.xpath("//tr[" + i + "]/td[2]/div/span")).getText()
+					.toUpperCase().contains("DOSSIÊ PREVIDENCIÁRIO");
+			if (existeDosPrev == true) {
+				WebElement dosClick = driver.findElement(By.xpath("//tr[" + i + "]/td[2]/div/span"));
+				dosClick.click();
+
+				System.out.println("informaçoes: " + informacao);
+				driver.switchTo().frame(0);
+				try {
+					String cnj = driver.findElement(By.xpath("//html/body/div/div[1]/table/tbody/tr[1]/td")).getText();
+					System.out.println("CNJ: " + cnj);
+					String dataAjuizamento = driver.findElement(By.xpath("/html/body/div/div[1]/table/tbody/tr[2]/td"))
+							.getText();
+					System.out.println("Data de Ajuizamento: " + dataAjuizamento + "funcinou");
+					String dataValiadcaoString = driver.findElement(By.xpath("/html/body/div/p[2]/b")).getText();
+					System.out.println(dataValiadcaoString);
+					String nome = driver.findElement(By.xpath("/html/body/div/div[1]/table/tbody/tr[6]/td")).getText();
+					System.out.println("Nome: " + nome);
+					String cpf = driver.findElement(By.xpath("/html/body/div/div[1]/table/tbody/tr[7]/td")).getText();
+					System.out.println("CPF: " + cpf);
+					informacao.setNumeroDoProcesso(cnj);
+					informacao.setDataAjuizamento(dataAjuizamento);
+					informacao.setNome(nome);
+					informacao.setCpf(cpf);
+
+					this.driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS).pageLoadTimeout(1,
+							TimeUnit.SECONDS);
+					String beneficio = null;
+					String nb = null;
+					String dip;
+					String rmi;
+					String dibInicial;
+					String dibFinal;
+					String dibAnterior;
+					String aps;
+					String nbUnido;
+					List<String> nbsAtivos = new ArrayList<String>();
+					for (int j = 2; j < 100; j++) {
+						try {
+
+							verificarAtivo = driver
+									.findElement(By.xpath("/html/body/div/div[3]/table/tbody/tr[" + j + "]/td[6]"))
+									.getText().toUpperCase().contains("CESSADO");
+
+
+						} catch (Exception e) {
+							System.out.println("Entrei no Catch procurarDosPrev");
+							System.out.println(e);
+							break;
+
+						}
+						if (verificarAtivo) {
+							nb = driver
+									.findElement(By.xpath("/html/body/div/div[3]/table/tbody/tr[" + j + "]/td[1]"))
+									.getText();
+							nbsAtivos.add(nb);
+
+						}
+					}
+					for (int z = 6; z >= 5; z--) {
+
+						for (int t = 1; t <= 35; t++) {
+
+							try {
+								if (z == 6 && t == 1) {
+									Thread.sleep(150);
+								} else {
+									this.driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS)
+											.pageLoadTimeout(1, TimeUnit.SECONDS);
+								}
+
+								for (int j = 0; j < nbsAtivos.size(); j++) {
+									String ativo = nbsAtivos.get(j);
+									verificarAtivo = driver
+											.findElement(
+													By.xpath("/html/body/div/div[" + z + "]/div[" + t
+															+ "]/table[1]/tbody/tr[2]/td[2]"))
+											.getText().toUpperCase().contains(ativo);
+
+									if (verificarAtivo) {
+
+										beneficio = driver
+												.findElement(By.xpath(
+														"/html/body/div/div[" + z + "]/div[" + t
+																+ "]/table[1]/tbody/tr[2]/td[3]"))
+												.getText();
+										dibInicial = driver
+												.findElement(By.xpath(
+														"/html/body/div/div[" + z + "]/div[" + t
+																+ "]/table[1]/tbody/tr[2]/td[6]"))
+												.getText();
+										System.out.println(dibInicial);
+										dip = driver
+												.findElement(By.xpath(
+														"/html/body/div/div[" + z + "]/div[" + t
+																+ "]/table[1]/tbody/tr[2]/td[8]"))
+												.getText();
+										System.out.println("DIP: " + dip);
+										dibFinal = driver
+												.findElement(By.xpath(
+														"/html/body/div/div[" + z + "]/div[" + t
+																+ "]/table[1]/tbody/tr[2]/td[7]"))
+												.getText();
+										System.out.println("DIP FINAL: " + dibFinal);
+										rmi = driver
+												.findElement(By.xpath(
+														"/html/body/div/div[" + z + "]/div[" + t
+																+ "]/table[2]/tbody/tr[2]/td[1]"))
+												.getText();
+										System.out.println("RMI: " + rmi);
+
+										dibAnterior = driver.findElement(By.xpath("/html/body/div/div[" + z + "]/div[" + t
+												+ "]/table[2]/tbody/tr[2]/td[6]")).getText();
+										if (dibAnterior.contains("-")) {
+											dibAnterior = "";
+										}
+
+										aps = driver
+												.findElement(By.xpath(
+														"/html/body/div/div[" + z + "]/div[" + t
+																+ "]/table[3]/tbody/tr[2]/td[8]"))
+												.getText();
+
+
+										System.out.println("APS: " + aps);
+										//z = 100;
+										//t = 100;
+										boolean ativoComDatasIguais = dibInicial.equals(dip);
+										//if(!ativoComDatasIguais || nbsAtivos.size() == 1){
+											informacao.setNb(nb);
+											informacao.setBeneficio(beneficio);
+											informacao.setAps(aps);
+											informacao.setRmi(rmi);
+											informacao.setDibInicial(dibInicial);
+											informacao.setDibFinal(dibFinal);
+											informacao.setDip(dip);
+											informacao.setDibAnterior(dibAnterior);
+											informacao.setUrlProcesso(driver.getCurrentUrl());
+											System.out.println("Url da pagina " + driver.getCurrentUrl());
+											nbUnido = unirNbInformacoesCessado(procurarCessado());
+											informacao.setCessado(nbUnido);
+											procurarCitacao(informacao, listaMovimentacao);
+
+
+											return informacao;
+										}
+
+									}
+
+								//}
+							} catch(Exception e){
+								System.out.println("Entrei no Catch forever " + e);
+								if(z == 6){
+									z -=1;
+									t = 0;
+								}
+
+								//	t = 1000;
+
+							}
+
+							/*
+							 * dataValiadcaoString = dataValiadcaoString
+							 * .replace("* Informações extraídas dos sistemas informatizados do INSS em: ",
+							 * ""); System.out.println(dataValiadcaoString);
+							 */
+
+						}
+					}
+
+
+					System.out.println("Nb: " + nb);
+
+
+				} catch (Exception e) {
+					System.out.println("Vish entrei no tal do catch 2");
+					// dataAjuizamento =
+					// driver.findElement(By.xpath("/html/body/div/div[5]/table/tbody/tr[3]/td[2]")).getText();
+				}
+				procurarCitacao(informacao, listaMovimentacao);
+				return informacao;
+			}
+		}
+
+
+
+		return null;
+
+	}
+
 
 	private void procurarCitacao(InfomacoesDosPrev informacao, List<WebElement> listaMovimentacao) {
 		try {
@@ -713,7 +914,7 @@ public class SeleniumRepositorio {
 			if (validacao == true) {
 				campoPassElemt.sendKeys("ATIVO " + beneficio);
 			} else {
-				campoPassElemt.sendKeys("INDEFERIDO OU CESSADO");
+				campoPassElemt.sendKeys("INDEFERIDO");
 			}
 		} else if (seletar == 0) {
 			if (validacao == true) {
@@ -737,12 +938,12 @@ public class SeleniumRepositorio {
 		filtroSpace.click();
 	}
 
-	public Ativo verificacaoDeAtivo() {
+	public ProcessoValido verificacaoDeAtivo() {
 		this.driver.manage().timeouts().implicitlyWait(100, TimeUnit.MILLISECONDS).pageLoadTimeout(100,
 				TimeUnit.MILLISECONDS);
 		List<String> janela = new ArrayList<String>(driver.getWindowHandles());
 		driver.switchTo().window(janela.get(2));
-		Ativo ativo = new Ativo();
+		ProcessoValido ativo = new ProcessoValido();
 		String beneficio = null;
 		boolean verificarAtivo = false;
 		driver.switchTo().frame(0);
@@ -767,6 +968,35 @@ public class SeleniumRepositorio {
 		return ativo;
 	}
 
+	public ProcessoValido verificacaoDeCessado() {
+		this.driver.manage().timeouts().implicitlyWait(100, TimeUnit.MILLISECONDS).pageLoadTimeout(100,
+				TimeUnit.MILLISECONDS);
+		List<String> janela = new ArrayList<String>(driver.getWindowHandles());
+		driver.switchTo().window(janela.get(2));
+		ProcessoValido ativo = new ProcessoValido();
+		String beneficio = null;
+		boolean verificarAtivo = false;
+		driver.switchTo().frame(0);
+		for (int j = 2; j < 100; j++) {
+			try {
+				verificarAtivo = driver.findElement(By.xpath("/html/body/div/div[3]/table/tbody/tr[" + j + "]/td[6]"))
+						.getText().toUpperCase().contains("CESSADO");
+				if (verificarAtivo) {
+					beneficio = driver.findElement(By.xpath("/html/body/div/div[3]/table/tbody/tr[" + j + "]/td[2]"))
+							.getText();
+					System.out.println(beneficio);
+					j = 100;
+				}
+			} catch (Exception e) {
+				System.out.println("Entrei no Catch");
+				break;
+
+			}
+		}
+		ativo.setAtivo(verificarAtivo);
+		ativo.setBeneficio(beneficio);
+		return ativo;
+	}
 	public void quit() {
 		driver.quit();
 	}
