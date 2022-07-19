@@ -493,6 +493,7 @@ public class SeleniumRepositorio {
 													informacao.setDibFinal(dibFinal);
 													informacao.setDip(dip);
 													informacao.setDibAnterior(dibAnterior);
+													informacao.setTipo("ATIVO");
 													informacao.setUrlProcesso(driver.getCurrentUrl());
 													System.out.println("Url da pagina " + driver.getCurrentUrl());
 													nbUnido = unirNbInformacoesCessado(procurarCessado());
@@ -638,7 +639,7 @@ public class SeleniumRepositorio {
 											.getText().toUpperCase().contains(ativo);
 
 									if (verificarAtivo) {
-
+										if(j == nbsAtivos.size() - 1){
 										beneficio = driver
 												.findElement(By.xpath(
 														"/html/body/div/div[" + z + "]/div[" + t
@@ -685,8 +686,8 @@ public class SeleniumRepositorio {
 										System.out.println("APS: " + aps);
 										//z = 100;
 										//t = 100;
-										boolean ativoComDatasIguais = dibInicial.equals(dip);
-										//if(!ativoComDatasIguais || nbsAtivos.size() == 1){
+								//		boolean ativoComDatasIguais = dibInicial.equals(dip);
+
 											informacao.setNb(nb);
 											informacao.setBeneficio(beneficio);
 											informacao.setAps(aps);
@@ -695,6 +696,7 @@ public class SeleniumRepositorio {
 											informacao.setDibFinal(dibFinal);
 											informacao.setDip(dip);
 											informacao.setDibAnterior(dibAnterior);
+											informacao.setTipo("CESSADO");
 											informacao.setUrlProcesso(driver.getCurrentUrl());
 											System.out.println("Url da pagina " + driver.getCurrentUrl());
 											nbUnido = unirNbInformacoesCessado(procurarCessado());
@@ -707,7 +709,7 @@ public class SeleniumRepositorio {
 
 									}
 
-								//}
+								}
 							} catch(Exception e){
 								System.out.println("Entrei no Catch forever " + e);
 								if(z == 6){
@@ -1066,12 +1068,14 @@ public class SeleniumRepositorio {
 		driver.findElement(By.id("beneficio")).sendKeys(lista.getBeneficio());
 		driver.findElement(By.id("nb")).sendKeys(lista.getNb());
 		driver.findElement(By.id("dip")).sendKeys(lista.getDip());
+		//driver.findElement(By.id("tipo")).sendKeys(lista.getTipo());
 		if (lista.getCitacao() != null) {
 			driver.findElement(By.id("citacao")).sendKeys(lista.getCitacao());
 		}
 		driver.findElement(By.id("urlProcesso")).sendKeys(lista.getUrlProcesso());
 		driver.findElement(By.id("aps")).sendKeys(lista.getAps());
 		driver.findElement(By.id("dibAnterior")).sendKeys(lista.getDibAnterior());
+
 		String[] listaNb = lista.getCessado().split(",");
 
 		try {
