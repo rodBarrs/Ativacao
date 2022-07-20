@@ -417,7 +417,7 @@ public class SeleniumRepositorio {
 					}
 							for (int z = 6; z >= 5; z--) {
 
-								for (int t = 1; t <= 35; t++) {
+								for (int t = 1; t <= 50; t++) {
 
 									try {
 										if (z == 6 && t == 1) {
@@ -620,7 +620,7 @@ public class SeleniumRepositorio {
 					}
 					for (int z = 6; z >= 5; z--) {
 
-						for (int t = 1; t <= 35; t++) {
+						for (int t = 1; t <= 50; t++) {
 
 							try {
 								if (z == 6 && t == 1) {
@@ -1068,14 +1068,13 @@ public class SeleniumRepositorio {
 		driver.findElement(By.id("beneficio")).sendKeys(lista.getBeneficio());
 		driver.findElement(By.id("nb")).sendKeys(lista.getNb());
 		driver.findElement(By.id("dip")).sendKeys(lista.getDip());
-		//driver.findElement(By.id("tipo")).sendKeys(lista.getTipo());
 		if (lista.getCitacao() != null) {
 			driver.findElement(By.id("citacao")).sendKeys(lista.getCitacao());
 		}
 		driver.findElement(By.id("urlProcesso")).sendKeys(lista.getUrlProcesso());
 		driver.findElement(By.id("aps")).sendKeys(lista.getAps());
 		driver.findElement(By.id("dibAnterior")).sendKeys(lista.getDibAnterior());
-
+		driver.findElement(By.id("tipo")).sendKeys(lista.getTipo());
 		String[] listaNb = lista.getCessado().split(",");
 
 		try {

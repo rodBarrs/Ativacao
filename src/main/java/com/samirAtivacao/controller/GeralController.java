@@ -115,15 +115,12 @@ public class GeralController {
 				}
 				boolean validacao = repository.dataDeValidacaoDosPrev();
 				if (validacao) {
-					ativo = repository.verificacaoDeAtivo();
-					cessado = repository.verificacaoDeCessado();
-
-					if(ativo.getAtivo() == true) {
+					if(repository.verificacaoDeAtivo().getAtivo() == true) {
 							info = repository.procurarDosPrevAtivo();
 							daoInfo.salvarInformacoesDosPrev(info);
 							repository.etiquetar(true, letra, 0);
 							x++;
-					} else if(cessado.getAtivo() == true) {
+					} else if(repository.verificacaoDeCessado().getAtivo() == true) {
 						info = repository.procurarDosPrevCessado();
 						daoInfo.salvarInformacoesDosPrev(info);
 						repository.etiquetar(true, letra, 0);
