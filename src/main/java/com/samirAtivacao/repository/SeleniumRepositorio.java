@@ -154,7 +154,7 @@ public class SeleniumRepositorio {
 
     }
 
-    public String atualizarDossie() {
+    public String atualizarDossie() throws InterruptedException {
         this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS).pageLoadTimeout(30, TimeUnit.SECONDS);
         WebElement cliqueProcesso = driver.findElement(
                 By.xpath("/html/body/div[4]/div[1]/div[2]/div/div[2]/div/div[4]/div/table/tbody/tr/td[7]"));
@@ -166,18 +166,27 @@ public class SeleniumRepositorio {
 
         WebElement cliqueEditarNup = driver.findElement(
                 By.id("menuitem-1116-itemEl"));
+
+
+        this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS).pageLoadTimeout(30, TimeUnit.SECONDS);
         cliqueEditarNup.click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("tab-2356-btnInnerEl")));
+
 
         WebElement cliqueVinculacoes = driver.findElement(
                 By.id("tab-2356-btnInnerEl"));
         cliqueVinculacoes.click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div[4]/div[2]/div[2]/div/div[2]/div[2]/div[3]/div/table/tbody/tr[1]/td[3]/div")));
+
+        this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS).pageLoadTimeout(30, TimeUnit.SECONDS);
 
         Actions actions = new Actions(driver);
         WebElement elementLocator = driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[2]/div/div[2]/div[2]/div[3]/div/table/tbody/tr[1]/td[3]/div"));
         actions.contextClick(elementLocator).perform();
 
         this.driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS).pageLoadTimeout(500, TimeUnit.MILLISECONDS);
-        for(int i = 1; i <50;i++){
+
+        for(int i = 11; i <50;i++){
             try {
                 WebElement cliqueEditarNup2 = driver.findElement(
                         By.xpath("/html/body/div["+i+"]/div/div[2]/div/div/a"));
@@ -189,6 +198,7 @@ public class SeleniumRepositorio {
 
         }
         for (int j = 1; j< 10; j++){
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div[4]/div[2]/div[2]/div/div[2]/div[1]/div[2]/span/div/fieldset/div/span/div/fieldset[10]/div/span/div/div/div[4]/div/table/tbody/tr["+j+"]/td[3]/div")));
             String poloAtivo = driver.findElement
                     (By.xpath("/html/body/div[4]/div[2]/div[2]/div/div[2]/div[1]/div[2]/span/div/fieldset/div/span/div/fieldset[10]/div/span/div/div/div[4]/div/table/tbody/tr["+j+"]/td[3]/div")).getText();
             if (poloAtivo.contains("PÓLO ATIVO")){
@@ -203,6 +213,49 @@ public class SeleniumRepositorio {
                 WebElement elementoSolicitarDossie = driver.findElement
                         (By.id("consultaCNIS-textEl"));
                 elementoSolicitarDossie.click();
+
+                Thread.sleep(2000);
+                actions.sendKeys(Keys.ENTER).build().perform();
+
+                WebElement botaoPainel = driver.findElement
+                        (By.id("button-1009"));
+                botaoPainel.click();
+                wait.until(ExpectedConditions.presenceOfElementLocated(By
+                        .xpath("/html/body/div[4]/div[1]/div[2]/div/div[1]/div[1]/div[2]/div/a[2]/span/span/span[1]")));
+
+                this.driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS).pageLoadTimeout(500, TimeUnit.MILLISECONDS);
+
+                try {
+                    JavascriptExecutor js = (JavascriptExecutor) driver;
+
+                    wait.until(ExpectedConditions
+                            .elementToBeClickable(By.xpath("//td[4]/div")));
+                    WebElement ele = driver.findElement(By.xpath("//td[4]/div"));
+//			action.moveToElement(driver.findElement(By.xpath("//td["+i+"]/div"))).doubleClick().build().perform();
+//			driver.findElement(By.xpath("//td["+i+"]/div")).click();
+                    //Thread.sleep(500);
+                    //driver.findElement(By.xpath("//td["+i+"]/div")).click();
+                    js.executeScript(("var evt = document.createEvent('MouseEvents');"+
+                            "evt.initMouseEvent('dblclick',true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0,null);"+
+                            "arguments[0].dispatchEvent(evt);"), ele);
+                    //action.doubleClick(driver.findElement(By.xpath("//td["+i+"]/div"))).build().perform();
+                    wait.until(ExpectedConditions
+                            .elementToBeClickable(By.xpath("//fieldset[5]/div/span/div/table[4]/tbody/tr/td[2]/input")));
+
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+
+                driver.findElement(By.xpath("//fieldset[5]/div/span/div/table[4]/tbody/tr/td[2]/input")).clear();
+
+                driver.findElement(By.xpath("//fieldset[5]/div/span/div/table[4]/tbody/tr/td[2]/input"))
+                        .sendKeys("Atualização Solicitada");
+
+                actions.sendKeys(Keys.TAB).build().perform();
+                actions.sendKeys(Keys.TAB).build().perform();
+                actions.sendKeys(Keys.TAB).build().perform();
+                actions.sendKeys(Keys.ENTER).build().perform();
+                return "deu bom";
 
             }
         }
