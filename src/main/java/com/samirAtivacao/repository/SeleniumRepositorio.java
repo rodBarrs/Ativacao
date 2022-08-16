@@ -125,6 +125,37 @@ public class SeleniumRepositorio {
 
     public String colocarFiltro(String etiqueta) throws InterruptedException {
         this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS).pageLoadTimeout(30, TimeUnit.SECONDS);
+        WebElement setaAparecer = driver.findElement(
+                By.xpath("/html/body/div[4]/div[1]/div[2]/div/div[2]/div[1]/div[3]/div/div/div[33]/div/span"));
+        setaAparecer.click();
+        WebElement seta = driver.findElement(
+                By.xpath("/html/body/div[4]/div[1]/div[2]/div/div[2]/div[1]/div[3]/div/div/div[33]/div/div"));
+        seta.click();
+
+        WebElement filtro = driver.findElement(By.xpath("/html/body/div[11]/div/div[2]/div/div[6]/a/div[1]"));
+        filtro.click();
+        WebElement filtroEs = driver.findElement(By.xpath("/html/body/div[13]/div/div[2]"));
+        filtroEs.click();
+        WebElement filtroSpace = driver
+                .findElement(By.xpath("/html/body/div[13]/div/div[2]/div/table/tbody/tr/td[2]/input"));
+        filtroSpace.click();
+        System.out.println("etiqueta no filtro: " + etiqueta);
+        filtroSpace.sendKeys(etiqueta);
+        Thread.sleep(1000);
+        long time = 100;
+        wait = new WebDriverWait(driver, time);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By
+                .xpath("/html/body/div[4]/div[1]/div[2]/div/div[2]/div/div[4]/div/table/tbody/tr[1]/td[3]/div/a[1]")));
+        wait.until(ExpectedConditions.elementToBeClickable(By
+                .xpath("/html/body/div[4]/div[1]/div[2]/div/div[2]/div/div[4]/div/table/tbody/tr[1]/td[3]/div/a[1]")));
+        Thread.sleep(1000);
+
+        return "fitro colocado";
+
+    }
+
+    public String atualizarDossie() {
+        this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS).pageLoadTimeout(30, TimeUnit.SECONDS);
         WebElement cliqueProcesso = driver.findElement(
                 By.xpath("/html/body/div[4]/div[1]/div[2]/div/div[2]/div/div[4]/div/table/tbody/tr/td[7]"));
         cliqueProcesso.click();
@@ -151,40 +182,33 @@ public class SeleniumRepositorio {
                 WebElement cliqueEditarNup2 = driver.findElement(
                         By.xpath("/html/body/div["+i+"]/div/div[2]/div/div/a"));
                 cliqueEditarNup2.click();
-               i = 50;
+                i = 50;
             } catch (Exception e){
                 System.err.println(e);
             }
 
         }
+        for (int j = 1; j< 10; j++){
+            String poloAtivo = driver.findElement
+                    (By.xpath("/html/body/div[4]/div[2]/div[2]/div/div[2]/div[1]/div[2]/span/div/fieldset/div/span/div/fieldset[10]/div/span/div/div/div[4]/div/table/tbody/tr["+j+"]/td[3]/div")).getText();
+            if (poloAtivo.contains("PÓLO ATIVO")){
+                WebElement elementoPoloAtivo = driver.findElement
+                        (By.xpath("/html/body/div[4]/div[2]/div[2]/div/div[2]/div[1]/div[2]/span/div/fieldset/div/span/div/fieldset[10]/div/span/div/div/div[4]/div/table/tbody/tr["+j+"]/td[3]/div"));
+                elementoPoloAtivo.click();
 
+                WebElement elementoSeta = driver.findElement
+                        (By.id("splitbutton-1815-btnWrap"));
+                elementoSeta.click();
 
+                WebElement elementoSolicitarDossie = driver.findElement
+                        (By.id("consultaCNIS-textEl"));
+                elementoSolicitarDossie.click();
 
+            }
+        }
 
-
-
-        WebElement filtro = driver.findElement(By.xpath("/html/body/div[11]/div/div[2]/div/div[6]/a/div[1]"));
-        filtro.click();
-        WebElement filtroEs = driver.findElement(By.xpath("/html/body/div[13]/div/div[2]"));
-        filtroEs.click();
-        WebElement filtroSpace = driver
-                .findElement(By.xpath("/html/body/div[13]/div/div[2]/div/table/tbody/tr/td[2]/input"));
-        filtroSpace.click();
-        System.out.println("etiqueta no filtro: " + etiqueta);
-        filtroSpace.sendKeys(etiqueta);
-        Thread.sleep(1000);
-        long time = 100;
-        wait = new WebDriverWait(driver, time);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By
-                .xpath("/html/body/div[4]/div[1]/div[2]/div/div[2]/div/div[4]/div/table/tbody/tr[1]/td[3]/div/a[1]")));
-        wait.until(ExpectedConditions.elementToBeClickable(By
-                .xpath("/html/body/div[4]/div[1]/div[2]/div/div[2]/div/div[4]/div/table/tbody/tr[1]/td[3]/div/a[1]")));
-        Thread.sleep(1000);
-
-        return "fitro colocado";
-
+        return "";
     }
-
     public boolean entrarNoProcessoAutomatico(String etiqueta) throws InterruptedException {
         try {
             this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS).pageLoadTimeout(30, TimeUnit.SECONDS);
@@ -201,16 +225,7 @@ public class SeleniumRepositorio {
             if (confirmacaoDeExistencia == true) {
                 return false;
             } else {
-                long time = 15000;
-                wait = new WebDriverWait(driver, time);
-                wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                        "/html/body/div[4]/div[1]/div[2]/div/div[2]/div/div[4]/div/table/tbody/tr[1]/td[3]/div/a[1]")));
-                wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                        "/html/body/div[4]/div[1]/div[2]/div/div[2]/div/div[4]/div/table/tbody/tr[1]/td[3]/div/a[1]")));
 
-                WebElement processo = driver.findElement(By.xpath(
-                        "/html/body/div[4]/div[1]/div[2]/div/div[2]/div[1]/div[4]/div/table/tbody/tr[1]/td[3]/div/a[1]"));
-                processo.click();
                 return true;
 
             }

@@ -87,6 +87,7 @@ public class Samir extends javax.swing.JFrame {
         botaoCalculadora = new javax.swing.JButton();
         botaoHome = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        atualizarDossie = new javax.swing.JToggleButton();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -211,7 +212,7 @@ public class Samir extends javax.swing.JFrame {
                 try {
                     botaoCalculadoraActionPerformed(evt);
                 } catch (AWTException e) {
-                    e.printStackTrace();
+                    throw new RuntimeException(e);
                 }
             }
         });
@@ -232,6 +233,17 @@ public class Samir extends javax.swing.JFrame {
         jLabel1.setText("SAMIR");
         getContentPane().add(jLabel1);
         jLabel1.setBounds(520, -30, 545, 155);
+
+        atualizarDossie.setBackground(new java.awt.Color(153, 153, 255));
+        atualizarDossie.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        atualizarDossie.setText("ATUALIZAR DOSSIÊ PREVIDÊNCIÁRIO");
+        atualizarDossie.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                atualizarDossieActionPerformed(evt);
+            }
+        });
+        getContentPane().add(atualizarDossie);
+        atualizarDossie.setBounds(20, 630, 250, 30);
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SamirFundo.png"))); // NOI18N
         jLabel4.setText("jLabel4");
@@ -400,6 +412,31 @@ public class Samir extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_botaoHomeActionPerformed
 
+    private void atualizarDossieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizarDossieActionPerformed
+        Usuario usuario = new Usuario();
+        usuario.setCpf(campoCPF.getText());
+        usuario.setSenha(campoSenha.getText());
+        usuario.setEtiqueta(campoEtiqueta.getText().toUpperCase());
+        usuario.setNome(campoNome.getText());
+        System.out.println("etiqueta usuario: " + usuario.getEtiqueta());
+        // SeleniumRepositorio shazam = new SeleniumRepositorio();
+        //JOptionPane.showMessageDialog(null,  shazam.triar(usuario));
+        Runnable task = new Runnable() {
+            GeralController shazam = new GeralController();
+            @Override
+            public void run() {
+                shazam.atualizacaoDossie(usuario);
+                
+            }
+
+        };
+        // Run the task in a background thread
+        backgroundThread = new Thread(task);
+        backgroundThread.start();
+
+        
+    }//GEN-LAST:event_atualizarDossieActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -436,6 +473,7 @@ public class Samir extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton atualizarDossie;
     private javax.swing.JButton botaoCalculadora;
     private javax.swing.JButton botaoHome;
     private javax.swing.JToggleButton botaoIniciar;

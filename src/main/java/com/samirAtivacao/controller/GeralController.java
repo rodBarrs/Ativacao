@@ -145,6 +145,31 @@ public class GeralController {
 		
 		
 	}
+
+	public String atualizacaoDossie(Usuario  usuario){
+		repository.open(usuario);
+		try {
+			repository.colocarFiltro(usuario.getEtiqueta());
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+		try {
+			while(repository.entrarNoProcessoAutomatico(usuario.getEtiqueta())) {
+				repository.atualizarDossie();
+
+
+			}
+
+		} catch (Exception e) {
+			System.out.println("entrei no cath controller");
+			System.out.println(e);
+		}
+
+
+		return "";
+	}
     public String InserirNoFront(Usuario usuario, Boolean driever) throws AWTException {
     	//repository.open(usuario);
     	if(driever == true){
