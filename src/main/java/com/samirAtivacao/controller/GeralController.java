@@ -15,6 +15,8 @@ import com.samirAtivacao.modelo.InformacoesCessado;
 import com.samirAtivacao.modelo.Usuario;
 import com.samirAtivacao.repository.SeleniumRepositorio;
 
+import javax.swing.*;
+
 
 /**
  *
@@ -161,7 +163,7 @@ public class GeralController {
 
 
 			}
-
+			JOptionPane.showMessageDialog(null, "Não há tarefas à serem triadas");
 		} catch (Exception e) {
 			System.out.println("entrei no cath controller");
 			System.out.println(e);

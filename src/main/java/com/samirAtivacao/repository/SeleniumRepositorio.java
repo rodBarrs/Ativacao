@@ -186,7 +186,7 @@ public class SeleniumRepositorio {
 
         this.driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS).pageLoadTimeout(500, TimeUnit.MILLISECONDS);
 
-        for(int i = 11; i <50;i++){
+        for(int i = 20; i <50;i++){
             try {
                 WebElement cliqueEditarNup2 = driver.findElement(
                         By.xpath("/html/body/div["+i+"]/div/div[2]/div/div/a"));
@@ -249,7 +249,7 @@ public class SeleniumRepositorio {
                 driver.findElement(By.xpath("//fieldset[5]/div/span/div/table[4]/tbody/tr/td[2]/input")).clear();
 
                 driver.findElement(By.xpath("//fieldset[5]/div/span/div/table[4]/tbody/tr/td[2]/input"))
-                        .sendKeys("Atualização Solicitada");
+                        .sendKeys("Atualização de Dossiê Solicitada");
 
                 actions.sendKeys(Keys.TAB).build().perform();
                 actions.sendKeys(Keys.TAB).build().perform();
