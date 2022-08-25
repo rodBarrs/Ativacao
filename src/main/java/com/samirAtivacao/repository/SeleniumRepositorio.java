@@ -155,19 +155,24 @@ public class SeleniumRepositorio {
     }
 
     public String atualizarDossie() throws InterruptedException {
-        this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS).pageLoadTimeout(30, TimeUnit.SECONDS);
-        WebElement cliqueProcesso = driver.findElement(
-                By.xpath("/html/body/div[4]/div[1]/div[2]/div/div[2]/div/div[4]/div/table/tbody/tr/td[7]"));
-        cliqueProcesso.click();
+        try {
+            this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS).pageLoadTimeout(30, TimeUnit.SECONDS);
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div[4]/div[1]/div[2]/div/div[2]/div/div[4]/div/table/tbody/tr/td[7]")));
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div[4]/div[1]/div[2]/div/div[2]/div/div[1]/div/div/a[4]/span")));
+            WebElement cliqueProcesso = driver.findElement(
+                    By.xpath("/html/body/div[4]/div[1]/div[2]/div/div[2]/div/div[4]/div/table/tbody/tr/td[7]"));
+            cliqueProcesso.click();
 
-        WebElement cliqueSeta = driver.findElement(
-                By.xpath("/html/body/div[4]/div[1]/div[2]/div/div[2]/div/div[1]/div/div/a[4]/span"));
-        cliqueSeta.click();
+            WebElement cliqueSeta = driver.findElement(
+                    By.xpath("/html/body/div[4]/div[1]/div[2]/div/div[2]/div/div[1]/div/div/a[4]/span"));
+            cliqueSeta.click();
 
+        } catch (Exception e){
+            Thread.sleep(1000);
+            atualizarDossie();
+        }
         WebElement cliqueEditarNup = driver.findElement(
                 By.id("menuitem-1116-itemEl"));
-
-
         this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS).pageLoadTimeout(30, TimeUnit.SECONDS);
         cliqueEditarNup.click();
         wait.until(ExpectedConditions.elementToBeClickable(By.id("tab-2356-btnInnerEl")));
@@ -186,12 +191,12 @@ public class SeleniumRepositorio {
 
         this.driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS).pageLoadTimeout(500, TimeUnit.MILLISECONDS);
 
-        for(int i = 20; i <50;i++){
+        for(int i = 20; i <200;i++){
             try {
                 WebElement cliqueEditarNup2 = driver.findElement(
                         By.xpath("/html/body/div["+i+"]/div/div[2]/div/div/a"));
                 cliqueEditarNup2.click();
-                i = 50;
+                i = 200;
             } catch (Exception e){
                 System.err.println(e);
             }
@@ -851,6 +856,7 @@ public class SeleniumRepositorio {
 
             for (int h = 2; h < listaMovimentacao.size(); h++) {
                 driver.switchTo().defaultContent();
+
                 Boolean existeCitacao = driver.findElement(By.xpath("//tr[" + h + "]/td[2]/div/span[1]")).getText()
                         .toUpperCase().contains("CITAÇÃO");
                 if (existeCitacao) {
