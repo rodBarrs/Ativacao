@@ -279,6 +279,7 @@ public class Beremiz extends javax.swing.JFrame {
         Usuario usuario = new Usuario();
         usuario.setCpf(campoCPF.getText());
         usuario.setSenha(campoSenha.getText());
+        usuario.setTipo("Beremiz");
         usuario.setEtiqueta(campoEtiqueta.getText().toUpperCase());
         System.out.println("etiqueta usuario: " + usuario.getEtiqueta());
        // SeleniumRepositorio shazam = new SeleniumRepositorio();

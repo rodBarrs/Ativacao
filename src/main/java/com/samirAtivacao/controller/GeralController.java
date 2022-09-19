@@ -53,15 +53,15 @@ public class GeralController {
 			boolean validacao;
 		    ativo.setAtivo(false);
 			try {
-				while(repository.entrarNoProcessoAutomatico(usuario.getEtiqueta())) {
-					validacao = repository.dataDeValidacaoDosPrev();
+				while(repository.entrarNoProcessoAutomatico(usuario.getEtiqueta(), usuario.getTipo())) {
+					validacao = repository.dataDeValidacaoDosPrev(usuario.getTipo());
 					if ( validacao == true) {
-						ativo = repository.verificacaoDeAtivo();
-						repository.etiquetar(ativo.getAtivo(), ativo.getBeneficio(), 1);
+						ativo = repository.verificacaoDeAtivo(usuario.getTipo());
+						repository.etiquetar(ativo.getAtivo(), ativo.getBeneficio(), 1, usuario.getTipo());
 						x++;
 					}
 					else {
-						repository.etiquetar(ativo.getAtivo(), ativo.getBeneficio(), 0);
+						repository.etiquetar(ativo.getAtivo(), ativo.getBeneficio(), 0, usuario.getTipo());
 						y++;
 					}
 				}
@@ -106,7 +106,7 @@ public class GeralController {
 		daoInfoCessado.excluirUInfomacoesDosPrev();
 
 		try {
-			while(repository.entrarNoProcessoAutomatico(usuario.getEtiqueta())) {
+			while(repository.entrarNoProcessoAutomatico(usuario.getEtiqueta(), usuario.getTipo())) {
 				ProcessoValido ativo = new ProcessoValido();
 				ProcessoValido cessado = new ProcessoValido();
 				ativo.setAtivo(false);
@@ -115,25 +115,25 @@ public class GeralController {
 				}catch  (Exception e) {
 					System.out.println("entrei no cath clicarNaPrincipal");
 				}
-				boolean validacao = repository.dataDeValidacaoDosPrev();
+				boolean validacao = repository.dataDeValidacaoDosPrev(usuario.getTipo());
 				if (validacao) {
-					if(repository.verificacaoDeAtivo().getAtivo() == true) {
+					if(repository.verificacaoDeAtivo(usuario.getTipo()).getAtivo() == true) {
 							info = repository.procurarDosPrevAtivo();
 							daoInfo.salvarInformacoesDosPrev(info);
-							repository.etiquetar(true, letra, 0);
+							repository.etiquetar(true, letra, 0, usuario.getTipo());
 							x++;
 					} else if(repository.verificacaoDeCessado().getAtivo() == true) {
 						info = repository.procurarDosPrevCessado();
 						daoInfo.salvarInformacoesDosPrev(info);
-						repository.etiquetar(true, letra, 0);
+						repository.etiquetar(true, letra, 0,usuario.getTipo());
 						x++;
 					}
 					else {
-						repository.etiquetar(ativo.getAtivo(), ativo.getBeneficio(), 1);
+						repository.etiquetar(ativo.getAtivo(), ativo.getBeneficio(), 1, usuario.getTipo());
 					}
 				}
 				else {
-					repository.etiquetar(false, ativo.getBeneficio(), 0);
+					repository.etiquetar(false, ativo.getBeneficio(), 0, usuario.getTipo());
 
 				}
 			}
@@ -158,7 +158,7 @@ public class GeralController {
 		}
 
 		try {
-			while(repository.entrarNoProcessoAutomatico(usuario.getEtiqueta())) {
+			while(repository.entrarNoProcessoAutomatico(usuario.getEtiqueta(), usuario.getTipo())) {
 				repository.atualizarDossie();
 
 

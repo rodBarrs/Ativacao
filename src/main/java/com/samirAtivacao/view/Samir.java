@@ -270,6 +270,7 @@ public class Samir extends javax.swing.JFrame {
         usuario.setSenha(campoSenha.getText());
         usuario.setEtiqueta(campoEtiqueta.getText().toUpperCase());
         usuario.setNome(campoNome.getText());
+        usuario.setTipo("Samir");
         System.out.println("etiqueta usuario: " + usuario.getEtiqueta());
         // SeleniumRepositorio shazam = new SeleniumRepositorio();
         //JOptionPane.showMessageDialog(null,  shazam.triar(usuario));
@@ -418,6 +419,7 @@ public class Samir extends javax.swing.JFrame {
         usuario.setSenha(campoSenha.getText());
         usuario.setEtiqueta(campoEtiqueta.getText().toUpperCase());
         usuario.setNome(campoNome.getText());
+        usuario.setTipo("Atualizacao");
         System.out.println("etiqueta usuario: " + usuario.getEtiqueta());
         // SeleniumRepositorio shazam = new SeleniumRepositorio();
         //JOptionPane.showMessageDialog(null,  shazam.triar(usuario));

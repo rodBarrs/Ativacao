@@ -202,6 +202,10 @@ public class SeleniumRepositorio {
             }
 
         }
+        String cpfPoloAtivo = "";
+        String labelPessoa = "";
+        String etiqueta = "";
+        List <String> inputPessoa = new ArrayList<>();
         for (int j = 1; j< 10; j++){
             wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div[4]/div[2]/div[2]/div/div[2]/div[1]/div[2]/span/div/fieldset/div/span/div/fieldset[10]/div/span/div/div/div[4]/div/table/tbody/tr["+j+"]/td[3]/div")));
             String poloAtivo = driver.findElement
@@ -210,18 +214,52 @@ public class SeleniumRepositorio {
                 WebElement elementoPoloAtivo = driver.findElement
                         (By.xpath("/html/body/div[4]/div[2]/div[2]/div/div[2]/div[1]/div[2]/span/div/fieldset/div/span/div/fieldset[10]/div/span/div/div/div[4]/div/table/tbody/tr["+j+"]/td[3]/div"));
                 elementoPoloAtivo.click();
+                actions.doubleClick(elementoPoloAtivo).perform();
+                for (int i = 20; i <200;i++){
+                    try{
+                        labelPessoa = driver.findElement(By.xpath("/html/body/div["+i+"]/div[2]/div/div[2]/div/div[1]/span/div/table[2]/tbody/tr/td[2]/div/div/div/table/tbody/tr/td[1]/label")).getText();
+                        if (labelPessoa.contains("Pessoa")){
+                            wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("/html/body/div["+i+"]/div[2]/div/div[2]/div/div[1]/span/div/table[2]/tbody/tr/td[2]/div/div/div/table/tbody/tr/td[2]/table/tbody/tr/td[1]/input"))));
+                            try{
+                                inputPessoa = Arrays.asList(driver.findElement(By.xpath("/html/body/div["+i+"]/div[2]/div/div[2]/div/div[1]/span/div/table[2]/tbody/tr/td[2]/div/div/div/table/tbody/tr/td[2]/table/tbody/tr/td[1]/input")).getAttribute("value").split(" "));
+                                driver.findElement(By.xpath("/html/body/div["+i+"]/div[2]/div/div[2]/div/div[1]/span/div/table[2]/tbody/tr/td[2]/div/div/div/table/tbody/tr/td[2]/table/tbody/tr/td[1]/input")).click();
+                                if (inputPessoa.get(inputPessoa.size() - 1).contains("(")){
+                                    cpfPoloAtivo = inputPessoa.get(inputPessoa.size() - 1).replace("()","");
+                                }
+//                            cpfPoloAtivo = driver.findElement(By.xpath("/html/body/div["+i+"]/div[2]/div/div[2]/div/div[1]/span/div/table[2]/tbody/tr/td[2]/div/div/div/table/tbody/tr/td[2]/table/tbody/tr/td[1]/input")).getText();
+                                i=200;
+                            }catch (Exception e){
+                                etiqueta = "CPF/CNPJ Ausente (Polo Ativo)";
+                            }
+                        }
+                    }catch(Exception e){
+                        System.out.println("deu ruim");
+                    }
+                }
+                if(!(cpfPoloAtivo.equals(""))) {
 
-                WebElement elementoSeta = driver.findElement
-                        (By.id("splitbutton-1815-btnWrap"));
-                elementoSeta.click();
+                    for (int i=0; i<7;i++){
+                        actions.sendKeys(Keys.TAB).build().perform();
+                    }
+                    actions.sendKeys(Keys.ENTER).build().perform();
+                    WebElement elementoSeta = driver.findElement
+                            (By.id("splitbutton-1815-btnWrap"));
+                    elementoSeta.click();
 
-                WebElement elementoSolicitarDossie = driver.findElement
-                        (By.id("consultaCNIS-textEl"));
-                elementoSolicitarDossie.click();
+                    WebElement elementoSolicitarDossie = driver.findElement
+                            (By.id("consultaCNIS-textEl"));
+                    elementoSolicitarDossie.click();
 
-                Thread.sleep(2000);
-                actions.sendKeys(Keys.ENTER).build().perform();
-
+                    Thread.sleep(2000);
+                    actions.sendKeys(Keys.ENTER).build().perform();
+                    etiqueta = "Atualização de Dossiê Solicitada";
+                }else {
+                    for (int i=0; i<7;i++){
+                        actions.sendKeys(Keys.TAB).build().perform();
+                    }
+                    actions.sendKeys(Keys.ENTER).build().perform();
+                    etiqueta = "CPF/CNPJ Ausente (Polo Ativo)";
+                }
                 WebElement botaoPainel = driver.findElement
                         (By.id("button-1009"));
                 botaoPainel.click();
@@ -252,22 +290,20 @@ public class SeleniumRepositorio {
                 }
 
                 driver.findElement(By.xpath("//fieldset[5]/div/span/div/table[4]/tbody/tr/td[2]/input")).clear();
-
-                driver.findElement(By.xpath("//fieldset[5]/div/span/div/table[4]/tbody/tr/td[2]/input"))
-                        .sendKeys("Atualização de Dossiê Solicitada");
+//                    driver.findElement(By.xpath("//fieldset[5]/div/span/div/table[4]/tbody/tr/td[2]/input")).sendKeys(etiqueta);
+                driver.findElement(By.xpath("//fieldset[5]/div/span/div/table[4]/tbody/tr/td[2]/input")).sendKeys(etiqueta);
 
                 actions.sendKeys(Keys.TAB).build().perform();
                 actions.sendKeys(Keys.TAB).build().perform();
                 actions.sendKeys(Keys.TAB).build().perform();
                 actions.sendKeys(Keys.ENTER).build().perform();
                 return "deu bom";
-
             }
         }
 
         return "";
     }
-    public boolean entrarNoProcessoAutomatico(String etiqueta) throws InterruptedException {
+    public boolean entrarNoProcessoAutomatico(String etiqueta, String tipo) throws InterruptedException {
         try {
             this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS).pageLoadTimeout(30, TimeUnit.SECONDS);
             Thread.sleep(1000);
@@ -283,6 +319,18 @@ public class SeleniumRepositorio {
             if (confirmacaoDeExistencia == true) {
                 return false;
             } else {
+                if (tipo.contains("Samir") || tipo.contains("Beremiz")){
+                    long time = 15000;
+                    wait = new WebDriverWait(driver, time);
+                    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+                            "/html/body/div[4]/div[1]/div[2]/div/div[2]/div/div[4]/div/table/tbody/tr[1]/td[3]/div/a[1]")));
+                    wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
+                            "/html/body/div[4]/div[1]/div[2]/div/div[2]/div/div[4]/div/table/tbody/tr[1]/td[3]/div/a[1]")));
+
+                    WebElement processo = driver.findElement(By.xpath(
+                            "/html/body/div[4]/div[1]/div[2]/div/div[2]/div[1]/div[4]/div/table/tbody/tr[1]/td[3]/div/a[1]"));
+                    processo.click();
+                }
 
                 return true;
 
@@ -290,7 +338,7 @@ public class SeleniumRepositorio {
         } catch (Exception e) {
             System.out.println("entrei no cat entrarNoProcessoAutomatico");
             System.out.println(e);
-            return entrarNoProcessoAutomatico(etiqueta);
+            return entrarNoProcessoAutomatico(etiqueta, tipo);
 
         }
     }
@@ -338,11 +386,17 @@ public class SeleniumRepositorio {
      * }
      */
 
-    public boolean dataDeValidacaoDosPrev() throws InterruptedException {
+    public boolean dataDeValidacaoDosPrev(String tipo) throws InterruptedException {
         this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS).pageLoadTimeout(30, TimeUnit.SECONDS);
         Thread.sleep(1000);
         List<String> janela = new ArrayList<String>(driver.getWindowHandles());
-        driver.switchTo().window(janela.get(2));
+        if(tipo.contains("Samir")){
+            driver.switchTo().window(janela.get(2));
+        }
+        if (tipo.contains("Beremiz")){
+            driver.switchTo().window(janela.get(1));
+        }
+
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("treeview-1015")));
         WebElement TabelaTref = driver.findElement(By.id("treeview-1015"));
         List<WebElement> listaMovimentacao = new ArrayList<WebElement>(TabelaTref.findElements(By.cssSelector("tr")));
@@ -1005,7 +1059,7 @@ public class SeleniumRepositorio {
 
     }
 
-    public void etiquetar(Boolean validacao, String beneficio, int seletar) {
+    public void etiquetar(Boolean validacao, String beneficio, int seletar, String tipo) {
         List<String> janela = new ArrayList<String>(driver.getWindowHandles());
         this.driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS).pageLoadTimeout(1, TimeUnit.SECONDS);
         driver.switchTo().window(janela.get(1));
@@ -1017,7 +1071,12 @@ public class SeleniumRepositorio {
             if (validacao == true) {
                 campoPassElemt.sendKeys("ATIVO " + beneficio);
             } else {
-                campoPassElemt.sendKeys("INDEFERIDO");
+                if( tipo.contains("Samir")){
+                    campoPassElemt.sendKeys("INDEFERIDO");
+                }
+                if(tipo.contains("Beremiz")){
+                    campoPassElemt.sendKeys("INDEFERIDO OU CESSADO");
+                }
             }
         } else if (seletar == 0) {
             if (validacao == true) {
@@ -1032,7 +1091,10 @@ public class SeleniumRepositorio {
         salvarEtiqueta.click();
 
         driver.switchTo().window(janela.get(1)).close();
-        driver.switchTo().window(janela.get(2)).close();
+        if (tipo.contains("Samir")){
+            driver.switchTo().window(janela.get(2)).close();
+        }
+
         driver.switchTo().window(janela.get(0));
         wait.until(ExpectedConditions.presenceOfElementLocated(By
                 .xpath("/html/body/div[4]/div[1]/div[2]/div/div[2]/div/div[2]/div/div/a[5]/span/span/span[2]")));
@@ -1041,11 +1103,16 @@ public class SeleniumRepositorio {
         filtroSpace.click();
     }
 
-    public ProcessoValido verificacaoDeAtivo() {
+    public ProcessoValido verificacaoDeAtivo(String tipo) {
         this.driver.manage().timeouts().implicitlyWait(100, TimeUnit.MILLISECONDS).pageLoadTimeout(100,
                 TimeUnit.MILLISECONDS);
         List<String> janela = new ArrayList<String>(driver.getWindowHandles());
-        driver.switchTo().window(janela.get(2));
+        if (tipo.contains("Samir")){
+            driver.switchTo().window(janela.get(2));
+        }
+        if (tipo.contains("Beremiz")){
+            driver.switchTo().window(janela.get(1));
+        }
         ProcessoValido ativo = new ProcessoValido();
         String beneficio = null;
         boolean verificarAtivo = false;

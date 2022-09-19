@@ -23,6 +23,8 @@ public class Usuario {
 
 	private String etiqueta;
 
+	private String tipo;
+
 	public Long getId() {
 		return id;
 	}
@@ -63,6 +65,11 @@ public class Usuario {
 		this.etiqueta = etiqueta;
 	}
 
+	public String getTipo() {
+		return tipo;
+	}
 
-
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
 }
